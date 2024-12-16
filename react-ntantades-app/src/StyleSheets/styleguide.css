@@ -1,0 +1,117 @@
+:root {
+    --body-l-font-family: "Roboto", Helvetica;
+    --body-l-font-size: 18px;
+    --body-l-font-style: normal;
+    --body-l-font-weight: 400;
+    --body-l-letter-spacing: 0px;
+    --body-l-line-height: 139.9999976158142%;
+    --body-s-font-family: "Roboto", Helvetica;
+    --body-s-font-size: 14px;
+    --body-s-font-style: normal;
+    --body-s-font-weight: 400;
+    --body-s-letter-spacing: 0px;
+    --body-s-line-height: 139.9999976158142%;
+    --body-XS-font-family: "Roboto", Helvetica;
+    --body-XS-font-size: 12px;
+    --body-XS-font-style: normal;
+    --body-XS-font-weight: 400;
+    --body-XS-letter-spacing: 0px;
+    --body-XS-line-height: 139.9999976158142%;
+    --button-l-font-family: "Roboto", Helvetica;
+    --button-l-font-size: 20px;
+    --button-l-font-style: normal;
+    --button-l-font-weight: 500;
+    --button-l-letter-spacing: 0.5px;
+    --button-l-line-height: 100%;
+    --button-m-font-family: "Roboto", Helvetica;
+    --button-m-font-size: 16px;
+    --button-m-font-style: normal;
+    --button-m-font-weight: 500;
+    --button-m-letter-spacing: 0.5px;
+    --button-m-line-height: 100%;
+    --coolgray-20: rgba(221, 225, 230, 1);
+    --coolgray-60: rgba(105, 112, 119, 1);
+    --coolgray-90: rgba(33, 39, 42, 1);
+    --defaultwhite: rgba(255, 255, 255, 1);
+    --greygrey-100: rgba(245, 245, 245, 1);
+    --greygrey-200: rgba(238, 238, 238, 1);
+    --greygrey-400: rgba(189, 189, 189, 1);
+    --greygrey-800: rgba(66, 66, 66, 1);
+    --heading-1-font-family: "Roboto", Helvetica;
+    --heading-1-font-size: 54px;
+    --heading-1-font-style: normal;
+    --heading-1-font-weight: 700;
+    --heading-1-letter-spacing: 0px;
+    --heading-1-line-height: 110.00000238418579%;
+    --heading-2-font-family: "Roboto", Helvetica;
+    --heading-2-font-size: 42px;
+    --heading-2-font-style: normal;
+    --heading-2-font-weight: 700;
+    --heading-2-letter-spacing: 0px;
+    --heading-2-line-height: 110.00000238418579%;
+    --other-caption-font-family: "Roboto", Helvetica;
+    --other-caption-font-size: 20px;
+    --other-caption-font-style: normal;
+    --other-caption-font-weight: 700;
+    --other-caption-letter-spacing: 1px;
+    --other-caption-line-height: 100%;
+    --other-menu-m-font-family: "Roboto", Helvetica;
+    --other-menu-m-font-size: 16px;
+    --other-menu-m-font-style: normal;
+    --other-menu-m-font-weight: 500;
+    --other-menu-m-letter-spacing: 0px;
+    --other-menu-m-line-height: 100%;
+    --overline-font-family: "Roboto", Helvetica;
+    --overline-font-size: 10px;
+    --overline-font-style: normal;
+    --overline-font-weight: 500;
+    --overline-letter-spacing: 0.15px;
+    --overline-line-height: 150%;
+    --primary-60: rgba(15, 98, 254, 1);
+    --primary-90: rgba(0, 29, 108, 1);
+    --system-colors-grays-white: rgba(255, 255, 255, 1);
+    --system-colors-miscellaneous-sidebar-fill-selected: rgba(255, 255, 255, 1);
+    --system-colors-overlays-default: rgba(0, 0, 0, 0.2);
+}
+
+/*
+
+To enable a theme in your HTML, simply add one of the following data attributes to an HTML element, like so:
+
+<body data-system-colors-mode="light">
+        <!-- the rest of your content -->
+</body>
+
+You can apply the theme on any DOM node, not just the `body`
+
+*/
+
+[data-system-colors-mode="light"] {
+    --system-colors-miscellaneous-sidebar-fill-selected: rgba(255, 255, 255, 1);
+    --system-colors-overlays-default: rgba(0, 0, 0, 0.2);
+}
+
+[data-system-colors-mode="dark"] {
+    --system-colors-miscellaneous-sidebar-fill-selected: rgba(142, 142, 147, 0.25);
+    --system-colors-overlays-default: rgba(0, 0, 0, 0.49);
+}
+
+[data-system-colors-mode="dark-elevated"] {
+    --system-colors-miscellaneous-sidebar-fill-selected: rgba(142, 142, 147, 0.25);
+    --system-colors-overlays-default: rgba(0, 0, 0, 0.49);
+}
+
+[data-system-colors-mode="IC-light"] {
+    --system-colors-miscellaneous-sidebar-fill-selected: rgba(255, 255, 255, 1);
+    --system-colors-overlays-default: rgba(0, 0, 0, 0.49);
+}
+
+[data-system-colors-mode="IC-dark"] {
+    --system-colors-miscellaneous-sidebar-fill-selected: rgba(144, 144, 153, 0.3);
+    --system-colors-overlays-default: rgba(0, 0, 0, 0.49);
+}
+
+[data-system-colors-mode="IC-dark-elevated"] {
+    --system-colors-miscellaneous-sidebar-fill-selected: rgba(144, 144, 153, 0.3);
+    --system-colors-overlays-default: rgba(0, 0, 0, 0.49);
+}

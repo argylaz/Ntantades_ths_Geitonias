@@ -1,0 +1,105 @@
+.footer {
+    
+    background-color: #0000005c;
+    height: 15%;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+
+}
+
+
+
+.footer .text-wrapper {
+    color: var(--defaultwhite);
+    font-family: var(--body-s-font-family);
+    font-size: var(--body-s-font-size);
+    font-style: var(--body-s-font-style);
+    font-weight: var(--body-s-font-weight);
+    letter-spacing: var(--body-s-letter-spacing);
+    line-height: var(--body-s-line-height);
+    position: absolute;
+    width: 25%;
+}
+
+.footer .logo-container {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    height: 55%;
+    position: absolute;
+    left: 65%;
+    bottom: 100%;
+    width: 100%;
+}
+
+.footer .rectangle-stroke {
+    align-self: stretch;
+    height: 62px;
+    position: relative;
+    width: 100%;
+}
+
+.footer .div {
+    color: #ffffff;
+    font-family: "Roboto-Medium", Helvetica;
+    font-size: 24px;
+    font-weight: 500;
+    left: 64px;
+    letter-spacing: 0;
+    line-height: 24px;
+    position: absolute;
+    top: 16px;
+    white-space: nowrap;
+    width: 68px;
+}
+
+.footer .logo-container-2 {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 62px;
+    left: 74px;
+    position: absolute;
+    top: 19px;
+    width: 122px;
+}
+
+.footer .text-wrapper-2 {
+    color: #ffffff;
+    font-family: "Roboto-Medium", Helvetica;
+    font-size: 24px;
+    font-weight: 500;
+    left: 27px;
+    letter-spacing: 0;
+    line-height: 24px;
+    position: absolute;
+    top: 16px;
+    white-space: nowrap;
+    width: 68px;
+}
+
+.footer .logo-container-3 {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 62px;
+    left: 441px;
+    position: absolute;
+    top: 19px;
+    width: 122px;
+}
+
+.footer .logo-container-4 {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 62px;
+    left: 976px;
+    position: absolute;
+    top: 19px;
+    width: 197px;
+}
