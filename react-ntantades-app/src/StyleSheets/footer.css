@@ -1,11 +1,9 @@
 .footer {
-    
     background-color: #0000005c;
     height: 15%;
     position: absolute;
     bottom: 0;
     width: 100%;
-
 }
 
 
@@ -23,9 +21,6 @@
 }
 
 .footer .logo-container {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
     height: 55%;
     position: absolute;
     left: 65%;
