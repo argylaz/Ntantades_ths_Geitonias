@@ -1,23 +1,42 @@
 
 .header {
-    align-items: center;
+    display: flex;
+    align-items:      center;
     background-color: #0000005C;
-    position: absolute;
-    top: 0%;
-    height: 15%;
-    width: 100%;
+    position:         absolute;
+    top:              0%;
+    height:           15%;
+    width:            100%;
 }
 
 .header .app-logo-container {
-    height: 60%;
-    width: 15%;
+    height:           60%;
+    width:            10%;
     background-color: gray;
-    margin-top: 3%;
-    margin-left: 3%;
+    margin-top:       1.5%;
+    margin-left:      1%;
+    margin-right: 2%;
 }
 
 .app-logo-container img {
-    width: 80%;
+    width:  60%;
     height: 100%;
-    /* margin-left: 15%; */
+}
+
+.header .menu {
+    background-color: rgb(0, 0, 0);
+    height: 60%;
+    width:  40%;
+    margin-left: 1%;
+}
+
+.menu .menu-list {
+    display: flex;
+    list-style-type: none;
+    padding: 10px;
+    margin: 0;
+}
+
+.menu-list li {
+    margin-right: 15px;
 }

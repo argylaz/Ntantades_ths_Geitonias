@@ -1,4 +1,6 @@
 import React from "react";
+import ButtonMenu from "./buttonMenu.jsx"
+
 import logo from "../images/baby_logo.png"
 import "../StyleSheets/header.css"
 
@@ -15,6 +17,9 @@ function Header() {
                     src={logo}
                     />
                 </div>  
+
+                {/* Adding menu */}
+                <ButtonMenu />
         </div>
     );
 };
