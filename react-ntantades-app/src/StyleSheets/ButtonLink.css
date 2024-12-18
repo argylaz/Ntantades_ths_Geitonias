@@ -1,4 +1,27 @@
-.ButtonLink {
-    /* width: 60%; */
-    /* size: 60%; */
-}
+.custom-button {
+    /* Size */
+    width: 150px; /* Change width */
+    height: 40px; /* Change height */
+
+
+    /* Color Scheme */
+    background-color: #007bff; /* Button background color */
+    color: white; /* Text color */
+  
+    /* Border */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+  
+    /* Typography */
+    font-size: 16px; /* Adjust font size */
+    font-weight: bold; /* Make text bold */
+  
+    /* Interaction */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+  }
+  
+  .custom-button:hover {
+    background-color: #0056b3; /* Darker background on hover */
+  }
+  

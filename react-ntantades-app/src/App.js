@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/header.jsx';
 import Footer from './components/footer.jsx';
 import Home from './pages/HomePage.jsx';
+import HomePageNanny from './pages/HomePageNanny.jsx';
+import HomePageParent from './pages/HomePageParent.jsx';
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
 
         <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/HomePageNanny" element={<HomePageNanny />} />
+            <Route path="/HomePageParent" element={<HomePageParent />} />
             {/* <Route path="/About" element={<About />} /> */}
             {/* // <Route path="/contact" element={<Contact />} /> */}
         </Routes>
