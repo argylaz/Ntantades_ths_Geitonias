@@ -1,13 +1,24 @@
 import './StyleSheets/App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/header.jsx';
 import Footer from './components/footer.jsx';
+import Home from './pages/HomePage.jsx';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className = "App">
+      <header className = "App-header">
+        {/* Header is always the same (for now) */}
         <Header />
 
+
+        <Routes>
+            <Route path="/" element={<Home />} />
+            {/* <Route path="/About" element={<About />} /> */}
+            {/* // <Route path="/contact" element={<Contact />} /> */}
+        </Routes>
+
+        {/* Footer is also alwats the same */}
         <Footer/>
       </header>
     </div>

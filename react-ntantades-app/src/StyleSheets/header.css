@@ -13,9 +13,7 @@
     height:           60%;
     width:            10%;
     background-color: gray;
-    margin-top:       1.5%;
     margin-left:      1%;
-    margin-right: 2%;
 }
 
 .app-logo-container img {
@@ -24,19 +22,84 @@
 }
 
 .header .menu {
-    background-color: rgb(0, 0, 0);
+    background-color: gray;
     height: 60%;
-    width:  40%;
-    margin-left: 1%;
+    /* width:  47%; */
+    width: auto;
+    margin-left: 10%;
+    align-items: center;
+    margin-right: 12%;
 }
+
+
 
 .menu .menu-list {
+
+    /* justify-content: /center; */
+    align-items: center;
+    /* position: absolute; */
     display: flex;
     list-style-type: none;
-    padding: 10px;
+    padding: 15px;
     margin: 0;
+
 }
 
+
 .menu-list li {
-    margin-right: 15px;
+    display: flex; /* Enables flexbox layout */
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
+    height: auto; /* Optional: define a fixed height for consistent alignment */
+    width: auto; /* Optional: adjust the width as needed */
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.1rem;
+    /* cursor: pointer; */
+    padding: 10px 15px; /* Add padding for better click targets */
+    transition: background-color 0.3s ease; 
+    list-style: none; /* Remove default list styling */
+}
+ 
+.menu-list a {
+    text-decoration: none;
+    text-emphasis-color: black;
+}
+
+
+.header .menu-user {
+    display: flex;
+    background-color: grey;
+    height: 60%; 
+    width: 8%;
+    margin-left: 2%;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-user .menu-user-item {
+    
+    /* margin-right: 20%; */
+    display: flex; /* Enables flexbox layout */
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
+    height: auto; /* Optional: define a fixed height for consistent alignment */
+    width: auto; /* Optional: adjust the width as needed */
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    padding: 10px 15px; /*Add padding for better click targets*/
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+
+    border-color: black;
+}
+
+
+/* STYLING FOR LINKS */
+
+a:link {
+    text-decoration: none;
+    color: black;
+}
+
+a:visited {
+    color: black; /* Visited link */
 }

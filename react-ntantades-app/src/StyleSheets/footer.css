@@ -1,31 +1,59 @@
-.footer {
+/* .footer {
     background-color: #0000005c;
     height: 15%;
     position: absolute;
     bottom: 0;
     width: 100%;
+} */
+
+.footer {
+    background-color: #0000005c;  /* Transparent black background */
+    height: 15%;  /* Set height of the footer */
+    position: absolute;  /* Position at the bottom */
+    bottom: 0;  /* Stick to the bottom of the page */
+    width: 100%;  /* Full width */
+    display: flex;  /* Flexbox to center content */
+    justify-content: center;  /* Center horizontally */
+    align-items: center;  /* Center vertically */
+    padding: 10px 0;  /* Optional: Add padding */
 }
 
 
-
 .footer .text-wrapper {
+    margin-top: auto;
+    margin-right: auto;
     color: var(--defaultwhite);
     font-family: var(--body-s-font-family);
-    font-size: var(--body-s-font-size);
+    font-size: 1rem;
     font-style: var(--body-s-font-style);
     font-weight: var(--body-s-font-weight);
     letter-spacing: var(--body-s-letter-spacing);
     line-height: var(--body-s-line-height);
-    position: absolute;
+    /* position: absolute; */
     width: 25%;
 }
 
-.footer .logo-container {
-    height: 55%;
-    position: absolute;
+/* .footer .logo-container {
+    align-items: center;
+    height: 40%;
     left: 65%;
     bottom: 100%;
-    width: 100%;
+    width: 30%;
+} */
+
+.footer .logo-container {
+    margin-left: auto;
+    display: flex;
+    justify-content: center;  /*Center logo horizontally */
+    align-items: center;  /* Center logo vertically */
+    width: auto;  /* Adjust width based on the image size */
+    height: auto;  /* Adjust height based on the image size */
+}
+
+.footer .logo-container img {
+    margin-left: auto;
+    width: 70%;  /* Maintain aspect ratio */
+    height: 70%;  /* Maintain aspect ratio */
 }
 
 .footer .rectangle-stroke {

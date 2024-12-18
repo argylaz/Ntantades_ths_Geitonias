@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@firebasegen/default-connector": "file:dataconnect-generated/js/default-connector",
     "cra-template": "1.2.0",
     "nth-check": "^2.1.1",
     "react": "^19.0.0",
