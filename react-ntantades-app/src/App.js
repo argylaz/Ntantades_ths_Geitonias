@@ -1,10 +1,13 @@
-import './StyleSheets/App.css';
 import { BrowserRouter as Routes, Route } from 'react-router-dom';
 import Header from './components/header.jsx';
 import Footer from './components/footer.jsx';
 import Home from './pages/HomePage.jsx';
 import HomePageNanny from './pages/HomePageNanny.jsx';
 import HomePageParent from './pages/HomePageParent.jsx';
+
+import "./config.js";
+
+import './StyleSheets/App.css';
 
 function App() {
   return (
