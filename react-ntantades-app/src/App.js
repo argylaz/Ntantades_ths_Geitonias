@@ -1,13 +1,14 @@
-import { BrowserRouter as Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from './components/header.jsx';
 import Footer from './components/footer.jsx';
 import Home from './pages/HomePage.jsx';
 import HomePageNanny from './pages/HomePageNanny.jsx';
 import HomePageParent from './pages/HomePageParent.jsx';
-
-import "./config.js";
-
+import app from "./config.js";
 import './StyleSheets/App.css';
+
+console.log("Firebase app initialized:", app.name);
+
 
 function App() {
   return (
@@ -16,14 +17,15 @@ function App() {
         {/* Header is always the same (for now) */}
         <Header />
 
-
-        <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/HomePageNanny" element={<HomePageNanny />} />
-            <Route path="/HomePageParent" element={<HomePageParent />} />
-            {/* <Route path="/About" element={<About />} /> */}
-            {/* // <Route path="/contact" element={<Contact />} /> */}
-        </Routes>
+        <BrowserRouter>
+          <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/HomePageNanny" element={<HomePageNanny />} />
+              <Route path="/HomePageParent" element={<HomePageParent />} />
+              {/* <Route path="/About" element={<About />} /> */}
+              {/* // <Route path="/contact" element={<Contact />} /> */}
+          </Routes>
+        </BrowserRouter>
 
         {/* Footer is also alwats the same */}
         <Footer/>
