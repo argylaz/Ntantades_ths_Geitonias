@@ -1,15 +1,13 @@
 import React from "react";
 import { Link } from 'react-router-dom';
-import  "../StyleSheets/ButtonLink.css"
 
 
 
 
 function ButtonLink({ to, children }) {
-
-  return <Link to={to}>
-            <button className="custom-button"> {children}</button>
-        </Link>;
+  return <div className="ButtonLink"><Link to={to}>
+          <button className="custom-button"> {children}</button>
+      </Link> </div>;
 };
 
 export default ButtonLink;

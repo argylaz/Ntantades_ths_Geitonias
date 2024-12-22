@@ -1,6 +1,6 @@
 import React from "react";
 import ButtonLink from '../components/ButtonLink.jsx';
-import '../StyleSheets/HomePage.css';
+import '../StyleSheets/HomePageNanny.css';
 
 
 function HomePageNanny () {
@@ -10,16 +10,20 @@ function HomePageNanny () {
                 <header>
                     <h2>Ξεκινήστε την διαδικασία εγγραφής στο Μητρώο Νταντάδων</h2>
 
-                
-                    <div className= "Buttons">
-                        <ButtonLink to="/SignIn">Είσοδος στην Υπηρεσία με κωδικούς taxis</ButtonLink>
-                    </div>
-
-                         
+                    <br/>
                 </header>
-                
-                
             </div>
+
+            <div className= "Login">
+                <ButtonLink to="/Login">Είσοδος στην Υπηρεσία με κωδικούς taxis</ButtonLink>
+            </div>
+
+            <div className= "Buttons">
+                        <ButtonLink to="/Nanny/EligibilityCriteria">Κριτήρια Επιλεξιμότητας</ButtonLink>
+                        <ButtonLink to="/Nanny/Guide">Οδηγίες για την Εγγραφή στο Μητρώο Νταντάδων</ButtonLink>
+            </div>
+
+
         </div>
     );
 };

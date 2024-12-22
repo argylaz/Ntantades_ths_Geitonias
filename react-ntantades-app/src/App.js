@@ -1,13 +1,24 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import Header from './components/header.jsx';
 import Footer from './components/footer.jsx';
+
+/* Importing pages */
 import Home from './pages/HomePage.jsx';
 import HomePageNanny from './pages/HomePageNanny.jsx';
 import HomePageParent from './pages/HomePageParent.jsx';
-import app from "./config.js";
-import './StyleSheets/App.css';
+import EligibilityCriteria from './pages/EligibilityCriteria.jsx';
+import Login from './pages/Login.jsx'
+import Register from "./pages/Register.jsx";
+import Profile from "./pages/Profile.jsx";
+import NannyGuide from "./pages/NannyGuide.jsx";
+import ParticipationRequiremenents from "./pages/ParticipationRequirements.jsx"
+import FundingRequiremenents from "./pages/FundingRequirements.jsx"
+import ParentsGuide from "./pages/ParentsGuide.jsx"
+import FundingRequirements from "./pages/FundingRequirements.jsx"
 
-console.log("Firebase app initialized:", app.name);
+import './StyleSheets/App.css';
+import './config/firebase.js'
 
 
 function App() {
@@ -17,15 +28,20 @@ function App() {
         {/* Header is always the same (for now) */}
         <Header />
 
-        <BrowserRouter>
           <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/HomePageNanny" element={<HomePageNanny />} />
-              <Route path="/HomePageParent" element={<HomePageParent />} />
-              {/* <Route path="/About" element={<About />} /> */}
-              {/* // <Route path="/contact" element={<Contact />} /> */}
+              <Route path="/Login" element={<Login />} />
+              <Route path="/Register" element={<Register />} />
+              <Route path="/Profile" element={<Profile />} />
+              <Route path="/Nanny" element={<HomePageNanny />} />
+              <Route path="/Nanny/Guide" element={<NannyGuide />} />
+              <Route path="/Nanny/EligibilityCriteria" element={<EligibilityCriteria />} />
+              <Route path="/Parent" element={<HomePageParent />} />
+              <Route path="/Parent/ParticipationRequiremenents" element={<ParticipationRequiremenents />} />
+              <Route path="/Parent/ParentsGuide" element={<ParentsGuide />} />
+              <Route path="/Parent/FundingRequirements" element={<FundingRequirements />} />
+          
           </Routes>
-        </BrowserRouter>
 
         {/* Footer is also alwats the same */}
         <Footer/>

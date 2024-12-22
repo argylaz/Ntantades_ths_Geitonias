@@ -10,10 +10,10 @@ function ButtonUserMode({mode}) {
 
     const links = {
         Κηδεμόνας: [
-            { to: "HomePageParent", label: "Κηδεμόνας" },
+            { to: "Parent", label: "Κηδεμόνας" },
         ],
         Νταντά: [
-            { to: "HomePageNanny", label: "Νταντά" },
+            { to: "Nanny", label: "Νταντά" },
         ],   
     };
 

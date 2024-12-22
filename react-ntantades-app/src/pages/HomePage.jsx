@@ -12,10 +12,10 @@ function Home () {
                     <p>Υπηρεσία κατ' οίκον φροντίδας βρεφών και νηπίων από 2 μηνών έως 2,5 ετών</p>
                 
                     <div className= "Buttons">
-                        <ButtonLink to="/HomePageParent">Είμαι Κηδεμόνας</ButtonLink>
-                            
-                        <ButtonLink to="/HomePageNanny">Είμαι Νταντά</ButtonLink>
+                        <ButtonLink className="Criteria" to="/Parent">Είμαι Κηδεμόνας</ButtonLink>
+                        <ButtonLink className="Criteria" to="/Nanny">Είμαι Νταντά</ButtonLink>
                     </div>
+                            
 
                          
                 </header>

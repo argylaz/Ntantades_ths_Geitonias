@@ -1,0 +1,43 @@
+.home-page div {
+    height: auto; /* Optional: define a fixed height for consistent alignment */
+    width: auto; /* Optional: adjust the width as needed */
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    align-items:      center;
+    margin: 0%;
+    background-color: #0000005C;
+    position:       relative;
+}
+
+.Buttons .ButtonLink {
+    margin-right: 30px;
+}
+
+
+.home-page .Login {
+    /* Size */
+    justify-content: center;
+    width: auto;    
+    /* Color Scheme */
+    background-color: #0000005C; /* Button background color */
+    color: white; /* Text color */
+    
+    /* Border */
+    border: rgba(0, 0, 0, 0); /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    margin-bottom: 5%;
+  
+    /* Typography */
+    font-size: 16px; /* Adjust font size */
+    font-weight: bold; /* Make text bold */
+  
+    /* Interaction */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+  }
+
+  .custom-button:hover {
+    background-color: #0056b3; /* Darker background on hover */
+  }
+
+
