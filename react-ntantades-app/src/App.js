@@ -13,7 +13,6 @@ import Register from "./pages/Register.jsx";
 import Profile from "./pages/Profile.jsx";
 import NannyGuide from "./pages/NannyGuide.jsx";
 import ParticipationRequiremenents from "./pages/ParticipationRequirements.jsx"
-import FundingRequiremenents from "./pages/FundingRequirements.jsx"
 import ParentsGuide from "./pages/ParentsGuide.jsx"
 import FundingRequirements from "./pages/FundingRequirements.jsx"
 
@@ -37,9 +36,9 @@ function App() {
               <Route path="/Nanny/Guide" element={<NannyGuide />} />
               <Route path="/Nanny/EligibilityCriteria" element={<EligibilityCriteria />} />
               <Route path="/Parent" element={<HomePageParent />} />
-              <Route path="/Parent/ParticipationRequiremenents" element={<ParticipationRequiremenents />} />
               <Route path="/Parent/ParentsGuide" element={<ParentsGuide />} />
               <Route path="/Parent/FundingRequirements" element={<FundingRequirements />} />
+              <Route path="/Parent/ParticipationRequirements" element={<ParticipationRequiremenents />} />
           
           </Routes>
 

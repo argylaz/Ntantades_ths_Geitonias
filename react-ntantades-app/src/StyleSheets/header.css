@@ -14,6 +14,17 @@
     width:            10%;
     background-color: gray;
     margin-left:      1%;
+    border-radius: 10px;
+}
+
+.app-logo-container a {
+    display: inline-block;
+    position: absolute;
+    left: 1%;
+    width: 10%;
+    height: 60%;
+    text-decoration: none;
+    border-radius: 5px;
 }
 
 .app-logo-container img {
@@ -29,6 +40,7 @@
     margin-left: 10%;
     align-items: center;
     margin-right: 12%;
+    border-radius: 10px;
 }
 
 
@@ -74,6 +86,7 @@
     margin-left: 2%;
     align-items: center;
     justify-content: center;
+    border-radius: 10px;
 }
 
 .menu-user .menu-user-item {
@@ -102,4 +115,13 @@ a:link {
 
 a:visited {
     color: black; /* Visited link */
+}
+
+.header .user-button {
+    height: 60%; 
+    width: 8%;
+    margin-left: 7%;
+
+    background-color: grey;
+    border-radius: 10px;
 }
