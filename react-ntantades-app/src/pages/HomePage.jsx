@@ -1,5 +1,12 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import ButtonLink from '../components/ButtonLink.jsx';
+import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
+import ParentIcon from '@mui/icons-material/EscalatorWarning';
+import NannyIcon from '@mui/icons-material/ChildFriendly';
+import Stack from '@mui/material/Stack';
+
 import '../StyleSheets/HomePage.css';
 
 
@@ -11,11 +18,24 @@ function Home () {
                     <h2>Δράση “Νταντάδες της γειτονιάς”</h2>
                     <p>Υπηρεσία κατ' οίκον φροντίδας βρεφών και νηπίων από 2 μηνών έως 2,5 ετών</p>
                 
-                    <div className= "Buttons">
+                    {/* <div className= "Buttons">
                         <ButtonLink className="Criteria" to="/Parent">Είμαι Κηδεμόνας</ButtonLink>
                         <ButtonLink className="Criteria" to="/Nanny">Είμαι Νταντά</ButtonLink>
-                    </div>
+                    </div> */}
                             
+                    <Link to="/Parent" style={{ textDecoration: 'none', marginRight: '5%',}}>
+                        <Button variant="contained" startIcon={<ParentIcon />}
+                            sx={{ width: '200px', height: "50px", whiteSpace: 'normal',textAlign: 'center',}}>
+                            Είμαι Κηδεμόνας
+                        </Button>
+                    </Link>
+
+                    <Link to="/Nanny" style={{ textDecoration: 'none', marginLeft: '5%',}}>
+                        <Button variant="contained" endIcon={<NannyIcon />} 
+                            sx={{ width: '200px', height: "50px", whiteSpace: 'normal',textAlign: 'center',}}>
+                            Είμαι Νταντά
+                        </Button>
+                    </Link>
 
                          
                 </header>

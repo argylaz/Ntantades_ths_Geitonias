@@ -1,6 +1,10 @@
 import React from "react";
 import ButtonLink from '../components/ButtonLink.jsx';
 import '../StyleSheets/NannyGuide.css';
+import { Link } from 'react-router-dom';
+import Button from '@mui/material/Button';
+import BackIcon from '@mui/icons-material/ArrowBack';
+
 
 
 function NannyGuide () {
@@ -24,9 +28,13 @@ function NannyGuide () {
 
             </div>
 
-            <div className= "Back">
-                <ButtonLink to="/Nanny">Επίστροφή στην Σελίδα Νταντάδων</ButtonLink>
-            </div>
+            <Link to="/Nanny" style={{ textDecoration: 'none',}}>
+                <Button variant="contained" startIcon={<BackIcon />} 
+                    sx={{ whiteSpace: 'normal',textAlign: 'center',}}>
+                    Επίστροφή στην Σελίδα Νταντάδων
+                </Button>
+            </Link>
+
 
         </div>
     );

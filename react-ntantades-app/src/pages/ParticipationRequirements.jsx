@@ -1,6 +1,9 @@
 import React from "react";
 import ButtonLink from '../components/ButtonLink.jsx';
 import '../StyleSheets/ParentsGuide.css';
+import { Link } from 'react-router-dom';
+import Button from '@mui/material/Button';
+import BackIcon from '@mui/icons-material/ArrowBack';
 
 
 function ParticipationRequirements () {
@@ -25,10 +28,12 @@ function ParticipationRequirements () {
 
             </div>
 
-            <div className= "Back">
-                <ButtonLink to="/Parent">Επίστροφή στην Σελίδα Κηδεμόνων</ButtonLink>
-            </div>
-
+            <Link to="/Parent" style={{ textDecoration: 'none',}}>
+                <Button variant="contained" startIcon={<BackIcon />} 
+                    sx={{ whiteSpace: 'normal',textAlign: 'center',}}>
+                    Επίστροφή στην Σελίδα Κηδεμόνων
+                </Button>
+            </Link>
         </div>
     );
 };

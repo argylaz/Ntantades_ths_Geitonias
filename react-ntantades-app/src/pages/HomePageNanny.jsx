@@ -1,5 +1,13 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import ButtonLink from '../components/ButtonLink.jsx';
+import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
+import PersonIcon from '@mui/icons-material/Person';
+import HelpIcon from '@mui/icons-material/Help';
+import LoginIcon from '@mui/icons-material/Login';
+import Stack from '@mui/material/Stack';
+
 import '../StyleSheets/HomePageNanny.css';
 
 
@@ -15,13 +23,31 @@ function HomePageNanny () {
             </div>
 
             <div className= "Login">
-                <ButtonLink to="/Login">Είσοδος στην Υπηρεσία με κωδικούς taxis</ButtonLink>
+                <Link to="/Login" style={{ textDecoration: 'none',}}>
+                <Button variant="contained" startIcon={<LoginIcon />}
+                    sx={{ width: '250px', height: "70px", whiteSpace: 'normal',textAlign: 'center',}}>
+                    Είσοδος στην Υπηρεσία με κωδικούς taxis
+                </Button>
+                </Link>
             </div>
 
-            <div className= "Buttons">
-                        <ButtonLink to="/Nanny/EligibilityCriteria">Κριτήρια Επιλεξιμότητας</ButtonLink>
-                        <ButtonLink to="/Nanny/Guide">Οδηγίες για την Εγγραφή στο Μητρώο Νταντάδων</ButtonLink>
-            </div>
+            <Link to="/Nanny/EligibilityCriteria" style={{ textDecoration: 'none', marginRight: '10%',}}>
+                <Button variant="contained" startIcon={<PersonIcon />}
+                    sx={{ width: '250px', height: "70px", whiteSpace: 'normal',textAlign: 'center',}}>
+                    Κριτήρια Επιλεξιμότητας
+                </Button>
+            </Link>
+
+            <Link to="/Nanny/Guide" style={{ textDecoration: 'none', marginLeft: '15%',}}>
+                <Button variant="contained" endIcon={<HelpIcon />} 
+                    sx={{ width: '250px', height: "70px", whiteSpace: 'normal',textAlign: 'center',}}>
+                    Οδηγίες για την Εγγραφή στο Μητρώο Νταντάδων
+                </Button>
+            </Link>
+
+            {/* <div className= "Buttons">
+                        
+            </div> */}
 
 
         </div>
