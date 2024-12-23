@@ -3,32 +3,37 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import ButtonBase from '@mui/material/ButtonBase';
 import Typography from '@mui/material/Typography';
-import logo from "../images/baby_logo.png"
+import nanny_image from "../images/nanny.jpg"
+import handshake_image from "../images/handshake.jpg"
+import payment_image from "../images/payment.webp"
+import history_activity_image from "../images/history_activity.jpg"
+import greeting_image from "../images/cooperation_image.jpg"
+
 
 
 const images = [
     {
-      url: logo,
+      url: nanny_image,
       title: 'Αναζήτηση Νταντάδων',
       width: '100%',
     },
     {
-      url: '/static/images/buttons/burgers.jpg',
+      url: greeting_image,
       title: 'Αίτηση Ενδιαφέροντος Συνεργασίας',
       width: '100%',
     },
     {
-      url: '/static/images/buttons/camera.jpg',
+      url: payment_image,
       title: 'Πληρώμη Νταντάς',
       width: '100%',
     },
     {
-        url: '/static/images/buttons/camera.jpg',
+        url: history_activity_image,
         title: 'Ιστορικό Ενεργειών',
         width: '100%',
     },
     {
-        url: '/static/images/buttons/camera.jpg',
+        url: handshake_image,
         title: 'Λήξη/Ανανέωση Συνεργασίας',
         width: '100%',
     },    

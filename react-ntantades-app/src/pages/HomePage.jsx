@@ -7,13 +7,16 @@ import ParentIcon from '@mui/icons-material/EscalatorWarning';
 import NannyIcon from '@mui/icons-material/ChildFriendly';
 import Stack from '@mui/material/Stack';
 
+
 import '../StyleSheets/HomePage.css';
 
 
 function Home () {
     return (
         <div className = "home-page">
-            <div className = "main-text">
+
+            <div style={{justifyContent: 'center',}}> 
+                
                 <header>
                     <h2>Δράση “Νταντάδες της γειτονιάς”</h2>
                     <p>Υπηρεσία κατ' οίκον φροντίδας βρεφών και νηπίων από 2 μηνών έως 2,5 ετών</p>
@@ -39,8 +42,7 @@ function Home () {
 
                          
                 </header>
-                
-                
+                    
             </div>
         </div>
     );

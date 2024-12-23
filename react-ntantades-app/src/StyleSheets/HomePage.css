@@ -1,14 +1,43 @@
-.home-page div {
-    height: auto; /* Optional: define a fixed height for consistent alignment */
-    width: auto; /* Optional: adjust the width as needed */
-    font-family: Arial, Helvetica, sans-serif;
-    display: flex;
-    align-items:      center;
-    margin: 0%;
-    background-color: #0000005C;
-    position:         relative;
+.home-page {
+    
+    /* Background  */
+    /* width: 100%;
+    height: 100vh;
+    background-image: url('../images/background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; */
 
-}
+    
+    justify-content: center;
+    align-content: center;
+    position:         relative; 
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: italic;
+    color: rgb(255, 255, 255);
+
+
+  }
+  
+
+  .home-page .main {
+    
+
+  }
+
+
+
+/* .home-page {
+    height: auto; /* Optional: define a fixed height for consistent alignment */
+    /* width: auto; Optional: adjust the width as needed */
+    /* font-family: Arial, Helvetica, sans-serif; */
+    /* display: flex; */
+    /* align-items:      center; */
+    /* margin: 0%; */
+    /* background-color: #0000005C;
+    position:         relative; */
+
+/* }  */
 
 
 .home-page .Buttons{
