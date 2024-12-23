@@ -10,12 +10,16 @@ import '../StyleSheets/ParentsGuide.css';
 
 function ParentsGuide () {
     return (
-        <div>
+        <div className="home-page">
             <div>
                 <h2>Οδηγίες προς τους Κηδεμόνες</h2>
+            </div>
 
+            <div>
                 <h3>Οδηγίες Υποβολής Αίτησης για Εύρεση Νταντάς</h3>
+            </div>
 
+            <div>
                 <ul style={{fontSize: '80%',}}>
                     <li> Για να συμμετάσχετε στην Δράση “Νταντάδες της Γειτονιάς” ως κηδεμόνας, αρχικά πρέπει να επιλέξετε “Είμαι Κηδεμόνας” στην Αρχική Σελίδα, και στη συνέχεια να πατήσετε το κουμπί “Είσοδος στην Υπηρεσία με κωδικούς taxisNet”.  </li>
                     <li> Στη συνέχεια, αφού συμπληρώσετε τα απαραίτητα στοιχεία, θα υποβάλλεται την αίτηση σας </li>
@@ -24,14 +28,12 @@ function ParentsGuide () {
                     Συνεργασίας</b></li>
                 </ul>
 
-
-
             </div>
 
-            <Link to="/Nanny" style={{ textDecoration: 'none',}}>
+            <Link to="/Parent" style={{ textDecoration: 'none',}}>
                 <Button variant="contained" startIcon={<BackIcon />} 
-                    sx={{ whiteSpace: 'normal',textAlign: 'center',}}>
-                    Επίστροφή στην Σελίδα Νταντάδων
+                    sx={{ whiteSpace: 'normal',textAlign: 'center', marginTop:'2%'}}>
+                    Επίστροφή στην Σελίδα Κηδεμόνων
                 </Button>
             </Link>
             

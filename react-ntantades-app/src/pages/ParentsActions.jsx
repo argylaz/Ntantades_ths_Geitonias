@@ -112,7 +112,7 @@ function HomePageNanny () {
             
             
 
-            <Box sx={{ display: 'flex', flexDirection: "row", gap : 4, minWidth: 1200, width: '100%' , minHeight:100 }}>
+            <Box sx={{ display: 'flex', flexDirection: "row", gap : 4, minWidth: 1200, width: '100%' , minHeight:100,}}>
             {images.map((image) => (
                 <ImageButton
                 focusRipple

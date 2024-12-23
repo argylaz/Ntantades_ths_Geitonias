@@ -7,10 +7,10 @@ import MoneyIcon from '@mui/icons-material/AttachMoney';
 import HelpIcon from '@mui/icons-material/Help';
 import LoginIcon from '@mui/icons-material/Login';
 import Stack from '@mui/material/Stack';
-import '../StyleSheets/HomePage.css';
+import '../StyleSheets/HomePageParent.css';
 
 
-function HomePageNanny () {
+function HomePageParent () {
     return (
         <div className = "home-page">
             <div className = "main-text">
@@ -68,4 +68,4 @@ function HomePageNanny () {
     );
 };
 
-export default HomePageNanny;
+export default HomePageParent;

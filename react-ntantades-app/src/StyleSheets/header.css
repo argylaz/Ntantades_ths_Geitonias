@@ -34,9 +34,9 @@
 }
 
 .header .menu {
-    background-color: gray;
+    /* background-color: rgb(128, 128, 128); */
     height: 60%;
-    /* width:  47%; */
+
     width: auto;
     margin-left: 10%;
     align-items: center;
@@ -45,6 +45,10 @@
 }
 
 
+.header .personas{
+    border-radius: 10px;
+    border-color: black;
+}
 
 .menu .menu-list {
 
@@ -119,10 +123,10 @@ a:visited {
 }
 
 .header .user-button {
-    height: 60%; 
-    width: 8%;
+    /* height: 60%;  */
+    /* width: 8%; */
     margin-left: 7%;
 
-    background-color: grey;
-    border-radius: 10px;
+    /* background-color: grey; */
+    border-radius: 10px; 
 }
