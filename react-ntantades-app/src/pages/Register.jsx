@@ -8,7 +8,9 @@ export default function Register() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
+  const [firstname, setFirstName] = useState('');
+  const [lastname, setLastName] = useState('');
+  const [age, setAge] = useState('');
   const [phone, setPhone] = useState('');
   const [loading, setLoading] = useState(false);
   
@@ -24,7 +26,9 @@ export default function Register() {
 
       // Save Added info to firestore
       await setDoc(doc(FIREBASE_DB, "users", user.uid), {
-        name: name,
+        firstname: firstname,
+        lastname: lastname,
+        age: age,
         email: email,
         phone: phone,
         createdAt: new Date().toISOString(),
@@ -44,14 +48,38 @@ export default function Register() {
         <form onSubmit={SignUp} className='register-container'>
             <h2>Register</h2>
 
-            {/* Field for name */}
+            {/* Field for firstname */}
             <div className='register-row'>
-            <label>Name:</label>
+            <label>FirstName:</label>
             &nbsp;&nbsp;&nbsp;
             <input
               type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={firstname}
+              onChange={(e) => setFirstName(e.target.value)}
+              required
+            />
+            </div>
+
+            {/* Field for lastname */}
+            <div className='register-row'>
+            <label>LastName:</label>
+            &nbsp;&nbsp;&nbsp;
+            <input
+              type="text"
+              value={lastname}
+              onChange={(e) => setLastName(e.target.value)}
+              required
+            />
+            </div>
+
+            {/* Field for Age */}
+            <div className='register-row'>
+            <label>Age:</label>
+            &nbsp;&nbsp;&nbsp;
+            <input
+              type="number"
+              value={age}
+              onChange={(e) => setAge(e.target.value)}
               required
             />
             </div>
