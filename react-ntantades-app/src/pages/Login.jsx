@@ -33,12 +33,12 @@ export default function Login() {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, (currentUser) => {
             if (currentUser) {
-                navigate('/profile'); // Navigate to /courses if already logged in
+                navigate('/profile'); 
             }
         });
 
         return () => unsubscribe(); // Cleanup subscription
-    }, [navigate, FIREBASE_AUTH]);
+    }, [navigate, /*FIREBASE_AUTH*/]);
 
 
     return (

@@ -1,16 +1,12 @@
 import React from "react";
 
 import ButtonMenu from "./buttonMenu.jsx"
-import ButtonUserMode from "./buttonUserMode.jsx";
 import UserButton from "./UserButton.jsx";
-
-import {Link} from 'react-router-dom';
-import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
 
 
 import logo from "../images/baby_logo.png"
 import "../StyleSheets/header.css"
+import ButtonUserMode from "./buttonUserMode.jsx";
 
 
 function Header() {
@@ -24,30 +20,14 @@ function Header() {
                     alt = "Rectangle stroke"
                     src = {logo}
                     />
-                    <a href='/'></a>
+                    <a href='/'> </a>
                 </div>
 
                 {/* Adding menu */}
                 <ButtonMenu />
 
                 {/* Adding user mode buttons */}
-                {/* <ButtonUserMode mode = "Κηδεμόνας"/>
-                <ButtonUserMode mode = "Νταντά"/> */}
-
-                <div className="personas">
-                    <ButtonGroup>    
-                        <Link to="/Parent" style={{ textDecoration: 'none',}}>
-                            <Button sx={{ width: 'auto', height: "60px", whiteSpace: 'normal',textAlign: 'center',backgroundColor:'white', color: 'black'}} >
-                                Κηδεμόνας</Button>
-                        </Link>
-
-                        <Link to="/Nanny" style={{ textDecoration: 'none',}}>
-                            <Button sx={{ width: 'auto', height: "60px", whiteSpace: 'normal',textAlign: 'center',backgroundColor:'white', color: 'black'}} >
-                                Νταντά</Button>
-                        </Link>
-                    </ButtonGroup>
-                </div>
-
+                <ButtonUserMode />
 
                 {/* Adding login/profile button */}
                 <UserButton/>

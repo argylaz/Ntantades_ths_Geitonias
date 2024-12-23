@@ -1,32 +1,33 @@
 import React from "react";
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom';
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
 
 import "../StyleSheets/header.css"
 
 
     
 
-function ButtonUserMode({mode}) {
+const ButtonUserMode = () => {
 
-    const links = {
-        Κηδεμόνας: [
-            { to: "Parent", label: "Κηδεμόνας" },
-        ],
-        Νταντά: [
-            { to: "Nanny", label: "Νταντά" },
-        ],   
-    };
-
-    const userLinks = links[mode] || [];
+    const currentLocation = useLocation();
+    const currentPath = currentLocation?.pathname || '';
 
     return (
-        <div className="menu-user">
-            {userLinks.map((link, index) => (
-                <div className="menu-user-item" key={index}>
-                    <Link to={link.to}>{link.label}</Link>
-                </div>
-            ))}
-        </div>
+        <div className="personas">
+        <ButtonGroup>    
+            <Link to="/Parent" style={{ textDecoration: 'none',}}>
+                <Button sx={{ width: 'auto', height: "60px", whiteSpace: 'normal',textAlign: 'center',backgroundColor: currentPath.startsWith('/Parent') ? 'blue' : 'white', color: 'black'}} >
+                    Κηδεμόνας</Button>
+            </Link>
+
+            <Link to="/Nanny" style={{ textDecoration: 'none',}}>
+                <Button sx={{ width: 'auto', height: "60px", whiteSpace: 'normal',textAlign: 'center', backgroundColor: currentPath.startsWith('/Nanny') ? 'blue' : 'white', color: 'black'}} >
+                    Νταντά</Button>
+            </Link>
+        </ButtonGroup>
+    </div>
+
     );
 };
 

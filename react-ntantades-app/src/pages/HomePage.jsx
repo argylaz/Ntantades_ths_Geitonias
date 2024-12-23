@@ -1,11 +1,8 @@
 import React from "react";
 import { Link } from 'react-router-dom';
-import ButtonLink from '../components/ButtonLink.jsx';
-import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 import ParentIcon from '@mui/icons-material/EscalatorWarning';
 import NannyIcon from '@mui/icons-material/ChildFriendly';
-import Stack from '@mui/material/Stack';
 
 
 import '../StyleSheets/HomePage.css';
