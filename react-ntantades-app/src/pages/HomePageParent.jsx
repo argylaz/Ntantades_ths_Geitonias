@@ -1,15 +1,18 @@
 import React from "react";
 import { Link } from 'react-router-dom';
+
 import Button from '@mui/material/Button';
 import PersonIcon from '@mui/icons-material/Person';
 import MoneyIcon from '@mui/icons-material/AttachMoney';
 import HelpIcon from '@mui/icons-material/Help';
-import LoginIcon from '@mui/icons-material/Login';
 import Stack from '@mui/material/Stack';
 import '../StyleSheets/HomePageParent.css';
+import IfLoggedInButton from "../components/IfLoggedInButton";
 
 
 function HomePageParent () {
+
+
     return (
         <div className = "home-page">
             <div className = "main-text">
@@ -20,23 +23,11 @@ function HomePageParent () {
                 </header>
             </div>
 
-            <div className= "Login">
-                <Link to="/Login" style={{ textDecoration: 'none',}}>
-                <Button variant="contained" startIcon={<LoginIcon />}
-                    sx={{ width: '250px', height: "70px", whiteSpace: 'normal',textAlign: 'center',}}>
-                    Είσοδος στην Υπηρεσία με κωδικούς taxis
-                </Button>
-                </Link>
-            </div>
-            
-            {/* <div className= "Buttons">
-                        <ButtonLink to="/Parent/ParticipationRequirements">Προϋποθέσεις Συμμετοχής</ButtonLink>
-                        <ButtonLink to="/Parent/FundingRequirements">Προϋποθέσεις Λήψης Χρηματοδότησης</ButtonLink>
-                        <ButtonLink to="/Parent/ParentsGuide">Οδηγίες</ButtonLink>
-            </div> */}
+            {/* Button to actions page (redirects to Login if not logged in) */}
+            <IfLoggedInButton link="/Parent/Actions" text="Είσοδος στην υπηρεσία" />
 
+            {/* Adding Links to info pages */}
             <Stack direction="row" spacing={16}>
-
 
                 <Link to="/Parent/ParticipationRequirements" style={{ textDecoration: 'none',}}>
                     <Button variant="contained" startIcon={<PersonIcon />}

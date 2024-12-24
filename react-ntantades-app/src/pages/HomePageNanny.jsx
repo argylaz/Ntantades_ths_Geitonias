@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import PersonIcon from '@mui/icons-material/Person';
 import HelpIcon from '@mui/icons-material/Help';
-import LoginIcon from '@mui/icons-material/Login';
+import IfLoggedInButton from "../components/IfLoggedInButton";
 
 import '../StyleSheets/HomePageNanny.css';
 
@@ -19,14 +19,8 @@ function HomePageNanny () {
                 </header>
             </div>
 
-            <div className= "Login">
-                <Link to="/Login" style={{ textDecoration: 'none',}}>
-                <Button variant="contained" startIcon={<LoginIcon />}
-                    sx={{ width: '250px', height: "70px", whiteSpace: 'normal',textAlign: 'center',}}>
-                    Είσοδος στην Υπηρεσία με κωδικούς taxis
-                </Button>
-                </Link>
-            </div>
+            {/* Button to actions page (redirects to Login if not logged in) */}
+            <IfLoggedInButton link="/Nanny/Actions" text="Είσοδος στην υπηρεσία" />
 
             <Link to="/Nanny/EligibilityCriteria" style={{ textDecoration: 'none', marginRight: '10%',}}>
                 <Button variant="contained" startIcon={<PersonIcon />}
