@@ -36,10 +36,6 @@ function HomePageNanny () {
                 </Button>
             </Link>
 
-            {/* <div className= "Buttons">
-                        
-            </div> */}
-
 
         </div>
     );

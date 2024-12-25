@@ -103,13 +103,15 @@ const images = [
     transition: theme.transitions.create('opacity'),
   }));
 
-function HomePageNanny () {
+function ParentsActions () {
     return (
 
         
-        <div>
-            <h1> Επιλέξτε την ενέργεια που επιθυμείτε </h1>
-            
+        <div className="inner-page">
+            <h1 style={{  fontFamily: "Arial, Helvetica, sans-serif",
+                          fontStyle: "italic",
+                          color:"black",}}> Επιλέξτε την ενέργεια που επιθυμείτε </h1>
+          
             
 
             <Box sx={{ display: 'flex', flexDirection: "row", gap : 4, minWidth: 1200, width: '100%' , minHeight:100,}}>
@@ -148,4 +150,4 @@ function HomePageNanny () {
     );
 };
 
-export default HomePageNanny;
+export default ParentsActions;

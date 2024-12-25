@@ -11,11 +11,13 @@
 }
 
 .header .app-logo-container {
-    height:           60%;
-    width:            10%;
-    background-color: gray;
-    margin-left:      1%;
-    border-radius: 10px;
+    /* height:           60%;
+    width:            10%; */
+    /* background-color: gray; */
+
+
+    
+    /* margin-left:      1%; */
 }
 
 .app-logo-container a {
@@ -46,6 +48,7 @@
 
 
 .header .personas{
+    height: 60%;
     border-radius: 10px;
     border-color: black;
 }
@@ -72,7 +75,7 @@
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1.1rem;
     /* cursor: pointer; */
-    padding: 10px 15px; /* Add padding for better click targets */
+    padding: 10px 15px; 
     transition: background-color 0.3s ease; 
     list-style: none; /* Remove default list styling */
 }
@@ -87,7 +90,7 @@
     display: flex;
     background-color: grey;
     height: 60%; 
-    width: 8%;
+    width: 8%; 
     margin-left: 2%;
     align-items: center;
     justify-content: center;
@@ -96,7 +99,7 @@
 
 .menu-user .menu-user-item {
     
-    /* margin-right: 20%; */
+    margin-right: 20%;
     display: flex; /* Enables flexbox layout */
     justify-content: center; /* Centers horizontally */
     align-items: center; /* Centers vertically */
@@ -123,8 +126,8 @@ a:visited {
 }
 
 .header .user-button {
-    /* height: 60%;  */
-    /* width: 8%; */
+    height: 60%; 
+    width: 8%;
     margin-left: 15%;
 
     /* background-color: grey; */

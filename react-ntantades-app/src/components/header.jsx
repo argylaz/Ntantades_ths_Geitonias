@@ -4,7 +4,7 @@ import ButtonMenu from "./buttonMenu.jsx"
 import UserButton from "./UserButton.jsx";
 
 
-import logo from "../images/baby_logo.png"
+import logo from "../images/logo_stroller.png"
 import "../StyleSheets/header.css"
 import ButtonUserMode from "./buttonUserMode.jsx";
 

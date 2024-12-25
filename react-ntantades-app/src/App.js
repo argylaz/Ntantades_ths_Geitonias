@@ -17,6 +17,7 @@ import ParentsGuide from "./pages/ParentsGuide.jsx"
 import FundingRequirements from "./pages/FundingRequirements.jsx"
 import ParentsActions from "./pages/ParentsActions.jsx"
 import NannyActions from "./pages/NannyActions.jsx"
+import Search from "./pages/Search.jsx"
 
 import './StyleSheets/App.css';
 import './config/firebase.js'
@@ -41,6 +42,7 @@ function App() {
               <Route path="/Parent/ParentsGuide" element={<ParentsGuide />} />
               <Route path="/Parent/FundingRequirements" element={<FundingRequirements />} />
               <Route path="/Parent/ParticipationRequirements" element={<ParticipationRequiremenents />} />
+              <Route path="/Parent/Search" element={<Search/>} />
               <Route path="/Parent/Actions" element={<ParentsActions/>} />
               <Route path="/Nanny/Actions" element={<NannyActions/>} />
           </Routes>

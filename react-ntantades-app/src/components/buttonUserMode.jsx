@@ -15,14 +15,14 @@ const ButtonUserMode = () => {
 
     return (
         <div className="personas">
-        <ButtonGroup>    
+        <ButtonGroup  variant="contained" aria-label="Basic button group">    
             <Link to="/Parent" style={{ textDecoration: 'none',}}>
-                <Button sx={{ width: 'auto', height: "60px", whiteSpace: 'normal',textAlign: 'center',backgroundColor: currentPath.startsWith('/Parent') ? 'blue' : 'white', color: 'black'}} >
+                <Button sx={{ width: 'auto', height: "60px", whiteSpace: 'normal',textAlign: 'center',backgroundColor: currentPath.startsWith('/Parent') ? '#1976d2' : 'white', color: currentPath.startsWith('/Parent') ? 'white' : 'black' }} >
                     Κηδεμόνας</Button>
             </Link>
 
             <Link to="/Nanny" style={{ textDecoration: 'none',}}>
-                <Button sx={{ width: 'auto', height: "60px", whiteSpace: 'normal',textAlign: 'center', backgroundColor: currentPath.startsWith('/Nanny') ? 'blue' : 'white', color: 'black'}} >
+                <Button sx={{ width: 'auto', height: "60px", whiteSpace: 'normal',textAlign: 'center', backgroundColor: currentPath.startsWith('/Nanny') ? '#1976d2' : 'white', color: currentPath.startsWith('/Nanny') ? 'white' : 'black' }} >
                     Νταντά</Button>
             </Link>
         </ButtonGroup>
