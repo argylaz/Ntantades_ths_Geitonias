@@ -112,7 +112,7 @@ const images = [
     transition: theme.transitions.create('opacity'),
   }));
 
-function HomePageNanny () {
+function NannyActions () {
     return (
 
         
@@ -157,4 +157,4 @@ function HomePageNanny () {
     );
 };
 
-export default HomePageNanny;
+export default NannyActions;
