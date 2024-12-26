@@ -1,58 +1,90 @@
 // 
-
-
-
-
-
 import React, { useState } from 'react';
-import { collection, query, where, getDocs } from 'firebase/firestore';
-import { FIREBASE_AUTH,  FIREBASE_DB } from '../config/firebase'; // Import your Firebase config
+import { FIREBASE_DB } from '../config/firebase'; // Import your Firebase config
+import { collection, onSnapshot, query, where, } from "firebase/firestore";
 
-// /ςεδατνατν ιεχε υοπ bd σεσ ncraes ωνακ
- // 
+
+// const getUsers = async () => {
+//   const usersSnapshot = await getDocs(collection(FIREBASE_DB, "users"));
+//   return usersSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+// };
+ 
 function SearchNannies() {
-    const [searchLocation, setSearchLocation] = useState('');
+    const [SearchName, setSearchName] = useState("");
     const [results, setResults] = useState([]);
 
-    const handleSearch = async () => {
+    
+    // const q = query(collection(FIREBASE_DB, "users"), where("firstname", "==", true));
+
+
+    // const handleSearch = async () => {
+    //     try {
+    //         // const q = query(
+    //         //     // collection(FIREBASE_DB, 'users'),
+    //         //     getUsers(),
+    //         //     where('firstname', '==', SearchName) // Search by FirstName
+    //         // );
+
+    //         const q = query(collection(FIREBASE_DB, "users"), where("firstname", "==", true));
+
+    //         const querySnapshot = await getDocs(q);
+    //         const users = querySnapshot.docs.map((doc) => ({
+    //             id: doc.id,
+    //             ...doc.data(),
+    //         }));
+
+    //         setResults(users);
+    //     } catch (error) {
+    //         console.error('Error fetching nannies:', error);
+    //     }
+    // };
+
+    const handleSearch = (event) => {
+
+        event.preventDefault();
+
         try {
-            const q = query(
-                collection(FIREBASE_AUTH, 'nannies'),
-                where('location', '==', searchLocation) // Search by location
-            );
 
-            const querySnapshot = await getDocs(q);
-            const nannies = querySnapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data(),
-            }));
+            // get collection
+            const colRef = collection(FIREBASE_DB,"users")
+        
+        
+            // queries
+            const q = query(colRef, where("firstname", "==", SearchName))
 
-            setResults(nannies);
-        } catch (error) {
-            console.error('Error fetching nannies:', error);
+        
+            // real time collection data
+            onSnapshot(q, (snapshot) => {
+                let names = []
+                snapshot.docs.forEach((doc) => {
+                    names.push({...doc.data(), id: doc.id})
+                }) 
+                console.log(names)
+                setResults(names)
+            })
+
         }
-    };
+        
+        catch (error){
+            console.error(error.message)
+        }
+            
+    }
+    
+
 
     return (
-        <div>
-            <h2>Search Nannies</h2>
-            <input
-                type="text"
-                placeholder="Enter location"
-                value={searchLocation}
-                onChange={(e) => setSearchLocation(e.target.value)}
-            />
-            <button onClick={handleSearch}>Search</button>
 
-            <ul>
-                {results.map((nanny) => (
-                    <li key={nanny.id}>
-                        <strong>{nanny.name}</strong> - {nanny.location}
-                        <br />
-                        Skills: {nanny.skills.join(', ')}
-                    </li>
-                ))}
-            </ul>
+        <div>
+            <form>
+                <label>Firstname</label>    
+                <input type="text" name="firstname" required onChange={(e) => setSearchName(e.target.value)}/>
+
+                <button onClick={handleSearch}> Search </button>
+            </form>    
+
+            <ul> {results.map((name) => ( <li key={name.id}>{name.firstname} {name.lastname}</li> ))} </ul>
+    
         </div>
     );
 }
