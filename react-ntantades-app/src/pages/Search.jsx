@@ -1,98 +1,60 @@
-import React, { useState } from "react";
-import { Link } from 'react-router-dom';
-import '../StyleSheets/HomePage.css';
-import {
-  TextField,
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel,
-  Button,
-} from "@mui/material";
+// 
 
 
 
-// const SearchBar = ({ onSearch }) => {
-//     const [searchTerm, setSearchTerm] = useState("");
-//     const [filter, setFilter] = useState("");
-    
-//     const handleSearch = () => {
-//         onSearch({ searchTerm, filter });
-//     };
-// }
 
-const Search = ({ onSearch }) => {
 
-    const [searchTerm, setSearchTerm] = useState("");
-    const [filter, setFilter] = useState("");
-    
-    const handleSearch = () => {
-        onSearch({ searchTerm, filter });
+import React, { useState } from 'react';
+import { collection, query, where, getDocs } from 'firebase/firestore';
+import { FIREBASE_AUTH,  FIREBASE_DB } from '../config/firebase'; // Import your Firebase config
+
+// /ςεδατνατν ιεχε υοπ bd σεσ ncraes ωνακ
+ // 
+function SearchNannies() {
+    const [searchLocation, setSearchLocation] = useState('');
+    const [results, setResults] = useState([]);
+
+    const handleSearch = async () => {
+        try {
+            const q = query(
+                collection(FIREBASE_AUTH, 'nannies'),
+                where('location', '==', searchLocation) // Search by location
+            );
+
+            const querySnapshot = await getDocs(q);
+            const nannies = querySnapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+            }));
+
+            setResults(nannies);
+        } catch (error) {
+            console.error('Error fetching nannies:', error);
+        }
     };
 
-    return ( 
-        <div className="inner-page" style={{justifyContent:"center",}}>
-            <div style={{ display: "flex", gap: "1rem", justifyContent: "center"}}>
-                <TextField
-                    label="Search"
-                    variant="outlined"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                />
-                <FormControl variant="outlined">
-                <InputLabel width="fit-content" >Filter</InputLabel>
-                <Select
-                value={filter}
-                onChange={(e) => setFilter(e.target.value)}
-                label="Filter"
-                >
-                    <MenuItem value="">None</MenuItem>
-                    <MenuItem value="category1">Category 1</MenuItem>
-                    <MenuItem value="category2">Category 2</MenuItem>
-                </Select>
-                </FormControl>
-            </div>
+    return (
+        <div>
+            <h2>Search Nannies</h2>
+            <input
+                type="text"
+                placeholder="Enter location"
+                value={searchLocation}
+                onChange={(e) => setSearchLocation(e.target.value)}
+            />
+            <button onClick={handleSearch}>Search</button>
 
-            <Button  variant="contained" onClick={handleSearch}>
-                Search
-            </Button>
-
-
+            <ul>
+                {results.map((nanny) => (
+                    <li key={nanny.id}>
+                        <strong>{nanny.name}</strong> - {nanny.location}
+                        <br />
+                        Skills: {nanny.skills.join(', ')}
+                    </li>
+                ))}
+            </ul>
         </div>
     );
-};
+}
 
-export default Search;
-
-
-
-
-// import React, { useState } from "react";
-//   return (
-//     <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
-//       <TextField
-//         label="Search"
-//         variant="outlined"
-//         value={searchTerm}
-//         onChange={(e) => setSearchTerm(e.target.value)}
-//       />
-//       <FormControl variant="outlined">
-//         <InputLabel>Filter</InputLabel>
-//         <Select
-//           value={filter}
-//           onChange={(e) => setFilter(e.target.value)}
-//           label="Filter"
-//         >
-//           <MenuItem value="">None</MenuItem>
-//           <MenuItem value="category1">Category 1</MenuItem>
-//           <MenuItem value="category2">Category 2</MenuItem>
-//         </Select>
-//       </FormControl>
-//       <Button variant="contained" onClick={handleSearch}>
-//         Search
-//       </Button>
-//     </div>
-//   );
-// };
-
-// export default SearchBar;
+export default SearchNannies;

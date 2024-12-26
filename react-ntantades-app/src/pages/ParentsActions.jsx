@@ -9,6 +9,8 @@ import payment_image from "../images/payment.webp"
 import history_activity_image from "../images/history_activity.jpg"
 import greeting_image from "../images/cooperation_image.jpg"
 
+import { useNavigate } from 'react-router-dom';
+
 
 
 const images = [
@@ -16,6 +18,7 @@ const images = [
       url: nanny_image,
       title: 'Αναζήτηση Νταντάδων',
       width: '100%',
+      route: 'Search'
     },
     {
       url: greeting_image,
@@ -104,6 +107,10 @@ const images = [
   }));
 
 function ParentsActions () {
+
+
+    const navigate = useNavigate();
+
     return (
 
         
@@ -119,6 +126,7 @@ function ParentsActions () {
                 <ImageButton
                 focusRipple
                 key={image.title}
+                onClick={() => navigate(image.route)}
                 style={{
                     width: image.width,
                 }}
