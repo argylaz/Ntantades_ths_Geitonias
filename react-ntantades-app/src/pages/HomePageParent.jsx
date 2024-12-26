@@ -24,7 +24,7 @@ function HomePageParent () {
             </div>
 
             {/* Button to actions page (redirects to Login if not logged in) */}
-            <IfLoggedInButton link="/Parent/Actions" text="Είσοδος στην υπηρεσία" />
+            <IfLoggedInButton link="/Parent/Actions" text="ΕΙΣΟΔΟΣ ΣΤΗΝ ΥΠΗΡΕΣΙΑ" />
 
             {/* Adding Links to info pages */}
             <Stack direction="row" spacing={16}>
@@ -32,21 +32,21 @@ function HomePageParent () {
                 <Link to="/Parent/ParticipationRequirements" style={{ textDecoration: 'none',}}>
                     <Button variant="contained" startIcon={<PersonIcon />}
                         sx={{ width: '200px', height: "70px", whiteSpace: 'normal',textAlign: 'center',}}>
-                        Προϋποθέσεις Συμμετοχής
+                        ΠΡΟΫΠΟΘΕΣΕΙΣ ΣΥΜΜΕΤΟΧΗΣ
                     </Button>
                 </Link>
 
                 <Link to="/Parent/FundingRequirements" style={{ textDecoration: 'none',}}>
                     <Button variant="contained" startIcon={<MoneyIcon />} 
                         sx={{ width: '200px', height: "70px", whiteSpace: 'normal',textAlign: 'center',}}>
-                        Προϋποθέσεις Λήψης Χρηματοδότησης
+                        ΠΡΟΫΠΟΘΕΣΕΙΣ ΛΗΨΗΣ ΧΡΗΜΑΤΟΔΟΤΗΣΗΣ
                     </Button>
                 </Link>
 
                 <Link to="/Parent/ParentsGuide" style={{ textDecoration: 'none',}}>
                     <Button variant="contained" endIcon={<HelpIcon />} 
                         sx={{ width: '200px', height: "70px", whiteSpace: 'normal',textAlign: 'center',}}>
-                        Οδηγίες
+                        ΟΔΗΓΙΕΣ
                     </Button>
                 </Link>
             

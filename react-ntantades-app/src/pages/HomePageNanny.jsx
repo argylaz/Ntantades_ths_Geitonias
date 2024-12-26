@@ -20,19 +20,19 @@ function HomePageNanny () {
             </div>
 
             {/* Button to actions page (redirects to Login if not logged in) */}
-            <IfLoggedInButton link="/Nanny/Actions" text="Είσοδος στην υπηρεσία" />
+            <IfLoggedInButton link="/Nanny/Actions" text="ΕΙΣΟΔΟΣ ΣΤΗΝ ΥΠΗΡΕΣΙΑ" />
 
             <Link to="/Nanny/EligibilityCriteria" style={{ textDecoration: 'none', marginRight: '10%',}}>
                 <Button variant="contained" startIcon={<PersonIcon />}
                     sx={{ width: '250px', height: "70px", whiteSpace: 'normal',textAlign: 'center',}}>
-                    Κριτήρια Επιλεξιμότητας
+                    ΚΡΙΤΗΡΙΑ ΕΠΙΛΕΞΙΜΟΤΗΤΑΣ
                 </Button>
             </Link>
 
             <Link to="/Nanny/Guide" style={{ textDecoration: 'none', marginLeft: '15%',}}>
                 <Button variant="contained" endIcon={<HelpIcon />} 
                     sx={{ width: '250px', height: "70px", whiteSpace: 'normal',textAlign: 'center',}}>
-                    Οδηγίες για την Εγγραφή στο Μητρώο Νταντάδων
+                    ΟΔΗΓΙΕΣ ΓΙΑ ΤΗΝ ΕΓΓΡΑΦΗ ΣΤΟ ΜΗΤΡΩΟ ΝΤΑΝΤΑΔΩΝ
                 </Button>
             </Link>
 

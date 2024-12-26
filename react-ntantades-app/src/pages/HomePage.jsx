@@ -26,14 +26,14 @@ function Home () {
                     <Link to="/Parent" style={{ textDecoration: 'none', marginRight: '5%',}}>
                         <Button variant="contained" startIcon={<ParentIcon />}
                             sx={{ width: '200px', height: "50px", whiteSpace: 'normal',textAlign: 'center',}}>
-                            Είμαι Κηδεμόνας
+                            ΕΙΜΑΙ ΚΗΔΕΜΟΝΑΣ
                         </Button>
                     </Link>
 
                     <Link to="/Nanny" style={{ textDecoration: 'none', marginLeft: '5%',}}>
                         <Button variant="contained" endIcon={<NannyIcon />} 
                             sx={{ width: '200px', height: "50px", whiteSpace: 'normal',textAlign: 'center',}}>
-                            Είμαι Νταντά
+                            ΕΙΜΑΙ ΝΤΑΝΤΑ
                         </Button>
                     </Link>
 

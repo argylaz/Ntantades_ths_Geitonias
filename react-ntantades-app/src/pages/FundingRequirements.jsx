@@ -35,7 +35,7 @@ function FundingRequirements () {
             <Link to="/Parent" style={{ textDecoration: 'none',}}>
                 <Button variant="contained" startIcon={<BackIcon />} 
                     sx={{ whiteSpace: 'normal',textAlign: 'center', marginTop:'2%'}}>
-                    Επίστροφή στην Σελίδα Κηδεμόνων
+                    ΕΠΙΣΤΡΟΦΗ ΣΤΗ ΣΕΛΙΔΑ ΚΗΔΕΜΟΝΩΝ
                 </Button>
             </Link>
 

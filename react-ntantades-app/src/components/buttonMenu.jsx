@@ -21,23 +21,23 @@ export const ButtonMenu = () => {
             <ButtonGroup variant="contained" aria-label="Basic button group">
                 <Link to="/" style={{ textDecoration: 'none',}}>
                     <Button sx={{ width: 'auto', height: "60px", whiteSpace: 'normal',textAlign: 'center',backgroundColor:'white', color: 'black'}} >
-                        Αρχική</Button>
+                        ΑΡΧΙΚΗ</Button>
                 </Link>
                 
                 <Link to="/Notifications" style={{ textDecoration: 'none',}}>
                     <Button sx={{ width: 'auto', height: "60px", whiteSpace: 'normal',textAlign: 'center',backgroundColor:'white', color: 'black'}}>
-                        Ειδοποιήσεις</Button>
+                        ΕΙΔΟΠΟΙΗΣΕΙΣ</Button>
                 </Link>
 
 
                 <Link to="/FAQ" style={{ textDecoration: 'none',}}>
                     <Button sx={{ width: 'auto', height: "60px", whiteSpace: 'normal',textAlign: 'center',backgroundColor:'white', color: 'black'}}>
-                        Συχνές Ερωτήσεις</Button>
+                        ΣΥΧΝΕΣ ΕΡΩΤΗΣΕΙΣ</Button>
                 </Link>
 
                 <Link to="/Guide" style={{ textDecoration: 'none',}}>
                     <Button sx={{ width: 'auto', height: "60px", whiteSpace: 'normal',textAlign: 'center', backgroundColor:'white', color: 'black'}}>
-                        Οδηγίες</Button>
+                        ΟΔΗΓΙΕΣ</Button>
                 </Link>
             </ButtonGroup>
                 

@@ -1,10 +1,10 @@
-.login h2{
+.login h2 {
     text-align: left;
     margin: 0px;
     margin-bottom: 20px;
 }
 
-.login-container{
+.login-container {
     color: rgb(30, 30, 30);
     width: fit-content;
     height: auto;
@@ -19,12 +19,12 @@
 
 
 
-.login-container .login-row{
+.login-container .login-row {
     justify-content: right;
     padding: 3px;
 }
 
-.login-container .login-row input{
+.login-container .login-row input {
     /* color: rgb(30, 30, 30); */
     /* background-color: rgb(240, 248, 255, 0); */
     border: 1px solid rgb(30, 30, 30);

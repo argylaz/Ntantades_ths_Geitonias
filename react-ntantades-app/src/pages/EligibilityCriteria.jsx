@@ -35,7 +35,7 @@ function EligibilityCriteria () {
             <Link to="/Nanny" style={{ textDecoration: 'none',}}>
                 <Button variant="contained" startIcon={<BackIcon />} 
                     sx={{ whiteSpace: 'normal',textAlign: 'center', marginTop:'2%'}}>
-                    Επίστροφή στην Σελίδα Νταντάδων
+                    ΕΠΙΣΤΡΟΦΗ ΣΤΗ ΣΕΛΙΔΑ ΝΤΑΝΤΑΔΩΝ
                 </Button>
             </Link>
             
