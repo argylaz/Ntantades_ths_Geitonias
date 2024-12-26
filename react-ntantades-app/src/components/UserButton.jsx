@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 
@@ -15,6 +15,8 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 function UserButton() {
     const [user, setUser] = useState(null);
     const auth = getAuth();
+
+    const location = useLocation();  // Get the current location
 
     useEffect(() => {
         // Check the authentication state
@@ -34,16 +36,16 @@ function UserButton() {
                         startIcon={<AccountCircleIcon />} 
                         sx={{ width: 'auto', height: "60px", whiteSpace: 'normal', textAlign: 'center', backgroundColor: 'white', color: 'black' }}
                     >
-                        Profile
+                        ΠΡΟΦΙΛ
                     </Button>
                 </Link>
             ) : (
-                <Link to="/Login" style={{ textDecoration: 'none' }}>
+                <Link to={{ pathname: "/Login", state: { redirectTo: location.pathname } }} style={{ textDecoration: 'none' }}>
                     <Button 
                         startIcon={<LoginIcon />} 
                         sx={{ width: 'auto', height: "60px", whiteSpace: 'normal', textAlign: 'center', backgroundColor: 'white', color: 'black' }}
                     >
-                        Login
+                        ΣΥΝΔΕΣΗ
                     </Button>
                 </Link>
             )}

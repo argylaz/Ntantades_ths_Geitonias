@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { FIREBASE_AUTH } from "../config/firebase"; // Ensure this points to your Firebase auth configuration
 import Button from '@mui/material/Button';
@@ -7,6 +7,7 @@ import LoginIcon from '@mui/icons-material/Login';
 
 export default function IfLoggedInButton({ link, text}) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, (user) => {
@@ -15,6 +16,10 @@ export default function IfLoggedInButton({ link, text}) {
 
     return () => unsubscribe();
   }, []);
+
+  const handleLoginRedirect = () => {
+    navigate("/Login", { state: { redirectTo: link } });
+  };
 
   return isLoggedIn ? (
     <div className= "Login">
@@ -28,12 +33,12 @@ export default function IfLoggedInButton({ link, text}) {
     </div>
   ) : (
     <div className= "Login">
-        <Link to="/Login" style={{ textDecoration: "none" }}>
-          <Button variant="contained" startIcon={<LoginIcon />}
+        {/* <Link to="/Login" style={{ textDecoration: "none" }}> */}
+          <Button onClick={handleLoginRedirect} variant="contained" startIcon={<LoginIcon />}
               sx={{ width: '250px', height: "70px", whiteSpace: 'normal',textAlign: 'center',}}>
               { text }
           </Button>
-        </Link>
+        {/* </Link> */}
     </div>
   );
 }
