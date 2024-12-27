@@ -1,58 +1,277 @@
-// 
-
-
-
-
-
 import React, { useState } from 'react';
-import { collection, query, where, getDocs } from 'firebase/firestore';
-import { FIREBASE_AUTH,  FIREBASE_DB } from '../config/firebase'; // Import your Firebase config
+import { useNavigate } from "react-router-dom";
+import { FIREBASE_DB } from '../config/firebase'; // Import your Firebase config
+import { collection, onSnapshot, query, where, or } from "firebase/firestore";
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Input from '@mui/material/Input';
+import InputLabel from '@mui/material/InputLabel';
+import InputAdornment from '@mui/material/InputAdornment';
+import FormControl from '@mui/material/FormControl';
+import TextField from '@mui/material/TextField';
+import SearchIcon from  '@mui/icons-material/Search';
 
-// /ςεδατνατν ιεχε υοπ bd σεσ ncraes ωνακ
- // 
+import "../StyleSheets/Search.css"
+
+
+function createQuery(colRef, searchParams) {
+    let constraints = [];
+
+    // Add conditions dynamically based on filled search parameters
+    if (searchParams.firstname) {
+        constraints.push(where("firstname", "==", searchParams.firstname));
+    }
+    if (searchParams.lastname) {
+        constraints.push(where("lastname", "==", searchParams.lastname));
+    }
+    if (searchParams.age) {
+        constraints.push(where("age", "==", searchParams.age));
+    }
+
+    // Construct the query with dynamic constraints
+    return query(colRef, ...constraints);
+}
+
+
 function SearchNannies() {
-    const [searchLocation, setSearchLocation] = useState('');
+    const [SearchName, setSearchName] = useState("");
+    const [SearchSurname, setSearchSurname] = useState("");
+    const [SearchAge, setSearchAge] = useState("");
     const [results, setResults] = useState([]);
 
-    const handleSearch = async () => {
+    const navigate = useNavigate();
+
+
+
+    const handleSearch = (event) => {
+
+        event.preventDefault();
+
         try {
-            const q = query(
-                collection(FIREBASE_AUTH, 'nannies'),
-                where('location', '==', searchLocation) // Search by location
-            );
+            
 
-            const querySnapshot = await getDocs(q);
-            const nannies = querySnapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data(),
-            }));
+            // get collection
+            const colRef = collection(FIREBASE_DB,"users");
+        
+            const searchParams = {
+                firstname: SearchName || null,
+                lastname: SearchSurname || null,
+                age: SearchAge || null,
+            };
+            const q = createQuery(colRef, searchParams);
 
-            setResults(nannies);
-        } catch (error) {
-            console.error('Error fetching nannies:', error);
+            let comb_results = [];
+            onSnapshot(q, (snapshot) => {
+                    let names = [];
+                    snapshot.docs.forEach((doc) => {
+                        names.push({...doc.data(), id: doc.id});
+                    });
+                console.log(names);
+                comb_results = [...comb_results, ...names];
+                setResults(comb_results); 
+                navigate("NannyResults", { state: { results: comb_results } 
+            }); 
+
+        });
+
+
+            // // queries
+            // const queries = [
+            //     query(colRef, where("firstname", "==", SearchName)),
+            //     query(colRef, where("lastname", "==", SearchSurname)),
+            //     query(colRef, where("age", "==", SearchAge))
+            // ];
+            
+            // // const q = query(colRef, where("firstname", "==", SearchName))
+
+            // let comb_results = [];
+            // // real time collection data
+            // queries.forEach((q) => { 
+            //     onSnapshot(q, (snapshot) => {
+            //         let names = [];
+            //         snapshot.docs.forEach((doc) => {
+            //             names.push({...doc.data(), id: doc.id});
+            //         });
+            //     console.log(names);
+            //     comb_results = [...comb_results, ...names];
+            //     setResults(comb_results); 
+            //     navigate("NannyResults", { state: { results: comb_results } }); 
+            //     });
+            // });
         }
-    };
+        catch (error){
+            console.error(error.message)
+        }
+            
+    }
+    
+
 
     return (
-        <div>
-            <h2>Search Nannies</h2>
-            <input
-                type="text"
-                placeholder="Enter location"
-                value={searchLocation}
-                onChange={(e) => setSearchLocation(e.target.value)}
-            />
-            <button onClick={handleSearch}>Search</button>
 
-            <ul>
-                {results.map((nanny) => (
-                    <li key={nanny.id}>
-                        <strong>{nanny.name}</strong> - {nanny.location}
-                        <br />
-                        Skills: {nanny.skills.join(', ')}
-                    </li>
-                ))}
-            </ul>
+        <div className='search-box' >
+
+            <header style={{color:"#948472",}}> <b>Συμπληρώστε τα φίλτρα Αναζήτησης</b></header>
+
+
+            <Box sx={{ flexGrow: 1, }}>
+
+
+                <Grid container spacing={2} style={{margin:"25px",}}>
+
+                <FormControl variant="standard" style={{marginRight:"15px"}}>
+                    <InputLabel htmlFor="input-with-icon-adornment">
+                    Επώνυμο
+                    </InputLabel>
+                    <Input
+                        id="input-with-icon-adornment"
+                        onChange={(e) => setSearchSurname(e.target.value)}
+                        startAdornment={
+                        <InputAdornment position="start">
+                        <SearchIcon />
+                        </InputAdornment>
+                        }
+                    />
+                </FormControl>
+                
+                
+                <FormControl variant="standard" >
+                    <InputLabel htmlFor="input-with-icon-adornment">
+                    Όνομα
+                    </InputLabel>
+                    <Input
+                        id="input-with-icon-adornment"
+                        onChange={(e) => setSearchName(e.target.value)}
+                        startAdornment={
+                        <InputAdornment position="start">
+                        <SearchIcon />
+                        </InputAdornment>
+                        }
+                    />
+                </FormControl>
+
+                </Grid>
+
+                <Grid container spacing={2} style={{margin:"25px",}}>
+                
+                    <FormControl variant="standard" style={{marginRight:"15px"}}>
+                        <InputLabel htmlFor="input-with-icon-adornment">
+                        Ηιλικία Νταντάς
+                        </InputLabel>
+                        <Input
+                            id="input-with-icon-adornment"
+                            onChange={(e) => setSearchAge(e.target.value)}
+                            startAdornment={
+                            <InputAdornment position="start">
+                            <SearchIcon />
+                            </InputAdornment>
+                            }
+                        />
+                    </FormControl>
+
+
+                    <FormControl variant="standard" >
+                        <InputLabel htmlFor="input-with-icon-adornment">
+                        Χρόνος Απασχόλησης
+                        </InputLabel>
+                        <Input
+                            id="input-with-icon-adornment"
+                            onChange={(e) => setSearchName(e.target.value)}
+                            startAdornment={
+                            <InputAdornment position="start">
+                            <SearchIcon />
+                            </InputAdornment>
+                            }
+                        />
+                    </FormControl>
+
+                </Grid>
+
+                <Grid container spacing={2} style={{margin:"25px",}}>
+
+                    <FormControl variant="standard" style={{marginRight:"15px"}}>
+                        <InputLabel htmlFor="input-with-icon-adornment">
+                        Προσδιορισμός Χρόνου
+                        </InputLabel>
+                        <Input
+                            id="input-with-icon-adornment"
+                            onChange={(e) => setSearchName(e.target.value)}
+                            startAdornment={
+                            <InputAdornment position="start">
+                            <SearchIcon />
+                            </InputAdornment>
+                            }
+                        />
+                    </FormControl>
+
+
+                    <FormControl variant="standard">
+                        <InputLabel htmlFor="input-with-icon-adornment">
+                        Εμπειρία
+                        </InputLabel>
+                        <Input
+                            id="input-with-icon-adornment"
+                            onChange={(e) => setSearchName(e.target.value)}
+                            startAdornment={
+                            <InputAdornment position="start">
+                            <SearchIcon />
+                            </InputAdornment>
+                            }
+                        />
+                    </FormControl>
+
+                </Grid>
+
+                <Grid container spacing={2} style={{margin:"25px",}}>
+
+
+                    <FormControl variant="standard" style={{marginRight:"15px"}}>
+                        <InputLabel htmlFor="input-with-icon-adornment">
+                        Ειδίκευση
+                        </InputLabel>
+                        <Input
+                            id="input-with-icon-adornment"
+                            onChange={(e) => setSearchName(e.target.value)}
+                            startAdornment={
+                                <InputAdornment position="start">
+                            <SearchIcon />
+                            </InputAdornment>
+                            }
+                            />
+                    </FormControl>
+
+
+                    <FormControl variant="standard">
+                        <InputLabel htmlFor="input-with-icon-adornment">
+                        Περιοχή Διαμονής
+                        </InputLabel>
+                        <Input
+                            id="input-with-icon-adornment"
+                            onChange={(e) => setSearchName(e.target.value)}
+                            startAdornment={
+                                <InputAdornment position="start">
+                            <SearchIcon />
+                            </InputAdornment>
+                            }
+                            />
+                    </FormControl>
+                        
+                </Grid>
+                
+                <Button onClick={handleSearch} variant='contained'>Αναζήτηση</Button>
+            
+            </Box>
+
+            {/* <form>
+                <label color='black'>Firstname</label>    
+                <input type="text" name="firstname" required onChange={(e) => setSearchName(e.target.value)}/>
+
+                <button onClick={handleSearch}> Search </button>
+            </form>    */
+
+            <ul> {results.map((name) => ( <li key={name.id}>{name.firstname} {name.lastname}</li> ))} </ul> }
+    
         </div>
     );
 }

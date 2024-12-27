@@ -12,6 +12,9 @@ import job_image from "../images/job.jpg"
 import rating_image from "../images/rating.jpeg"
 
 
+import { useNavigate } from 'react-router-dom';
+
+
 
 
 const images = [
@@ -19,6 +22,7 @@ const images = [
       url: greeting_image,
       title: 'Αιτήσεις Ενδιαφέροντος Συνεργασίας',
       width: '100%',
+      route: 'requests'
     },
     {
       url: job_image,
@@ -113,10 +117,13 @@ const images = [
   }));
 
 function NannyActions () {
+
+    const navigate = useNavigate();
+
     return (
 
         
-        <div>
+        <div className="inner-page">
             <h1> Επιλέξτε την ενέργεια που επιθυμείτε </h1>
             
             
@@ -126,6 +133,7 @@ function NannyActions () {
                 <ImageButton
                 focusRipple
                 key={image.title}
+                onClick={() => navigate(image.route)}
                 style={{
                     width: image.width,
                 }}

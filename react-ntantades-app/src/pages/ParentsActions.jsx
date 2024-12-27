@@ -116,8 +116,7 @@ function ParentsActions () {
         
         <div className="inner-page">
             <h1 style={{  fontFamily: "Arial, Helvetica, sans-serif",
-                          fontStyle: "italic",
-                          color:"black",}}> Επιλέξτε την ενέργεια που επιθυμείτε </h1>
+                          fontStyle: "italic",}}> Επιλέξτε την ενέργεια που επιθυμείτε </h1>
           
             
 
