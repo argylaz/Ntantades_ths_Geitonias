@@ -123,7 +123,7 @@ function NannyActions () {
     return (
 
         
-        <div>
+        <div className="inner-page">
             <h1> Επιλέξτε την ενέργεια που επιθυμείτε </h1>
             
             
