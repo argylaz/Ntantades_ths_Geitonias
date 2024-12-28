@@ -2,19 +2,22 @@ import '../StyleSheets/Profile.css'
 import React, { useEffect, useState } from 'react';
 import { FIREBASE_AUTH , FIREBASE_DB} from '../config/firebase';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
-import { collection, addDoc, query, where, getDocs } from 'firebase/firestore';
+import { collection, addDoc, query, where, getDocs, doc, getDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import { Button, Card, CardContent, Typography, Box } from "@mui/material";
+import { Link } from 'react-router-dom';
+import EditIcon from '@mui/icons-material/Edit';
 
 
 
 export default function Profile() {
-    const [email, setEmail] = useState(null);
-    const [userId, setUserId] = useState(null); // Store the user ID
+    const [email, setEmail] = useState("");
+    const [userId, setUserId] = useState(""); // Store the user ID
+    // const [firstname, setFirstName] = useState
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
-    const [userData, setUserData] = useState(null); // State for fetched user data
+    const [userData, setUserData] = useState(""); // State for fetched user data
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, (user) => {
@@ -37,15 +40,19 @@ export default function Profile() {
         }
     }, [userId]);
     
+
+    let results = [];
+    
     const fetchUserData = async () => {
         try {
-            const q = query(collection(FIREBASE_DB, "users"), where("userId", "==", userId));
-            const querySnapshot = await getDocs(q);
-            if (!querySnapshot.empty) {
-                const userDoc = querySnapshot.docs[0];
-                setUserData({ id: userDoc.id, ...userDoc.data() });
+            const docRef = doc(FIREBASE_DB, "users", userId); // Directly reference the document by ID
+            const docSnap = await getDoc(docRef);
+            
+            if (docSnap.exists()) {
+                console.log("Document data:", docSnap.data());
+                setUserData({ id: docSnap.id, ...docSnap.data() });
             } else {
-                console.error("No documents found for the given userId:", userId);
+                console.error("No document found with ID:", userId);
             }
         } catch (error) {
             console.error("Error fetching user data:", error);
@@ -74,97 +81,11 @@ export default function Profile() {
       );
     }
 
-    // const handleFormSubmit = async (e) => {
-    //     e.preventDefault();
-    //     setFormMessage('');
-        
-    //     try {
-    //         const payload = {
-    //             amka: amka,
-    //             firstName: firstName,
-    //             age: parseInt(age),
-    //             userId: userId, // Add the user's UID
-    //             createdAt: new Date(),
-    //         }
-            
-    //         await addDoc(collection(FIREBASE_DB, 'user'), payload);
-
-    //         setFormMessage('Data submitted successfully!');
-    //         setAmka('');
-    //         setFirstName('');
-    //         setAge('');
-    //         fetchUserData(); // Refresh user data after submission
-    //     } catch (error) {
-    //         console.error('Error adding document:', error);
-    //         setFormMessage('Error submitting data. Please try again.');
-    //     }
-    // };
-
     if (loading) {
         return <div>Loading...</div>;
     }
 
     return (
-        // <div className='courses'>
-        //     <h1>Welcome</h1>
-        //     {email ? <p>Your email: {email}</p> : <p>No user logged in</p>}
-        //     <button onClick={handleLogout}>Logout</button>
-        //     {/* <h2>Submit User Data</h2> */}
-        //     {/* <form onSubmit={handleFormSubmit} className="data-form">
-        //         <div className="form-row">
-        //             <label>AMKA:</label>
-        //             <input
-        //                 type="number"
-        //                 value={amka}
-        //                 onChange={(e) => setAmka(e.target.value)}
-        //                 required
-        //             />
-        //         </div>
-        //         <div className="form-row">
-        //             <label>First Name:</label>
-        //             <input
-        //                 type="text"
-        //                 value={firstName}
-        //                 onChange={(e) => setFirstName(e.target.value)}
-        //                 required
-        //             />
-        //         </div>
-        //         <div className="form-row">
-        //             <label>Age:</label>
-        //             <input
-        //                 type="number"
-        //                 value={age}
-        //                 onChange={(e) => setAge(e.target.value)}
-        //                 required
-        //             />
-        //         </div>
-        //         <button type="submit">Submit</button>
-        //         {formMessage && <p>{formMessage}</p>}
-        //     </form> */}
-        //     <h2>User Data</h2>
-        //     {userData.length > 0 ? (
-        //         <table>
-        //             <thead>
-        //                 <tr>
-        //                     <th>AMKA</th>
-        //                     <th>First Name</th>
-        //                     <th>Age</th>
-        //                 </tr>
-        //             </thead>
-        //             <tbody>
-        //                 {userData.map((user) => (
-        //                     <tr key={user.id}>
-        //                         <td>{user.amka}</td>
-        //                         <td>{user.firstName}</td>
-        //                         <td>{user.age}</td>
-        //                     </tr>
-        //                 ))}
-        //             </tbody>
-        //         </table>
-        //     ) : (
-        //         <p>No user data found</p>
-        //     )}
-        // </div>
 
     <Box className="profileContainer" sx={{ maxWidth: 600, margin: "0 auto", mt: 4 }}>
         <Card variant="outlined">
@@ -177,7 +98,10 @@ export default function Profile() {
                 <strong>Ονομα:</strong> {userData.firstname || "Δεν βρεθηκε Ονομα"}
             </Typography>
             <Typography variant="body1" sx={{ mb: 2 }}>
-                <strong>Επώνυμο:</strong> {userData.lastname || "Δεν βρεθηκε Επώνυμο"}
+                <strong>Επίθετο:</strong> {userData.lastname || "Δεν βρεθηκε Επίθετο"}
+            </Typography>
+            <Typography variant="body1" sx={{ mb: 2 }}>
+                <strong>Ηλικία:</strong> {userData.age || "Δεν βρεθηκε Ηλικία"}
             </Typography>
             <Typography variant="body1" sx={{ mb: 2 }}>
                 <strong>Email:</strong> {email || "Δεν βρεθηκε Email"}
@@ -185,6 +109,16 @@ export default function Profile() {
             <Typography variant="body1" sx={{ mb: 2 }}>
                 <strong>Τηλέφωνο:</strong> {userData.phone || "Δεν βρεθηκε Τηλέφωνο"}
             </Typography>
+            <Typography variant="body1" sx={{ mb: 2 }}>
+                <strong>AMKA:</strong> {userData.AMKA || "Δεν βρεθηκε AMKA"}
+            </Typography>
+
+            <Link to="/Profile/Edit" style={{ textDecoration: 'none',}}>
+                <Button variant="contained" startIcon={<EditIcon />} 
+                    sx={{ whiteSpace: 'normal',textAlign: 'center', marginBottom:'2%', marginRight: '2%'}}>
+                    ΕΠΕΞΕΡΓΑΣΙΑ ΠΡΟΦΙΛ
+                </Button>
+            </Link>
 
             <Button
                 variant="contained"

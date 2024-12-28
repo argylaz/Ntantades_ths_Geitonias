@@ -21,7 +21,7 @@ function RequestsNanny() {
 
    return (
       <div className="requestsContainer">
-        <h1> Οι Αιτήσεις Μου </h1>
+        <h1 style={{color:"black"}}> Οι Αιτήσεις Μου </h1>
         <RequestTable onUpdateStatus={onUpdateStatus} />
 
       </div>

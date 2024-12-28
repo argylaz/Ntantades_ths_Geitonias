@@ -1,8 +1,12 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { useLocation } from "react-router-dom";
+import { onAuthStateChanged, Timestamp } from 'firebase/auth';
+
+import { format } from "date-fns";
 
 // import Box from '@mui/material/Box';
-
+import { collection, onSnapshot, query, where,} from "firebase/firestore";
+import { FIREBASE_AUTH , FIREBASE_DB} from '../config/firebase'; // Import your Firebase config
 
 import { Link } from 'react-router-dom';
 import BackIcon from '@mui/icons-material/ArrowBack';
@@ -29,53 +33,103 @@ import "../StyleSheets/HomePage.css"
 
 
 
-function ResultsPage() {
+function Advertisement() {
   const location = useLocation();
-  const { results } = location.state || { results: [] }; // Retrieve results from state
-  let nanny = [];
   
+  const [ads, setAds] = useState([]);
   
-  const navigate = useNavigate();
-  const scheduleMeeting = (nanny) => {
-  
-          try {
-            navigate("ScheduleMeeting", { state: { nanny }  
-          });
-  
-          }
-          catch (error){
-              console.error(error.message)
-          }
-              
-      }
+  const [startDate, setStartDate] = useState(null);
 
+  const [email, setEmail] = useState("");
+  const [userId, setUserId] = useState(""); // Store the user ID
+  // const [firstname, setFirstName] = useState
+  
+  const [userData, setUserData] = useState(""); // State for fetched user data
+
+  useEffect(() => {
+      const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, (user) => {
+          if (user) {
+              setEmail(user.email);
+              setUserId(user.uid); // Store the user's UID
+          } else {
+              setEmail(null);
+              setUserId(null);
+          }
+
+      });
+
+      return () => unsubscribe();
+  }, []);
+
+
+    useEffect(() => {
+      if (userId) {
+          SearchAds(); // Fetch user data only after the user_id is available
+      }
+  }, [userId]);
+
+    
+  
+  const SearchAds = () => {
+
+    // event.preventDefault();
+
+    try {
+        
+
+        // get collection
+        const colRef = collection(FIREBASE_DB,"Advertisement");
+
+        // console.log(userId)
+        const q = query(colRef, where( "FromUser", "==", userId));
+
+        let comb_results = [];
+
+        onSnapshot(q, (snapshot) => {
+                let temp = [];
+                snapshot.docs.forEach((doc) => {
+                    temp.push({...doc.data(), id: doc.id});
+                  });
+                  console.log(ads);
+        comb_results = [...comb_results, ...temp];
+        setAds(comb_results); 
+
+    
+    });
+
+    }
+    catch (error){
+        console.error(error.message)
+    }
+        
+}
 
 
 
   return (
     <div className='inner-page'>
-        <h1>Αποτελέσματα Αναζήτησης</h1>
+        <h1>Οι Αγγελίες μου</h1>
 
       <Box sx={{color:"black",display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 4,}}> 
 
       <TableContainer component={Paper} sx={{ marginTop: 4, width:"70%", display:"flex", justifyContent:"center", alignItems:"center",}}>
-          {results.length > 0 ? (
+          {ads.length > 0 ? (
             <Table>
               <TableHead>
                 <TableRow>
                   <TableCell align="left"><strong>Όνομα</strong></TableCell>
                   <TableCell align="left"><strong>Επώνυμο</strong></TableCell>
-                  <TableCell align="center"><strong>Ηλικία</strong></TableCell>
+                  <TableCell align="center"><strong>Ημ. Έναρξης</strong></TableCell>
                   <TableCell align="center"><strong> </strong></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {results.map((nanny) => (
-                  <TableRow key={nanny.id}>
-                    <TableCell align="left">{nanny.firstname}</TableCell>
-                    <TableCell align="left">{nanny.lastname}</TableCell>
-                    <TableCell align="center">{nanny.age}</TableCell>
-                    <TableCell align="center"> <Button onClick={() => scheduleMeeting(nanny)} variant="contained"> ΠΡΟΓΡΑΜΜΑΤΙΣΜΟΣ ΡΑΝΤΕΒΟΥ </Button> </TableCell>
+                {ads.map((ad) => (
+                  <TableRow key={ad.id}>
+                    <TableCell align="left">{ad.firstname}</TableCell>
+                    <TableCell align="left">{ad.lastname}</TableCell>
+                    <TableCell align="center">{ad.age}</TableCell>
+                    <TableCell align="center"> <Button variant="contained"> Προεπισκόπηση </Button> </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -107,4 +161,4 @@ function ResultsPage() {
   );
 }
 
-export default ResultsPage;
+export default Advertisement;

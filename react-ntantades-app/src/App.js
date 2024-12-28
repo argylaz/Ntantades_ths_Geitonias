@@ -23,6 +23,7 @@ import NannyResults from "./pages/SearchResults.jsx"
 import RequestsNanny from "./pages/RequestsNanny.jsx";
 import PageNotFound from "./pages/PageNotFound.jsx";
 import Advertisement from "./pages/Advertisement.jsx"
+import EditProfile from "./pages/EditProfile.jsx";
 
 
 import './StyleSheets/App.css';
@@ -41,6 +42,7 @@ function App() {
               <Route path="/Login" element={<Login />} />
               <Route path="/Register" element={<Register />} />
               <Route path="/Profile" element={<Profile />} />
+              <Route path="/Profile/Edit" element={<EditProfile />} />
               <Route path="/Nanny" element={<HomePageNanny />} />
               <Route path="/Nanny/Guide" element={<NannyGuide />} />
               <Route path="/Nanny/EligibilityCriteria" element={<EligibilityCriteria />} />
