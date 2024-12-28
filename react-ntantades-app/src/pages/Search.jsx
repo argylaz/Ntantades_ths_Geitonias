@@ -12,6 +12,9 @@ import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
 import SearchIcon from  '@mui/icons-material/Search';
 
+import { Link } from 'react-router-dom';
+import BackIcon from '@mui/icons-material/ArrowBack';
+
 import "../StyleSheets/Search.css"
 
 
@@ -268,10 +271,20 @@ function SearchNannies() {
                 <input type="text" name="firstname" required onChange={(e) => setSearchName(e.target.value)}/>
 
                 <button onClick={handleSearch}> Search </button>
-            </form>    */
+            </form>  
 
-            <ul> {results.map((name) => ( <li key={name.id}>{name.firstname} {name.lastname}</li> ))} </ul> }
+            <ul> {results.map((name) => ( <li key={name.id}>{name.firstname} {name.lastname}</li> ))} </ul>  */}
     
+            <div className='back-button'>
+                <Link to="/Parent/Actions/" style={{ textDecoration: 'none',}}>
+                    <Button variant="contained" startIcon={<BackIcon />} 
+                        sx={{ whiteSpace: 'normal',textAlign: 'center', marginTop:'2%'}}>
+                        ΕΠΙΣΤΡΟΦΗ ΣΤΗ ΣΕΛΙΔΑ ΕΝΕΡΓΕΙΩΝ
+                    </Button>
+                </Link>
+            </div>
+
+
         </div>
     );
 }
