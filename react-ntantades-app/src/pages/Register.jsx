@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Grid, TextField, Typography, FormGroup } from "@mui/material";
+import { Button, ButtonGroup, Grid, TextField, Typography, FormGroup } from "@mui/material";
 import { onAuthStateChanged, createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { FIREBASE_AUTH, FIREBASE_DB } from "../config/firebase.js"; // Ensure Firebase is configured correctly
@@ -14,6 +14,7 @@ export default function RegisterForm() {
   const [AMKA, setAMKA] = useState('');
   const [age, setAge] = useState('');
   const [phone, setPhone] = useState('');
+  const [role, setRole] = useState('');
   const [loading, setLoading] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
@@ -58,6 +59,7 @@ export default function RegisterForm() {
         phone: phone,
         email: email,
         createdAt: new Date().toISOString(),
+        role: role, // Set the selected role
       });
 
       console.log("User registered successfully:", user);
@@ -71,9 +73,46 @@ export default function RegisterForm() {
 
   return (
     <div>
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h2" gutterBottom> 
         Register
       </Typography>
+
+      <ButtonGroup  variant="contained" aria-label="Basic button group" sx={{ marginBottom: 5 }}>    
+        <Button
+          onClick={() => setRole("parent")}
+          sx={{
+            width: 'auto',
+            height: "60px",
+            whiteSpace: 'normal',
+            textAlign: 'center',
+            backgroundColor: role === "parent" ? "blue" : "white", // Blue if role is parent, white otherwise
+            color: role === "parent" ? "white" : "black", // White text for blue background, black text otherwise
+            '&:hover': {
+              backgroundColor: role === "parent" ? "darkblue" : "lightgray", // Hover effect
+            },
+          }}
+        >
+          ΚΗΔΕΜΟΝΑΣ
+        </Button>
+
+        <Button
+          onClick={() => setRole("nanny")}
+          sx={{
+            width: 'auto',
+            height: "60px",
+            whiteSpace: 'normal',
+            textAlign: 'center',
+            backgroundColor: role === "nanny" ? "blue" : "white", // Blue if role is parent, white otherwise
+            color: role === "nanny" ? "white" : "black", // White text for blue background, black text otherwise
+            '&:hover': {
+              backgroundColor: role === "nanny" ? "darkblue" : "lightgray", // Hover effect
+            },
+          }}
+        >
+          ΝΤΑΝΤΑ
+        </Button>
+      </ButtonGroup>
+
       {!user ? (
         <form onSubmit={handleRegister}>
           <FormGroup>
@@ -159,7 +198,7 @@ export default function RegisterForm() {
             />
             </Grid>
             </Grid>
-            <Button type="submit" variant="contained" color="primary" disabled={loading}>
+            <Button type="submit" variant="contained" color="primary" disabled={loading} sx={{ marginTop: 5, width: "50%", marginLeft: "25%" }}>
               {loading ? "Registering..." : "Register"}
             </Button>
           </FormGroup>
