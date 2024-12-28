@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { FIREBASE_DB } from '../config/firebase'; // Import your Firebase config
-import { collection, onSnapshot, query, where, or } from "firebase/firestore";
+import { collection, onSnapshot, query, where,} from "firebase/firestore";
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -9,8 +9,10 @@ import Input from '@mui/material/Input';
 import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
-import TextField from '@mui/material/TextField';
 import SearchIcon from  '@mui/icons-material/Search';
+
+import { Link } from 'react-router-dom';
+import BackIcon from '@mui/icons-material/ArrowBack';
 
 import "../StyleSheets/Search.css"
 
@@ -75,30 +77,6 @@ function SearchNannies() {
 
         });
 
-
-            // // queries
-            // const queries = [
-            //     query(colRef, where("firstname", "==", SearchName)),
-            //     query(colRef, where("lastname", "==", SearchSurname)),
-            //     query(colRef, where("age", "==", SearchAge))
-            // ];
-            
-            // // const q = query(colRef, where("firstname", "==", SearchName))
-
-            // let comb_results = [];
-            // // real time collection data
-            // queries.forEach((q) => { 
-            //     onSnapshot(q, (snapshot) => {
-            //         let names = [];
-            //         snapshot.docs.forEach((doc) => {
-            //             names.push({...doc.data(), id: doc.id});
-            //         });
-            //     console.log(names);
-            //     comb_results = [...comb_results, ...names];
-            //     setResults(comb_results); 
-            //     navigate("NannyResults", { state: { results: comb_results } }); 
-            //     });
-            // });
         }
         catch (error){
             console.error(error.message)
@@ -268,10 +246,20 @@ function SearchNannies() {
                 <input type="text" name="firstname" required onChange={(e) => setSearchName(e.target.value)}/>
 
                 <button onClick={handleSearch}> Search </button>
-            </form>    */
+            </form>  
 
-            <ul> {results.map((name) => ( <li key={name.id}>{name.firstname} {name.lastname}</li> ))} </ul> }
+            <ul> {results.map((name) => ( <li key={name.id}>{name.firstname} {name.lastname}</li> ))} </ul>  */}
     
+            <div className='back-button'>
+                <Link to="/Parent/Actions/" style={{ textDecoration: 'none',}}>
+                    <Button variant="contained" startIcon={<BackIcon />} 
+                        sx={{ whiteSpace: 'normal',textAlign: 'center', marginTop:'2%'}}>
+                        ΕΠΙΣΤΡΟΦΗ ΣΤΗ ΣΕΛΙΔΑ ΕΝΕΡΓΕΙΩΝ
+                    </Button>
+                </Link>
+            </div>
+
+
         </div>
     );
 }
