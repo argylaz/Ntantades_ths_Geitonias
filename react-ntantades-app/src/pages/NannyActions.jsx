@@ -28,6 +28,7 @@ const images = [
       url: job_image,
       title: 'Οι Αγγελίες μου',
       width: '100%',
+      route: 'Advertisement'
     },
     {
       url: payment_image,

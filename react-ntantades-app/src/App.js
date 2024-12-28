@@ -22,6 +22,7 @@ import ScheduleMeeting from "./pages/ScheduleMeeting.jsx";
 import NannyResults from "./pages/SearchResults.jsx"
 import RequestsNanny from "./pages/RequestsNanny.jsx";
 import PageNotFound from "./pages/PageNotFound.jsx";
+import Advertisement from "./pages/Advertisement.jsx"
 
 
 import './StyleSheets/App.css';
@@ -53,6 +54,7 @@ function App() {
               <Route path="/Parent/Actions" element={<ParentsActions/>} />
               <Route path="/Nanny/Actions" element={<NannyActions/>} />
               <Route path="/Nanny/Actions/Requests" element={<RequestsNanny />} />
+              <Route path="/Nanny/Actions/Advertisement" element={<Advertisement />} />
               <Route path="*" element={<PageNotFound/>} />
           </Routes>
 

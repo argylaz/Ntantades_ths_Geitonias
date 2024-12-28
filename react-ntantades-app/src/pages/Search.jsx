@@ -40,7 +40,12 @@ function SearchNannies() {
     const [SearchName, setSearchName] = useState("");
     const [SearchSurname, setSearchSurname] = useState("");
     const [SearchAge, setSearchAge] = useState("");
+    const [SearchStatus, setSearchStatus] = useState("");
+    const [SearchPlace, setSearchPlace] = useState("");
+    const [SearchExperience, setSearchExperience] = useState("");
+    const [SearchSpecialization, setSearchSpecialization] = useState("");
     const [results, setResults] = useState([]);
+
 
     const navigate = useNavigate();
 
@@ -54,12 +59,16 @@ function SearchNannies() {
             
 
             // get collection
-            const colRef = collection(FIREBASE_DB,"users");
+            const colRef = collection(FIREBASE_DB,"Advertisement");
         
             const searchParams = {
                 firstname: SearchName || null,
                 lastname: SearchSurname || null,
                 age: SearchAge || null,
+                employment_status : SearchStatus || null, 
+                place : SearchPlace || null, 
+                experience : SearchPlace || null, 
+                specialization : SearchPlace || null, 
             };
             const q = createQuery(colRef, searchParams);
 
@@ -98,6 +107,7 @@ function SearchNannies() {
 
                 <Grid container spacing={2} style={{margin:"25px",}}>
 
+                {/* Lastname */}
                 <FormControl variant="standard" style={{marginRight:"15px"}}>
                     <InputLabel htmlFor="input-with-icon-adornment">
                     Επώνυμο
@@ -113,7 +123,7 @@ function SearchNannies() {
                     />
                 </FormControl>
                 
-                
+                {/* Firstname */}
                 <FormControl variant="standard" >
                     <InputLabel htmlFor="input-with-icon-adornment">
                     Όνομα
@@ -133,6 +143,7 @@ function SearchNannies() {
 
                 <Grid container spacing={2} style={{margin:"25px",}}>
                 
+                    {/* Age */}
                     <FormControl variant="standard" style={{marginRight:"15px"}}>
                         <InputLabel htmlFor="input-with-icon-adornment">
                         Ηιλικία Νταντάς
@@ -149,13 +160,14 @@ function SearchNannies() {
                     </FormControl>
 
 
+                    {/* Employment-status */}
                     <FormControl variant="standard" >
                         <InputLabel htmlFor="input-with-icon-adornment">
-                        Χρόνος Απασχόλησης
+                        Καθεστώς Απασχόλησης
                         </InputLabel>
                         <Input
                             id="input-with-icon-adornment"
-                            onChange={(e) => setSearchName(e.target.value)}
+                            onChange={(e) => setSearchStatus(e.target.value)}
                             startAdornment={
                             <InputAdornment position="start">
                             <SearchIcon />
@@ -183,14 +195,14 @@ function SearchNannies() {
                         />
                     </FormControl>
 
-
+                     {/* Experience */}
                     <FormControl variant="standard">
                         <InputLabel htmlFor="input-with-icon-adornment">
                         Εμπειρία
                         </InputLabel>
                         <Input
                             id="input-with-icon-adornment"
-                            onChange={(e) => setSearchName(e.target.value)}
+                            onChange={(e) => setSearchExperience(e.target.value)}
                             startAdornment={
                             <InputAdornment position="start">
                             <SearchIcon />
@@ -203,14 +215,14 @@ function SearchNannies() {
 
                 <Grid container spacing={2} style={{margin:"25px",}}>
 
-
+                   
                     <FormControl variant="standard" style={{marginRight:"15px"}}>
                         <InputLabel htmlFor="input-with-icon-adornment">
                         Ειδίκευση
                         </InputLabel>
                         <Input
                             id="input-with-icon-adornment"
-                            onChange={(e) => setSearchName(e.target.value)}
+                            onChange={(e) => setSearchSpecialization(e.target.value)}
                             startAdornment={
                                 <InputAdornment position="start">
                             <SearchIcon />
@@ -220,13 +232,15 @@ function SearchNannies() {
                     </FormControl>
 
 
+
+                    {/* Place */}
                     <FormControl variant="standard">
                         <InputLabel htmlFor="input-with-icon-adornment">
                         Περιοχή Διαμονής
                         </InputLabel>
                         <Input
                             id="input-with-icon-adornment"
-                            onChange={(e) => setSearchName(e.target.value)}
+                            onChange={(e) => setSearchPlace(e.target.value)}
                             startAdornment={
                                 <InputAdornment position="start">
                             <SearchIcon />
