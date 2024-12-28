@@ -10,6 +10,7 @@ import { FIREBASE_AUTH , FIREBASE_DB} from '../config/firebase'; // Import your 
 
 import { Link } from 'react-router-dom';
 import BackIcon from '@mui/icons-material/ArrowBack';
+import RightIcon from '@mui/icons-material/ArrowForward';
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -128,7 +129,10 @@ function Advertisement() {
                   <TableRow key={ad.id}>
                     <TableCell align="left">{ad.firstname}</TableCell>
                     <TableCell align="left">{ad.lastname}</TableCell>
-                    <TableCell align="center">{ad.age}</TableCell>
+                    <TableCell align="center">
+                      <Typography>
+                        {ad.start_date ? ad.start_date.toDate().toLocaleDateString() : "No date available"}
+                      </Typography></TableCell>
                     <TableCell align="center"> <Button variant="contained"> Προεπισκόπηση </Button> </TableCell>
                   </TableRow>
                 ))}
@@ -147,14 +151,23 @@ function Advertisement() {
       </TableContainer>
 
       </Box>
-       
+
 
       <Link to="/Nanny/Actions" style={{ textDecoration: 'none',}}>
             <Button variant="contained" startIcon={<BackIcon />} 
-                sx={{ whiteSpace: 'normal',textAlign: 'center', marginBottom:'2%'}}>
+                sx={{ whiteSpace: 'normal',textAlign: 'center', marginBottom:'2%',}}>
                 ΕΠΙΣΤΡΟΦΗ ΣΤΗ ΣΕΛΙΔΑ ΕΝΕΡΓΕΙΩΝ
             </Button>
       </Link>
+
+      <Link to="/Nanny/Actions/CreateAdvertisement" style={{ textDecoration: 'none',}}>
+            <Button variant="contained" endIcon={<RightIcon />} 
+                sx={{ whiteSpace: 'normal',textAlign: 'center', marginBottom:'2%',}}>
+                ΔΗΜΙΟΥΡΓΙΑ ΝΕΑΣ ΑΓΓΕΛΙΑΣ
+            </Button>
+      </Link>
+        
+
 
     </div>
 

@@ -91,7 +91,7 @@ export default function Profile() {
         <Card variant="outlined">
             <CardContent>
             <Typography variant="h4" gutterBottom>
-                Το προφίλ μου
+                Το προφίλ μου {userData.role === "parent" ? "(Κηδεμόνας)" : "(Νταντά"}
             </Typography>
 
             <Typography variant="body1" sx={{ mb: 2 }}>
@@ -115,7 +115,7 @@ export default function Profile() {
 
             <Link to="/Profile/Edit" style={{ textDecoration: 'none',}}>
                 <Button variant="contained" startIcon={<EditIcon />} 
-                    sx={{ whiteSpace: 'normal',textAlign: 'center', marginBottom:'2%', marginRight: '2%'}}>
+                    sx={{ whiteSpace: 'normal',textAlign: 'center', marginBottom:'2%', marginRight: '2%',}}>
                     ΕΠΕΞΕΡΓΑΣΙΑ ΠΡΟΦΙΛ
                 </Button>
             </Link>
@@ -124,7 +124,7 @@ export default function Profile() {
                 variant="contained"
                 color="primary"
                 onClick={handleLogout}
-                sx={{ mt: 2 }}
+                sx={{ mt: -1, ml: 2 }}
             >
                 Logout
             </Button>

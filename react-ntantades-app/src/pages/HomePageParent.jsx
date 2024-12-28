@@ -24,7 +24,7 @@ function HomePageParent () {
             </div>
 
             {/* Button to actions page (redirects to Login if not logged in) */}
-            <IfLoggedInButton link="/Parent/Actions" text="ΕΙΣΟΔΟΣ ΣΤΗΝ ΥΠΗΡΕΣΙΑ" />
+            <IfLoggedInButton link="/Parent/Actions" text="ΕΙΣΟΔΟΣ ΣΤΗΝ ΥΠΗΡΕΣΙΑ" targetRole="parent" />
 
             {/* Adding Links to info pages */}
             <Stack direction="row" spacing={16}>

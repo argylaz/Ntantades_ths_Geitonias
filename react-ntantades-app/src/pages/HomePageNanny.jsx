@@ -20,7 +20,7 @@ function HomePageNanny () {
             </div>
 
             {/* Button to actions page (redirects to Login if not logged in) */}
-            <IfLoggedInButton link="/Nanny/Actions" text="ΕΙΣΟΔΟΣ ΣΤΗΝ ΥΠΗΡΕΣΙΑ" />
+            <IfLoggedInButton link="/Nanny/Actions" text="ΕΙΣΟΔΟΣ ΣΤΗΝ ΥΠΗΡΕΣΙΑ" targetRole="nanny" />
 
             <Link to="/Nanny/EligibilityCriteria" style={{ textDecoration: 'none', marginRight: '10%',}}>
                 <Button variant="contained" startIcon={<PersonIcon />}

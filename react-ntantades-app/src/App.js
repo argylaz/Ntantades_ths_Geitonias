@@ -7,6 +7,8 @@ import Footer from './components/footer.jsx';
 import Home from './pages/HomePage.jsx';
 import HomePageNanny from './pages/HomePageNanny.jsx';
 import HomePageParent from './pages/HomePageParent.jsx';
+import NannyInstruction from './pages/NannyInstruction.jsx';
+import ParentInstruction from './pages/ParentInstruction.jsx';
 import EligibilityCriteria from './pages/EligibilityCriteria.jsx';
 import Login from './pages/Login.jsx'
 import Register from "./pages/Register.jsx";
@@ -24,6 +26,8 @@ import RequestsNanny from "./pages/RequestsNanny.jsx";
 import PageNotFound from "./pages/PageNotFound.jsx";
 import Advertisement from "./pages/Advertisement.jsx"
 import EditProfile from "./pages/EditProfile.jsx";
+import CreateAdvertisement from "./pages/CreateAdvertisement.jsx";
+import FAQ from "./pages/FAQ.jsx";
 
 
 import './StyleSheets/App.css';
@@ -40,6 +44,9 @@ function App() {
           <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/Login" element={<Login />} />
+              <Route path="/FAQ" element={<FAQ />} />
+              <Route path="/NannyInstruction" element={<NannyInstruction />} />
+              <Route path="/ParentInstruction" element={<ParentInstruction />} />
               <Route path="/Register" element={<Register />} />
               <Route path="/Profile" element={<Profile />} />
               <Route path="/Profile/Edit" element={<EditProfile />} />
@@ -57,6 +64,7 @@ function App() {
               <Route path="/Nanny/Actions" element={<NannyActions/>} />
               <Route path="/Nanny/Actions/Requests" element={<RequestsNanny />} />
               <Route path="/Nanny/Actions/Advertisement" element={<Advertisement />} />
+              <Route path="/Nanny/Actions/CreateAdvertisement" element={<CreateAdvertisement />} />
               <Route path="*" element={<PageNotFound/>} />
           </Routes>
 

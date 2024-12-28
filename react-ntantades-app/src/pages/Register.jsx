@@ -73,7 +73,7 @@ export default function RegisterForm() {
 
   return (
     <div>
-      <Typography variant="h2" gutterBottom> 
+      <Typography style={{color:"black",}} variant="h2" gutterBottom> 
         Register
       </Typography>
 
@@ -85,10 +85,10 @@ export default function RegisterForm() {
             height: "60px",
             whiteSpace: 'normal',
             textAlign: 'center',
-            backgroundColor: role === "parent" ? "blue" : "white", // Blue if role is parent, white otherwise
+            backgroundColor: role === "parent" ? '#1976d2' : "white", // Blue if role is parent, white otherwise
             color: role === "parent" ? "white" : "black", // White text for blue background, black text otherwise
             '&:hover': {
-              backgroundColor: role === "parent" ? "darkblue" : "lightgray", // Hover effect
+              backgroundColor: role === "parent" ? '#1976d2' : "lightgray", // Hover effect
             },
           }}
         >
@@ -102,10 +102,10 @@ export default function RegisterForm() {
             height: "60px",
             whiteSpace: 'normal',
             textAlign: 'center',
-            backgroundColor: role === "nanny" ? "blue" : "white", // Blue if role is parent, white otherwise
+            backgroundColor: role === "nanny" ? "#1976d2" : "white", // Blue if role is parent, white otherwise
             color: role === "nanny" ? "white" : "black", // White text for blue background, black text otherwise
             '&:hover': {
-              backgroundColor: role === "nanny" ? "darkblue" : "lightgray", // Hover effect
+              backgroundColor: role === "nanny" ? '#1976d2' : "lightgray", // Hover effect
             },
           }}
         >
