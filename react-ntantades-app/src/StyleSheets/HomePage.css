@@ -30,8 +30,8 @@ main {
     /* Background  */
     width: 100%;
     /* height: 100vh; */
-    background-image: linear-gradient(white, bisque, rgb(123, 120, 120));
-    /* background-color: bisque; */
+    /* background-image: linear-gradient(white, bisque, rgb(123, 120, 120)); */
+    background-color: bisque;
     
     /* background-image: url('../images/background_blurred.png'); */
     background-size: cover;

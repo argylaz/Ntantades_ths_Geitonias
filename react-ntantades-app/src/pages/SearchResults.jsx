@@ -97,7 +97,7 @@ function ResultsPage() {
                     <TableCell align="center">{nanny.place}</TableCell>
                     {console.log("start_date:", nanny.start_date)}
                     <TableCell> <Typography>{nanny.start_date ?  new Date(nanny.start_date.seconds * 1000).toLocaleDateString() : "No date available"}</Typography> </TableCell>
-                    <TableCell> <Typography>{nanny.end_date  ? new Date(nanny.start_date.seconds * 1000).toLocaleDateString() : "No date available"}</Typography> </TableCell>
+                    <TableCell> <Typography>{nanny.end_date  ? new Date(nanny.end_date.seconds * 1000).toLocaleDateString() : "No date available"}</Typography> </TableCell>
                     <TableCell align="center"> <Button onClick={() => scheduleMeeting(nanny)} variant="contained"> ΠΡΟΓΡΑΜΜΑΤΙΣΜΟΣ ΡΑΝΤΕΒΟΥ </Button> </TableCell>
                   </TableRow>
                 ))}
