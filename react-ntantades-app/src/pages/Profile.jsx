@@ -91,7 +91,7 @@ export default function Profile() {
         <Card variant="outlined">
             <CardContent>
             <Typography variant="h4" gutterBottom>
-                Το προφίλ μου {userData.role === "parent" ? "(Κηδεμόνας)" : "(Νταντά"}
+                Το προφίλ μου {userData.role === "parent" ? "(Κηδεμόνας)" : "(Νταντά)"}
             </Typography>
 
             <Typography variant="body1" sx={{ mb: 2 }}>

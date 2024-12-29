@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { useLocation } from "react-router-dom";
 import "../StyleSheets/HomePage.css"
 
+import { Link } from 'react-router-dom';
+import BackIcon from '@mui/icons-material/ArrowBack';
 import { Button } from '@mui/material'; 
 import { Box }  from '@mui/material';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
@@ -72,7 +74,15 @@ function ScheduleMeeting() {
             </FormGroup>
 
             <div>
-                <Button variant="contained" onClick={handleSubmit}>
+
+                <Link to="/Parent/Actions/Search" style={{ textDecoration: 'none',}}>
+                    <Button variant="contained" startIcon={<BackIcon />} 
+                        sx={{ whiteSpace: 'normal',textAlign: 'center',marginRight:"5%",}}>
+                        ΕΠΙΣΤΡΟΦΗ ΣΤΗ ΣΕΛΙΔΑ ΑΝΑΖΗΤΗΣΗΣ
+                    </Button>
+                </Link>
+
+                <Button variant="contained" onClick={handleSubmit} sx={{marginLeft:"5%",}}>
                     Υποβολή Αιτήματος Ραντεβού
                 </Button>
             </div>

@@ -95,6 +95,7 @@ function Advertisement() {
         comb_results = [...comb_results, ...temp];
         setAds(comb_results); 
 
+        console.log(comb_results)
     
     });
 
@@ -160,7 +161,7 @@ function Advertisement() {
             </Button>
       </Link>
 
-      <Link to="/Nanny/Actions/CreateAdvertisement" style={{ textDecoration: 'none',}}>
+      <Link to="/Nanny/Actions/Advertisement/CreateAdvertisement" style={{ textDecoration: 'none',}}>
             <Button variant="contained" endIcon={<RightIcon />} 
                 sx={{ whiteSpace: 'normal',textAlign: 'center', marginBottom:'2%',}}>
                 ΔΗΜΙΟΥΡΓΙΑ ΝΕΑΣ ΑΓΓΕΛΙΑΣ

@@ -64,7 +64,7 @@ function App() {
               <Route path="/Nanny/Actions" element={<NannyActions/>} />
               <Route path="/Nanny/Actions/Requests" element={<RequestsNanny />} />
               <Route path="/Nanny/Actions/Advertisement" element={<Advertisement />} />
-              <Route path="/Nanny/Actions/CreateAdvertisement" element={<CreateAdvertisement />} />
+              <Route path="/Nanny/Actions/Advertisement/CreateAdvertisement" element={<CreateAdvertisement />} />
               <Route path="*" element={<PageNotFound/>} />
           </Routes>
 

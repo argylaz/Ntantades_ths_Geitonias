@@ -6,39 +6,46 @@ import {
   Typography,
   TextField,
   Box,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
   Alert,
 } from "@mui/material";
+import { Link } from "react-router-dom";
+import BackIcon from '@mui/icons-material/ArrowBack';
 import { onAuthStateChanged } from "firebase/auth";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, addDoc, getDoc, collection, Timestamp} from "firebase/firestore";
 import { FIREBASE_AUTH, FIREBASE_DB } from "../config/firebase";
-import { set } from "date-fns";
+import ButtonMenu from "../components/buttonMenu";
+
 
 
 
 function CreateAdvertisement() {
+  const [fromUser, setFromUser] = useState("")
   const [email, setEmail] = useState("");
   const [userId, setUserId] = useState("");
+  const [phone, setPhone] = useState("")
   const [loading, setLoading] = useState(true);
   const [AMKA, setAmka] = useState("");
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
   const [age, setAge] = useState("");
-  const [formMessage, setFormMessage] = useState("");
+  const [place, setPlace] = useState("");
+  const [startDate, setStartDate] = useState(null)
+  const [endDate, setEndDate] = useState(null)
+  const [employmentStatus, setEmploymentStatus] = useState("");
+  const [formMessage, setFormMessage] = useState("")
   const [userData, setUserData] = useState(null);
+
+
+  
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, (user) => {
       if (user) {
         setEmail(user.email);
+        setFromUser(user.uid);
         setUserId(user.uid);
       } else {
+        setFromUser(null);
         setEmail(null);
         setUserId(null);
       }
@@ -54,15 +61,18 @@ function CreateAdvertisement() {
   }, [userId]);
 
   const fetchUserData = async () => {
+
     try {
       const docRef = doc(FIREBASE_DB, "users", userId);
       const docSnap = await getDoc(docRef);
+      // console.log(docSnap)
       if (docSnap.exists()) {
         setUserData({ id: docSnap.id, ...docSnap.data() });
         setAge(docSnap.data().age);
         setAmka(docSnap.data().AMKA);
         setFirstName(docSnap.data().firstname);
         setLastName(docSnap.data().lastname);
+        setPhone(docSnap.data().phone);
       } else {
         console.error("No document found with ID:", userId);
       }
@@ -75,26 +85,53 @@ function CreateAdvertisement() {
     e.preventDefault();
     setFormMessage("");
   
-    try {
-      const docRef = doc(FIREBASE_DB, "users", userId); // Reference the current user's document
+    try {  
+
+      // Adding advertisement to firebase
+      async function createAdvertisement(data) {
+        try {
+            const docRef = await addDoc(collection(FIREBASE_DB, "Advertisement"), data);
+            console.log("Document added with ID:", docRef.id);
+            // console.log(data);
+        } catch (e) {
+            console.error("Error adding document:", e);
+        }
+      }
+
+      fetchUserData();
+
+      // // Ensure selectedDate is a valid Date
+      // if (!startDate || isNaN(startDate.getTime())  || !endDate || isNaN(endDate.getTime())) {
+      //   throw new Error("Invalid date selected");
+      // }
+      
+      console.log("Selected Date Before Conversion:", startDate);
+      // Convert the selected date to Firebase Timestamp
+
+
+      createAdvertisement({
+        FromUser: fromUser,
+        firstname: firstname,
+        lastname: lastname,
+        AMKA: AMKA,
+        place: place,
+        employmentStatus: employmentStatus,
+        age: age,
+        phone: phone,
+        email: email,
+        createdAt: new Date().toISOString(),
+        start_date: new Date(startDate), // Start date,
+        end_date: new Date(endDate), // Start date,
+      })
+
+      // console.log("Document written with ID: ", docRef.id);
+      setFormMessage("Advertisement added successfully!");
+      // fetchUserData(); // Refresh user data after update
   
-      // Payload with the fields to update
-      const payload = {
-        AMKA,
-        firstname,
-        lastname,
-        age: parseInt(age),
-        updatedAt: new Date(), // Optional: Add a timestamp for the update
-      };
-  
-      // Update the document
-      await updateDoc(docRef, payload);
-  
-      setFormMessage("Profile updated successfully!");
-      fetchUserData(); // Refresh user data after update
+      
     } catch (error) {
-      console.error("Error updating document:", error);
-      setFormMessage("Error updating profile. Please try again.");
+      console.error("Error adding Advertisement document:", error);
+      setFormMessage("Error adding Advertisement document:. Please try again.");
     }
   };
 
@@ -105,6 +142,7 @@ function CreateAdvertisement() {
   return (
 
     <div> 
+
             
         <Box sx={{ maxWidth: 600, margin: "0 auto", mt: 4 }}>
         <Card>
@@ -114,7 +152,7 @@ function CreateAdvertisement() {
             </Typography>
             {email && (
                 <Typography variant="body1" sx={{ mb: 2 }}>
-                Logged in as: {email}
+                Το email σας είναι: {email}
                 </Typography>
             )}
             <Box
@@ -125,37 +163,21 @@ function CreateAdvertisement() {
                 >
                 <TextField
                 label="Τοποθεσία Εργασίας"
-                value={AMKA}
-                onChange={(e) => setAmka(e.target.value)}
+                value={place}
+                onChange={(e) => setPlace(e.target.value)}
                 type="string"
                 required
                 fullWidth
                 />
                 <TextField
-                label="ΚΑΘΕΣΤΩΣ ΑΠΑΣΧΟΛΗΣΗΣ"
-                value={firstname}
-                onChange={(e) => setFirstName(e.target.value)}
+                label="Καθεστώς Απασχόλησης"
+                value={employmentStatus}
+                onChange={(e) => setEmploymentStatus(e.target.value)}
                 required
                 fullWidth
                 />
-                <TextField
-                label="Last Name"
-                value={lastname}
-                onChange={(e) => setLastName(e.target.value)}
-                required
-                fullWidth
-                />
-                <TextField
-                label="Age"
-                value={age}
-                onChange={(e) => setAge(e.target.value)}
-                type="number"
-                required
-                fullWidth
-                />
-                <Button variant="contained" color="primary" type="submit">
-                Submit
-                </Button>
+
+               
             </Box>
             {formMessage && (
                 <Alert severity="info" sx={{ mt: 2 }}>
@@ -163,9 +185,47 @@ function CreateAdvertisement() {
                 </Alert>
             )}
             </CardContent>
-        </Card>
 
-        </Box>
+            <Box sx={{ display: 'flex', flexDirection: "row", width: '100%', justifyContent:"center", marginTop:"4%", marginBottom:"4%"}}>
+
+          
+              <TextField
+                label="Ημ. Έναρξης"
+                type="date"
+                InputLabelProps={{ shrink: true }}
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+                required
+                // sx={{color:"black",display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 4,}}
+              />    
+
+              <TextField
+                label="Ημ. Λήξης"
+                type="date"
+                InputLabelProps={{ shrink: true }}
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+                required
+                // sx={{color:"black",display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 4,}}
+                />  
+
+            </Box>
+
+            <Button onClick={handleFormSubmit} variant="contained" color="primary" type="submit">
+                Υποβολή
+            </Button>
+
+        </Card>
+  
+      </Box>
+
+        <Link to="/Nanny/Actions/Advertisement" style={{ textDecoration: 'none',}}>
+            <Button variant="contained" startIcon={<BackIcon />} 
+                sx={{ whiteSpace: 'normal',textAlign: 'center', }}>
+                ΕΠΙΣΤΡΟΦΗ ΣΤΙΣ ΑΓΓΕΛΙΕΣ ΜΟΥ
+            </Button>
+        </Link>
+
     </div>
   );
 }
