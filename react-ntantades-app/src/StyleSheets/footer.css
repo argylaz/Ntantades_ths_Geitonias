@@ -6,12 +6,16 @@
     width: 100%;
 } */
 
+
 .footer {
     background-color: #0000005c;  /* Transparent black background */
-    height: 9%;  /* Set height of the footer */
+    height: 12%;  
     position: absolute;  /* Position at the bottom */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     bottom: 0;  /* Stick to the bottom of the page */
-    width: 100%;  /* Full width */
+    width: 100%; 
     display: flex;  /* Flexbox to center content */
     justify-content: center;  /* Center horizontally */
     align-items: center;  /* Center vertically */

@@ -109,9 +109,12 @@ function Advertisement() {
 
 
   return (
+
+    
     <div className='inner-page'>
         <h1>Οι Αγγελίες μου</h1>
 
+      <main>
       <Box sx={{color:"black",display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 4,}}> 
 
       <TableContainer component={Paper} sx={{ marginTop: 4, width:"70%", display:"flex", justifyContent:"center", alignItems:"center",}}>
@@ -121,6 +124,7 @@ function Advertisement() {
                 <TableRow>
                   <TableCell align="left"><strong>Όνομα</strong></TableCell>
                   <TableCell align="left"><strong>Επώνυμο</strong></TableCell>
+                  <TableCell align="left"><strong>Περιοχή</strong></TableCell>
                   <TableCell align="center"><strong>Ημ. Έναρξης</strong></TableCell>
                   <TableCell align="center"><strong> </strong></TableCell>
                 </TableRow>
@@ -130,12 +134,16 @@ function Advertisement() {
                   <TableRow key={ad.id}>
                     <TableCell align="left">{ad.firstname}</TableCell>
                     <TableCell align="left">{ad.lastname}</TableCell>
+                    <TableCell align="left">{ad.place}</TableCell>
                     <TableCell align="center">
                       <Typography>
                         {ad.start_date ? ad.start_date.toDate().toLocaleDateString() : "No date available"}
                       </Typography></TableCell>
-                    <TableCell align="center"> <Button variant="contained"> Προεπισκόπηση </Button> </TableCell>
-                  </TableRow>
+                    { ad.status == "permanent" ?
+                    (<TableCell align="center"> <Button variant="contained"> Προεπισκόπηση </Button> </TableCell>) :
+                    (<TableCell align="center"> <Button variant="contained"> Επεξεργασια </Button> </TableCell>)
+                    }
+                    </TableRow>
                 ))}
               </TableBody>
             </Table>
@@ -168,6 +176,7 @@ function Advertisement() {
             </Button>
       </Link>
         
+      </main>
 
 
     </div>

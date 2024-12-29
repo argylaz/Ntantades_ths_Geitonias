@@ -32,6 +32,7 @@ function CreateAdvertisement() {
   const [startDate, setStartDate] = useState(null)
   const [endDate, setEndDate] = useState(null)
   const [employmentStatus, setEmploymentStatus] = useState("");
+  const [status, setStatus] = useState("");
   const [formMessage, setFormMessage] = useState("")
   const [userData, setUserData] = useState(null);
 
@@ -81,6 +82,24 @@ function CreateAdvertisement() {
     }
   };
 
+  const handleTempSave = async (e) => {
+
+    e.preventDefault();
+    setStatus("temporary");
+
+    handleFormSubmit(e)
+  }
+
+  const handleSubmit = async (e) => {
+    
+    e.preventDefault();
+    setStatus("permanent");
+
+    handleFormSubmit(e)
+  }
+
+
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     setFormMessage("");
@@ -122,6 +141,7 @@ function CreateAdvertisement() {
         createdAt: new Date().toISOString(),
         start_date: new Date(startDate), // Start date,
         end_date: new Date(endDate), // Start date,
+        status: status,
       })
 
       // console.log("Document written with ID: ", docRef.id);
@@ -142,9 +162,11 @@ function CreateAdvertisement() {
   return (
 
     <div> 
+       
+       <div>
 
             
-        <Box sx={{ maxWidth: 600, margin: "0 auto", mt: 4 }}>
+        <Box sx={{ maxWidth: 500, maxHeight:500, margin: "0 auto", mt: 4 }}>
         <Card>
             <CardContent>
             <Typography variant="h4" gutterBottom>
@@ -157,7 +179,7 @@ function CreateAdvertisement() {
             )}
             <Box
                 component="form"
-                onSubmit={handleFormSubmit}
+                // onSubmit={handleFormSubmit}
                 noValidate
                 sx={{ display: "flex", flexDirection: "column", gap: 2 }}
                 >
@@ -197,7 +219,7 @@ function CreateAdvertisement() {
                 onChange={(e) => setStartDate(e.target.value)}
                 required
                 // sx={{color:"black",display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 4,}}
-              />    
+                />    
 
               <TextField
                 label="Ημ. Λήξης"
@@ -211,20 +233,28 @@ function CreateAdvertisement() {
 
             </Box>
 
-            <Button onClick={handleFormSubmit} variant="contained" color="primary" type="submit">
-                Υποβολή
+            <Button onClick={handleTempSave} variant="contained" color="primary" type="submit" >
+                Προσωρινή Αποθήκευση
+            </Button>
+
+            <Button onClick={handleSubmit} variant="contained" color="primary" type="submit" >
+                Οριστική Υποβολή
             </Button>
 
         </Card>
   
       </Box>
 
-        <Link to="/Nanny/Actions/Advertisement" style={{ textDecoration: 'none',}}>
-            <Button variant="contained" startIcon={<BackIcon />} 
-                sx={{ whiteSpace: 'normal',textAlign: 'center', }}>
-                ΕΠΙΣΤΡΟΦΗ ΣΤΙΣ ΑΓΓΕΛΙΕΣ ΜΟΥ
-            </Button>
-        </Link>
+        </div>
+        
+        <div>
+          <Link to="/Nanny/Actions/Advertisement" style={{ textDecoration: 'none', justifyContent:"left", alignContent:"left", position:"relative",}}>
+              <Button variant="contained" startIcon={<BackIcon />} 
+                  sx={{ whiteSpace: 'normal',textAlign: 'center', }}>
+                  ΕΠΙΣΤΡΟΦΗ ΣΤΙΣ ΑΓΓΕΛΙΕΣ ΜΟΥ
+              </Button>
+          </Link>
+        </div>
 
     </div>
   );
