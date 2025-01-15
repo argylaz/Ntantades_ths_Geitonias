@@ -17,6 +17,7 @@ import BackIcon from '@mui/icons-material/ArrowBack';
 import "../StyleSheets/Search.css"
 
 
+
 function createQuery(colRef, searchParams) {
     let constraints = [];
 
@@ -97,7 +98,7 @@ function SearchNannies() {
 
     return (
 
-        <div className='search-box' >
+        <div className='search-box'  >
 
             <header style={{color:"#948472",}}> <b>Συμπληρώστε τα φίλτρα Αναζήτησης</b></header>
 
@@ -251,7 +252,19 @@ function SearchNannies() {
                         
                 </Grid>
                 
-                <Button onClick={handleSearch} variant='contained'>Αναζήτηση</Button>
+                <Box 
+                    sx={{ 
+                        display: 'flex', 
+                        justifyContent: 'flex-end', // Aligns the button to the right
+                        marginTop: 2, // Adds space above the button
+                        marginRight: 3, // Adds some space to the right (optional)
+                        // color: "blue";
+                    }}
+                    >
+                    <Button onClick={handleSearch} variant='contained'>
+                        Αναζήτηση
+                    </Button>
+                </Box>
             
             </Box>
 
@@ -267,7 +280,7 @@ function SearchNannies() {
             <div className='back-button'>
                 <Link to="/Parent/Actions/" style={{ textDecoration: 'none',}}>
                     <Button variant="contained" startIcon={<BackIcon />} 
-                        sx={{ whiteSpace: 'normal',textAlign: 'center', marginTop:'2%'}}>
+                        sx={{ whiteSpace: 'normal',textAlign: 'center', marginTop:'15%'}}>
                         ΕΠΙΣΤΡΟΦΗ ΣΤΗ ΣΕΛΙΔΑ ΕΝΕΡΓΕΙΩΝ
                     </Button>
                 </Link>

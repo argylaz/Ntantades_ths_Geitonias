@@ -86,51 +86,52 @@ export default function Profile() {
     }
 
     return (
-
-    <Box className="profileContainer" sx={{ maxWidth: 600, margin: "0 auto", mt: 4 }}>
-        <Card variant="outlined">
-            <CardContent>
-            <Typography variant="h4" gutterBottom>
-                Το προφίλ μου {userData.role === "parent" ? "(Κηδεμόνας)" : "(Νταντά)"}
-            </Typography>
-
-            <Typography variant="body1" sx={{ mb: 2 }}>
-                <strong>Ονομα:</strong> {userData.firstname || "Δεν βρεθηκε Ονομα"}
-            </Typography>
-            <Typography variant="body1" sx={{ mb: 2 }}>
-                <strong>Επίθετο:</strong> {userData.lastname || "Δεν βρεθηκε Επίθετο"}
-            </Typography>
-            <Typography variant="body1" sx={{ mb: 2 }}>
-                <strong>Ηλικία:</strong> {userData.age || "Δεν βρεθηκε Ηλικία"}
-            </Typography>
-            <Typography variant="body1" sx={{ mb: 2 }}>
-                <strong>Email:</strong> {email || "Δεν βρεθηκε Email"}
-            </Typography>
-            <Typography variant="body1" sx={{ mb: 2 }}>
-                <strong>Τηλέφωνο:</strong> {userData.phone || "Δεν βρεθηκε Τηλέφωνο"}
-            </Typography>
-            <Typography variant="body1" sx={{ mb: 2 }}>
-                <strong>AMKA:</strong> {userData.AMKA || "Δεν βρεθηκε AMKA"}
-            </Typography>
-
-            <Link to="/Profile/Edit" style={{ textDecoration: 'none',}}>
-                <Button variant="contained" startIcon={<EditIcon />} 
-                    sx={{ whiteSpace: 'normal',textAlign: 'center', marginBottom:'2%', marginRight: '2%',}}>
-                    ΕΠΕΞΕΡΓΑΣΙΑ ΠΡΟΦΙΛ
-                </Button>
-            </Link>
-
-            <Button
-                variant="contained"
-                color="primary"
-                onClick={handleLogout}
-                sx={{ mt: -1, ml: 2 }}
-            >
-                Logout
-            </Button>
-            </CardContent>
-        </Card>
-    </Box>
     
+    <div className="inner-page">    
+        <Box className="profileContainer" sx={{ maxWidth: 600, margin: "0 auto", mt: 4 }}>
+            <Card variant="outlined">
+                <CardContent>
+                <Typography variant="h4" gutterBottom>
+                    Το προφίλ μου {userData.role === "parent" ? "(Κηδεμόνας)" : "(Νταντά)"}
+                </Typography>
+
+                <Typography variant="body1" sx={{ mb: 2 }}>
+                    <strong>Ονομα:</strong> {userData.firstname || "Δεν βρεθηκε Ονομα"}
+                </Typography>
+                <Typography variant="body1" sx={{ mb: 2 }}>
+                    <strong>Επίθετο:</strong> {userData.lastname || "Δεν βρεθηκε Επίθετο"}
+                </Typography>
+                <Typography variant="body1" sx={{ mb: 2 }}>
+                    <strong>Ηλικία:</strong> {userData.age || "Δεν βρεθηκε Ηλικία"}
+                </Typography>
+                <Typography variant="body1" sx={{ mb: 2 }}>
+                    <strong>Email:</strong> {email || "Δεν βρεθηκε Email"}
+                </Typography>
+                <Typography variant="body1" sx={{ mb: 2 }}>
+                    <strong>Τηλέφωνο:</strong> {userData.phone || "Δεν βρεθηκε Τηλέφωνο"}
+                </Typography>
+                <Typography variant="body1" sx={{ mb: 2 }}>
+                    <strong>AMKA:</strong> {userData.AMKA || "Δεν βρεθηκε AMKA"}
+                </Typography>
+
+                <Link to="/Profile/Edit" style={{ textDecoration: 'none',}}>
+                    <Button variant="contained" startIcon={<EditIcon />} 
+                        sx={{ whiteSpace: 'normal',textAlign: 'center', marginBottom:'2%', marginRight: '2%',}}>
+                        ΕΠΕΞΕΡΓΑΣΙΑ ΠΡΟΦΙΛ
+                    </Button>
+                </Link>
+
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleLogout}
+                    sx={{ mt: -1, ml: 2 }}
+                >
+                    Logout
+                </Button>
+                </CardContent>
+            </Card>
+        </Box>
+    </div>
     );
 }

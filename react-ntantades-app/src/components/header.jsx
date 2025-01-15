@@ -24,13 +24,19 @@ function Header() {
                 </div>
 
                 {/* Adding menu */}
-                <ButtonMenu />
+                <div className="menu-container">
+                 <ButtonMenu sx={{ flexShrink: 0 }}/> 
+                </div>
 
                 {/* Adding user mode buttons */}
+                <div className="user-mode-container">
                 <ButtonUserMode />
+                </div>
 
                 {/* Adding login/profile button */}
-                <UserButton/>
+                <div className="user-button-container">
+                 <UserButton/>
+                </div>
         </div>
     );
 };

@@ -13,7 +13,7 @@ function HomePageNanny () {
         <div className = "home-page">
             <div className = "main-text">
                 <header>
-                    <h2>Ξεκινήστε την διαδικασία εγγραφής στο Μητρώο Νταντάδων</h2>
+                    <h2 style={{ fontStyle: 'normal' }}>Ξεκινήστε την διαδικασία εγγραφής στο Μητρώο Νταντάδων</h2>
 
                     <br/>
                 </header>
@@ -22,15 +22,15 @@ function HomePageNanny () {
             {/* Button to actions page (redirects to Login if not logged in) */}
             <IfLoggedInButton link="/Nanny/Actions" text="ΕΙΣΟΔΟΣ ΣΤΗΝ ΥΠΗΡΕΣΙΑ" targetRole="nanny" />
 
-            <Link to="/Nanny/EligibilityCriteria" style={{ textDecoration: 'none', marginRight: '10%',}}>
+            <Link to="/Nanny/EligibilityCriteria" style={{ textDecoration: 'none', marginRight: '4%',}}>
                 <Button variant="contained" startIcon={<PersonIcon />}
                     sx={{ width: '250px', height: "70px", whiteSpace: 'normal',textAlign: 'center',}}>
                     ΚΡΙΤΗΡΙΑ ΕΠΙΛΕΞΙΜΟΤΗΤΑΣ
                 </Button>
             </Link>
 
-            <Link to="/Nanny/Guide" style={{ textDecoration: 'none', marginLeft: '15%',}}>
-                <Button variant="contained" endIcon={<HelpIcon />} 
+            <Link to="/Nanny/Guide" style={{ textDecoration: 'none', marginLeft: '4%',}}>
+                <Button variant="contained" startIcon={<HelpIcon />} 
                     sx={{ width: '250px', height: "70px", whiteSpace: 'normal',textAlign: 'center',}}>
                     ΟΔΗΓΙΕΣ ΓΙΑ ΤΗΝ ΕΓΓΡΑΦΗ ΣΤΟ ΜΗΤΡΩΟ ΝΤΑΝΤΑΔΩΝ
                 </Button>

@@ -28,6 +28,9 @@ import Advertisement from "./pages/Advertisement.jsx"
 import EditProfile from "./pages/EditProfile.jsx";
 import CreateAdvertisement from "./pages/CreateAdvertisement.jsx";
 import FAQ from "./pages/FAQ.jsx";
+import ParentsRequest from "./pages/ParentsRequest.jsx";
+import CreateInterestRequest from './pages/CreateInterestRequest.jsx'
+import NannyMeetings from "./pages/NannyMeetings.jsx";
 
 
 import './StyleSheets/App.css';
@@ -61,10 +64,14 @@ function App() {
               <Route path="/Parent/Actions/Search/NannyResults" element={<NannyResults/>} />
               <Route path="/Parent/Actions/Search/NannyResults/ScheduleMeeting" element={<ScheduleMeeting />} />
               <Route path="/Parent/Actions" element={<ParentsActions/>} />
+              <Route path="/Parent/Actions/ParentsRequest" element={<ParentsRequest/>} />
+              <Route path="/Parent/Actions/ParentsRequest/CreateInterestRequest" element={<CreateInterestRequest/>} />
               <Route path="/Nanny/Actions" element={<NannyActions/>} />
               <Route path="/Nanny/Actions/Requests" element={<RequestsNanny />} />
               <Route path="/Nanny/Actions/Advertisement" element={<Advertisement />} />
               <Route path="/Nanny/Actions/Advertisement/CreateAdvertisement" element={<CreateAdvertisement />} />
+              <Route path="/Nanny/Actions/NannyMeetings" element={<NannyMeetings />} />
+              
               <Route path="*" element={<PageNotFound/>} />
           </Routes>
 

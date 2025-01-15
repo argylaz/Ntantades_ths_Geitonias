@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, addDoc, getDoc, collection, Timestamp} from "firebase/firestore";
 import { FIREBASE_AUTH, FIREBASE_DB } from "../config/firebase";
@@ -161,21 +162,21 @@ function ScheduleMeeting() {
                 <FormControlLabel control={<Checkbox name="phoneCall" checked={options.phoneCall} onChange={handleChange}/>} label="Τηλεφωνική Επικοινωνία" />
             </FormGroup> */}
 
-            <FormGroup sx={{color:"black",display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 4,}}>
+        
+            <FormGroup sx={{ color: "black", display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 4 }}>
                 {['Δια ζώσης Ραντεβού', 'Online Ραντεβού', 'Τηλεφωνική Επικοινωνία'].map((label, index) => (
                     <FormControlLabel
-                    key={index}
-                    control={
-                        <Checkbox
-                        checked={selectedCheckbox === index}
-                        onChange={() => handleChangeCheckbox(index)}
-                        />
-                    }
-                    label={label}
+                        key={index}
+                        control={
+                            <Checkbox
+                                checked={selectedCheckbox === ["InPerson", "Online", "PhoneCall"][index]} // Match the label
+                                onChange={() => handleChangeCheckbox(index)}
+                            />
+                        }
+                        label={label}
                     />
                 ))}
             </FormGroup>
-
             <div>
 
                 <Link to="/Parent/Actions/Search" style={{ textDecoration: 'none',}}>

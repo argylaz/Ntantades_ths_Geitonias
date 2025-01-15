@@ -5,7 +5,7 @@ import { onAuthStateChanged, Timestamp } from 'firebase/auth';
 import { format } from "date-fns";
 
 // import Box from '@mui/material/Box';
-import { collection, onSnapshot, query, where,} from "firebase/firestore";
+import { doc, getDoc, collection, onSnapshot, query, where,} from "firebase/firestore";
 import { FIREBASE_AUTH , FIREBASE_DB} from '../config/firebase'; // Import your Firebase config
 
 import { Link } from 'react-router-dom';
@@ -34,10 +34,10 @@ import "../StyleSheets/HomePage.css"
 
 
 
-function Advertisement() {
+function NannyMeetings() {
   const location = useLocation();
   
-  const [ads, setAds] = useState([]);
+  const [meetings, setMeetings] = useState([]);
   
   const [startDate, setStartDate] = useState(null);
 
@@ -65,46 +65,48 @@ function Advertisement() {
 
     useEffect(() => {
       if (userId) {
-          SearchAds(); // Fetch user data only after the user_id is available
+          SearchMeetings(); // Fetch user data only after the user_id is available
       }
   }, [userId]);
 
     
   
-  const SearchAds = () => {
-
-    // event.preventDefault();
-
+  const SearchMeetings = async () => {
     try {
-        
+        // Get collection
+        const colRef = collection(FIREBASE_DB, "Meetings");
 
-        // get collection
-        const colRef = collection(FIREBASE_DB,"Advertisement");
+        // Query based on the ToUser field
+        console.log(userId); // Assuming userId is the ID of the current user
+        const q = query(colRef, where("ToUser", "==", userId));
+        const comb_results = [];
 
-        // console.log(userId)
-        const q = query(colRef, where( "FromUser", "==", userId));
+        onSnapshot(q, async (snapshot) => {
+            let temp = [];
 
-        let comb_results = [];
+            for (const docSnap of snapshot.docs) {
+                const meetingData = { ...docSnap.data(), id: docSnap.id };
 
-        onSnapshot(q, (snapshot) => {
-                let temp = [];
-                snapshot.docs.forEach((doc) => {
-                    temp.push({...doc.data(), id: doc.id});
-                  });
-                  console.log(ads);
-        comb_results = [...comb_results, ...temp];
-        setAds(comb_results); 
+                // Fetch additional details if necessary
+                if (meetingData.FromUser) {
+                    const userRef = doc(FIREBASE_DB, "users", meetingData.FromUser); // Adjust collection name if needed
+                    const userSnap = await getDoc(userRef);
 
-        console.log(comb_results)
-    
-    });
+                    if (userSnap.exists()) {
+                        meetingData.FromUserDetails = userSnap.data(); // Add user details
+                    }
+                }
 
+                temp.push(meetingData);
+            }
+
+            comb_results.push(...temp);
+            setMeetings(comb_results);
+        });
+    } catch (error) {
+        console.error("Error fetching meetings:", error.message);
     }
-    catch (error){
-        console.error(error.message)
-    }
-        
-}
+};
 
 
 
@@ -112,13 +114,13 @@ function Advertisement() {
 
     
     <div className='inner-page'>
-        <h1>Οι Αγγελίες μου</h1>
+        <h1>Τα Ραντεβού</h1>
 
       <main>
       <Box sx={{color:"black",display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 4,}}> 
 
       <TableContainer component={Paper} sx={{ marginTop: 4, width:"70%", display:"flex", justifyContent:"center", alignItems:"center",}}>
-          {ads.length > 0 ? (
+          {meetings.length > 0 ? (
             <Table>
               <TableHead>
                 <TableRow>
@@ -130,16 +132,16 @@ function Advertisement() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {ads.map((ad) => (
+                {meetings.map((ad) => (
                   <TableRow key={ad.id}>
-                    <TableCell align="left">{ad.firstname}</TableCell>
-                    <TableCell align="left">{ad.lastname}</TableCell>
+                    <TableCell align="left">{ad.ToUserDetails?.firstname || "N/A"}</TableCell>
+                    <TableCell align="left">{ad.ToUserDetails?.lastname || "N/A"}</TableCell>
                     <TableCell align="left">{ad.place}</TableCell>
                     <TableCell align="center">
                       <Typography>
                         {ad.start_date ? ad.start_date.toDate().toLocaleDateString() : "No date available"}
                       </Typography></TableCell>
-                    { ad.status == "permanent" ?
+                    { ad.submitted == "permanent" ?
                     (<TableCell align="center"> <Button variant="contained"> Προεπισκόπηση </Button> </TableCell>) :
                     (<TableCell align="center"> <Button variant="contained"> Επεξεργασια </Button> </TableCell>)
                     }
@@ -162,36 +164,19 @@ function Advertisement() {
       </Box>
 
 
-      <Link to="/Nanny/Actions" style={{ textDecoration: 'none' }}>
-        <Button
-          variant="contained"
-          startIcon={<BackIcon />}
-          sx={{
-            whiteSpace: 'normal',
-            textAlign: 'center',
-            marginBottom: '2%',
-            marginRight: '5%', // Add space to the right
-          }}
-        >
-          ΕΠΙΣΤΡΟΦΗ ΣΤΗ ΣΕΛΙΔΑ ΕΝΕΡΓΕΙΩΝ
-        </Button>
+      <Link to="/Parent/Actions" style={{ textDecoration: 'none', marginRight: '5%',}}>
+            <Button variant="contained" startIcon={<BackIcon />} 
+                sx={{ whiteSpace: 'normal',textAlign: 'center', marginBottom:'2%',}}>
+                ΕΠΙΣΤΡΟΦΗ ΣΤΗ ΣΕΛΙΔΑ ΕΝΕΡΓΕΙΩΝ
+            </Button>
       </Link>
 
-      <Link to="/Nanny/Actions/Advertisement/CreateAdvertisement" style={{ textDecoration: 'none' }}>
-        <Button
-          variant="contained"
-          endIcon={<RightIcon />}
-          sx={{
-            whiteSpace: 'normal',
-            textAlign: 'center',
-            marginBottom: '2%',
-            marginLeft: '5%', // Add space to the left
-          }}
-        >
-          ΔΗΜΙΟΥΡΓΙΑ ΝΕΑΣ ΑΓΓΕΛΙΑΣ
-        </Button>
+      <Link to="/Parent/Actions/ParentsRequest/CreateInterestRequest" style={{ textDecoration: 'none',}}>
+            <Button variant="contained" endIcon={<RightIcon />} 
+                sx={{ whiteSpace: 'normal',textAlign: 'center', marginBottom:'2%', marginLeft:'5%',}}>
+                ΔΗΜΙΟΥΡΓΙΑ ΝΕΑΣ ΑΙΤΗΣΗΣ
+            </Button>
       </Link>
-
         
       </main>
 
@@ -201,4 +186,4 @@ function Advertisement() {
   );
 }
 
-export default Advertisement;
+export default NannyMeetings;

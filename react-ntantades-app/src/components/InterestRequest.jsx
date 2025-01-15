@@ -102,7 +102,7 @@ const RequestTable = ({ onUpdateStatus }) => {
   return (
     <TableContainer component={Paper}>
       {requests.length === 0 ? (
-        <p>No requests found.</p> // Display this message if the array is empty
+        <p>Δεν βρέθηκαν αποτελέσματα.</p> // Display this message if the array is empty
       ) : (
         <Table>
           <TableHead>

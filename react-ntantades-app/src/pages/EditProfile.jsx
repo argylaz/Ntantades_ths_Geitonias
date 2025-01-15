@@ -103,94 +103,96 @@ export default function EditProfile() {
   }
 
   return (
-    <Box sx={{ maxWidth: 600, margin: "0 auto", mt: 4 }}>
-      <Card>
-        <CardContent>
-          <Typography variant="h4" gutterBottom>
-            Edit Profile
-          </Typography>
-          {email && (
-            <Typography variant="body1" sx={{ mb: 2 }}>
-              Logged in as: {email}
+    <div className="inner-page">   
+      <Box sx={{ maxWidth: 600, margin: "0 auto", mt: 4}}>
+        <Card>
+          <CardContent>
+            <Typography variant="h4" gutterBottom>
+              Edit Profile
             </Typography>
-          )}
-          <Box
-            component="form"
-            onSubmit={handleFormSubmit}
-            noValidate
-            sx={{ display: "flex", flexDirection: "column", gap: 2 }}
-          >
-            <TextField
-              label="AMKA"
-              value={AMKA}
-              onChange={(e) => setAmka(e.target.value)}
-              type="number"
-              required
-              fullWidth
-            />
-            <TextField
-              label="First Name"
-              value={firstname}
-              onChange={(e) => setFirstName(e.target.value)}
-              required
-              fullWidth
-            />
-            <TextField
-              label="Last Name"
-              value={lastname}
-              onChange={(e) => setLastName(e.target.value)}
-              required
-              fullWidth
-            />
-            <TextField
-              label="Age"
-              value={age}
-              onChange={(e) => setAge(e.target.value)}
-              type="number"
-              required
-              fullWidth
-            />
-            <Button variant="contained" color="primary" type="submit">
-              Submit
-            </Button>
-          </Box>
-          {formMessage && (
-            <Alert severity="info" sx={{ mt: 2 }}>
-              {formMessage}
-            </Alert>
-          )}
-        </CardContent>
-      </Card>
+            {email && (
+              <Typography variant="body1" sx={{ mb: 2 }}>
+                Logged in as: {email}
+              </Typography>
+            )}
+            <Box
+              component="form"
+              onSubmit={handleFormSubmit}
+              noValidate
+              sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+            >
+              <TextField
+                label="AMKA"
+                value={AMKA}
+                onChange={(e) => setAmka(e.target.value)}
+                type="number"
+                required
+                fullWidth
+              />
+              <TextField
+                label="First Name"
+                value={firstname}
+                onChange={(e) => setFirstName(e.target.value)}
+                required
+                fullWidth
+              />
+              <TextField
+                label="Last Name"
+                value={lastname}
+                onChange={(e) => setLastName(e.target.value)}
+                required
+                fullWidth
+              />
+              <TextField
+                label="Age"
+                value={age}
+                onChange={(e) => setAge(e.target.value)}
+                type="number"
+                required
+                fullWidth
+              />
+              <Button variant="contained" color="primary" type="submit">
+                Submit
+              </Button>
+            </Box>
+            {formMessage && (
+              <Alert severity="info" sx={{ mt: 2 }}>
+                {formMessage}
+              </Alert>
+            )}
+          </CardContent>
+        </Card>
 
-      <Typography variant="h5" sx={{ mt: 4 }}>
-        User Data
-      </Typography>
-      {userData ? (
-        <TableContainer component={Paper} sx={{ mt: 2 }}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>AMKA</TableCell>
-                <TableCell>First Name</TableCell>
-                <TableCell>Last Name</TableCell>
-                <TableCell>Age</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              <TableRow>
-                <TableCell>{userData.AMKA || "N/A"}</TableCell>
-                <TableCell>{userData.firstname || "N/A"}</TableCell>
-                <TableCell>{userData.lastname || "N/A"}</TableCell>
-                <TableCell>{userData.age || "N/A"}</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </TableContainer>
-      ) : (
-        <Typography variant="body1" sx={{ mt: 2 }}>
-          No user data found.
+        <Typography variant="h5" sx={{ mt: 4 }}>
+          User Data
         </Typography>
-      )}
-    </Box>
+        {userData ? (
+          <TableContainer component={Paper} sx={{ mt: 2 }}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>AMKA</TableCell>
+                  <TableCell>First Name</TableCell>
+                  <TableCell>Last Name</TableCell>
+                  <TableCell>Age</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow>
+                  <TableCell>{userData.AMKA || "N/A"}</TableCell>
+                  <TableCell>{userData.firstname || "N/A"}</TableCell>
+                  <TableCell>{userData.lastname || "N/A"}</TableCell>
+                  <TableCell>{userData.age || "N/A"}</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>
+        ) : (
+          <Typography variant="body1" sx={{ mt: 2 }}>
+            No user data found.
+          </Typography>
+        )}
+      </Box>
+      </div>   
   );
 }

@@ -44,6 +44,7 @@ const images = [
         url: handshake_image,
         title: 'Τα Ραντεβού μου',
         width: '100%',
+        route: 'NannyMeetings'
     },    
     {
         url: rating_image,
@@ -125,7 +126,7 @@ function NannyActions () {
 
         
         <div className="inner-page">
-            <h1> Επιλέξτε την ενέργεια που επιθυμείτε </h1>
+            <h1 style={{ color: "#494030", fontStyle: 'normal' }}> Επιλέξτε την ενέργεια που επιθυμείτε </h1>
             
             
 

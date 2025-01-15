@@ -11,108 +11,60 @@
 }
 
 .header .app-logo-container {
-    /* height:           60%;
-    width:            10%; */
-    /* background-color: gray; */
-
-
-    
-    /* margin-left:      1%; */
+    height:           90%;
+    display:          flex;
+    width:            25%; 
+    margin-left:      3%;
 }
 
 .app-logo-container a {
     display: inline-block;
     position: absolute;
     left: 1%;
-    width: 10%;
-    height: 60%;
+    width: 15%;
+    height: 80%;
     text-decoration: none;
-    border-radius: 5px;
+    margin-left: 3%;
 }
 
 .app-logo-container img {
     width:  60%;
-    height: 100%;
+    height: 80%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-right: 5%;
 }
 
-.header .menu {
-    /* background-color: rgb(128, 128, 128); */
-    height: 60%;
-
-    width: auto;
-    margin-left: 10%;
-    align-items: center;
-    margin-right: 12%;
-    border-radius: 10px;
-}
-
-
-.header .personas{
-    height: 60%;
-    border-radius: 10px;
-    border-color: black;
-}
-
-.menu .menu-list {
-
-    /* justify-content: /center; */
-    align-items: center;
-    /* position: absolute; */
+.menu-container {
     display: flex;
-    list-style-type: none;
-    padding: 15px;
-    margin: 0;
-
-}
-
-
-.menu-list li {
-    display: flex; /* Enables flexbox layout */
-    justify-content: center; /* Centers horizontally */
-    align-items: center; /* Centers vertically */
-    height: auto; /* Optional: define a fixed height for consistent alignment */
-    width: auto; /* Optional: adjust the width as needed */
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.1rem;
-    /* cursor: pointer; */
-    padding: 10px 15px; 
-    transition: background-color 0.3s ease; 
-    list-style: none; /* Remove default list styling */
-}
- 
-.menu-list a {
-    text-decoration: none;
-    text-emphasis-color: black;
-}
-
-
-.header .menu-user {
-    display: flex;
-    background-color: grey;
-    height: 60%; 
-    width: 8%; 
-    margin-left: 2%;
     align-items: center;
     justify-content: center;
-    border-radius: 10px;
+    height: 60%;
+    width: 10%;
+    /* background-color: gray; */
+    margin-left: 10%;
+    margin-right: 10%;
 }
 
-.menu-user .menu-user-item {
-    
-    margin-right: 20%;
-    display: flex; /* Enables flexbox layout */
-    justify-content: center; /* Centers horizontally */
-    align-items: center; /* Centers vertically */
-    height: auto; /* Optional: define a fixed height for consistent alignment */
-    width: auto; /* Optional: adjust the width as needed */
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 1rem;
-    padding: 10px 15px; /*Add padding for better click targets*/
-    transition: background-color 0.3s ease; /* Smooth hover effect */
-
-    border-color: black;
+.user-mode-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60%;
+    width: 10%;
+    /* background-color: gray; */
+    margin-left: 10%;
 }
 
+.user-button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60%;
+    width: 10%;
+    /* background-color: gray; */
+    margin-left: 10%;
+}
 
 /* STYLING FOR LINKS */
 
@@ -123,14 +75,4 @@ a:link {
 
 a:visited {
     color: black; /* Visited link */
-}
-
-.header .user-button {
-    height: 60%; 
-    width: 8%;
-    margin-left: 15%;
-    margin-right: 1.5%;
-
-    /* background-color: grey; */
-    border-radius: 10px; 
 }

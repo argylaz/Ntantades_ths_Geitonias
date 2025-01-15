@@ -24,6 +24,7 @@ const images = [
       url: greeting_image,
       title: 'Αίτηση Ενδιαφέροντος Συνεργασίας',
       width: '100%',
+      route: 'ParentsRequest'
     },
     {
       url: payment_image,
