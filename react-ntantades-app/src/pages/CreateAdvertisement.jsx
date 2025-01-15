@@ -233,11 +233,11 @@ function CreateAdvertisement() {
 
             </Box>
 
-            <Button onClick={handleTempSave} variant="contained" color="primary" type="submit" >
+            <Button onClick={handleTempSave} variant="contained" color="primary" type="submit" sx={{marginBottom:'3%', marginRight:'3%',}} >
                 Προσωρινή Αποθήκευση
             </Button>
 
-            <Button onClick={handleSubmit} variant="contained" color="primary" type="submit" >
+            <Button onClick={handleSubmit} variant="contained" color="primary" type="submit" sx={{marginBottom:'3%', marginLeft:'3%',}} >
                 Οριστική Υποβολή
             </Button>
 
@@ -250,7 +250,7 @@ function CreateAdvertisement() {
         <div>
           <Link to="/Nanny/Actions/Advertisement" style={{ textDecoration: 'none', justifyContent:"left", alignContent:"left", position:"relative",}}>
               <Button variant="contained" startIcon={<BackIcon />} 
-                  sx={{ whiteSpace: 'normal',textAlign: 'center', }}>
+                  sx={{ whiteSpace: 'normal',textAlign: 'center', marginTop: '2%',}}>
                   ΕΠΙΣΤΡΟΦΗ ΣΤΙΣ ΑΓΓΕΛΙΕΣ ΜΟΥ
               </Button>
           </Link>

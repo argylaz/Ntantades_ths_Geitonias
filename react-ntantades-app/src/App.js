@@ -30,7 +30,11 @@ import CreateAdvertisement from "./pages/CreateAdvertisement.jsx";
 import FAQ from "./pages/FAQ.jsx";
 import ParentsRequest from "./pages/ParentsRequest.jsx";
 import CreateInterestRequest from './pages/CreateInterestRequest.jsx'
-import NannyMeetings from "./pages/NannyMeetings.jsx";
+import NannyScheduledMeetings from "./pages/NannyScheduledMeetings.jsx";
+import MeetingRequests from "./pages/MeetingRequests.jsx"
+import NannyMeetings from "./pages/NannyMeetings.jsx"
+import ParentPayment from "./pages/ParentPayment.jsx"
+import NannyPayment from "./pages/NannyPayment.jsx"
 
 
 import './StyleSheets/App.css';
@@ -64,14 +68,18 @@ function App() {
               <Route path="/Parent/Actions/Search/NannyResults" element={<NannyResults/>} />
               <Route path="/Parent/Actions/Search/NannyResults/ScheduleMeeting" element={<ScheduleMeeting />} />
               <Route path="/Parent/Actions" element={<ParentsActions/>} />
+              <Route path="/Parent/Actions/ParentPayment" element={<ParentPayment/>} />
               <Route path="/Parent/Actions/ParentsRequest" element={<ParentsRequest/>} />
               <Route path="/Parent/Actions/ParentsRequest/CreateInterestRequest" element={<CreateInterestRequest/>} />
               <Route path="/Nanny/Actions" element={<NannyActions/>} />
               <Route path="/Nanny/Actions/Requests" element={<RequestsNanny />} />
               <Route path="/Nanny/Actions/Advertisement" element={<Advertisement />} />
               <Route path="/Nanny/Actions/Advertisement/CreateAdvertisement" element={<CreateAdvertisement />} />
+              <Route path="/Nanny/Actions/NannyMeetings/NannyScheduledMeetings" element={<NannyScheduledMeetings />} />
+              <Route path="/Nanny/Actions/NannyMeetings/MeetingRequests" element={<MeetingRequests />} />
               <Route path="/Nanny/Actions/NannyMeetings" element={<NannyMeetings />} />
-              
+              <Route path="/Nanny/Actions/NannyPayment" element={<NannyPayment />} />
+
               <Route path="*" element={<PageNotFound/>} />
           </Routes>
 

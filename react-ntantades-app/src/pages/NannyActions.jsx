@@ -34,6 +34,7 @@ const images = [
       url: payment_image,
       title: 'Λήψη Πληρωμής',
       width: '100%',
+      route: 'NannyPayment'
     },
     {
         url: history_activity_image,
