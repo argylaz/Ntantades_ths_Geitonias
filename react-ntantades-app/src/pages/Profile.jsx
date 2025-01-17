@@ -13,7 +13,6 @@ import EditIcon from '@mui/icons-material/Edit';
 export default function Profile() {
     const [email, setEmail] = useState("");
     const [userId, setUserId] = useState(""); // Store the user ID
-    // const [firstname, setFirstName] = useState
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 

@@ -196,21 +196,21 @@ export default function EditProfile() {
                 <Box sx={{ mt: 4 }}>
                     <Typography variant="h5" gutterBottom>Βιογραφικό</Typography>
                     <TextField
-                        label="Experience"
+                        label="Εμπειρία"
                         fullWidth
                         value={cvData.experience}
                         onChange={(e) => handleCvDataChange("experience", e.target.value)}
                         sx={{ mb: 2 }}
                     />
                     <TextField
-                        label="Specialization"
+                        label="Ειδικότητα"
                         fullWidth
                         value={cvData.specialization}
                         onChange={(e) => handleCvDataChange("specialization", e.target.value)}
                         sx={{ mb: 2 }}
                     />
                     <TextField
-                        label="Studies"
+                        label="Σπουδές"
                         fullWidth
                         value={cvData.studies}
                         onChange={(e) => handleCvDataChange("studies", e.target.value)}
@@ -260,7 +260,7 @@ export default function EditProfile() {
               )}
 
               <Button variant="contained" color="primary" type="submit">
-                Submit
+                Υποβολή
               </Button>
 
             </Box>
