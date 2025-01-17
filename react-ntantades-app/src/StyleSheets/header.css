@@ -2,16 +2,17 @@
 .header {
     display: flex;
     align-items:      center;
-    background-color: #0000005C;
+    background-color: #3bc4ff;
     position:         fixed;
     top:              0%;
     z-index: 1000; /* Keeps it above other elements */
     height:           15%;
     width:            100%;
+    /* opacity: 100%; */
 }
 
 .header .app-logo-container {
-    height:           90%;
+    height:           100%;
     display:          flex;
     width:            25%; 
     margin-left:      3%;
@@ -22,7 +23,7 @@
     position: absolute;
     left: 1%;
     width: 15%;
-    height: 80%;
+    height: 10%;
     text-decoration: none;
     margin-left: 3%;
 }

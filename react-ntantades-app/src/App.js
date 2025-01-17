@@ -41,43 +41,47 @@ function App() {
   return (
     <div className = "App">
       <header className = "App-header">
-        {/* Header is always the same (for now) */}
+        {/* Header is always the same */}
         <Header />
-
-          <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/Login" element={<Login />} />
-              <Route path="/FAQ" element={<FAQ />} />
-              <Route path="/NannyInstruction" element={<NannyInstruction />} />
-              <Route path="/ParentInstruction" element={<ParentInstruction />} />
-              <Route path="/Register" element={<Register />} />
-              <Route path="/Profile" element={<Profile />} />
-              <Route path="/Profile/Edit" element={<EditProfile />} />
-              <Route path="/Nanny" element={<HomePageNanny />} />
-              <Route path="/Nanny/Guide" element={<NannyGuide />} />
-              <Route path="/Nanny/EligibilityCriteria" element={<EligibilityCriteria />} />
-              <Route path="/Parent" element={<HomePageParent />} />
-              <Route path="/Parent/ParentsGuide" element={<ParentsGuide />} />
-              <Route path="/Parent/FundingRequirements" element={<FundingRequirements />} />
-              <Route path="/Parent/ParticipationRequirements" element={<ParticipationRequiremenents />} />
-              <Route path="/Parent/Actions/Search" element={<Search/>} />
-              <Route path="/Parent/Actions/Search/NannyResults" element={<NannyResults/>} />
-              <Route path="/Parent/Actions/Search/NannyResults/ScheduleMeeting" element={<ScheduleMeeting />} />
-              <Route path="/Parent/Actions" element={<ParentsActions/>} />
-              <Route path="/Parent/Actions/ParentsRequest" element={<ParentsRequest/>} />
-              <Route path="/Parent/Actions/ParentsRequest/CreateInterestRequest" element={<CreateInterestRequest/>} />
-              <Route path="/Nanny/Actions" element={<NannyActions/>} />
-              <Route path="/Nanny/Actions/Requests" element={<RequestsNanny />} />
-              <Route path="/Nanny/Actions/Advertisement" element={<Advertisement />} />
-              <Route path="/Nanny/Actions/Advertisement/CreateAdvertisement" element={<CreateAdvertisement />} />
-              <Route path="/Nanny/Actions/NannyMeetings" element={<NannyMeetings />} />
-              
-              <Route path="*" element={<PageNotFound/>} />
-          </Routes>
-
-        {/* Footer is also alwats the same */}
-        <Footer/>
       </header>
+
+      <div className="App-content">
+        <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/Login" element={<Login />} />
+            <Route path="/FAQ" element={<FAQ />} />
+            <Route path="/NannyInstruction" element={<NannyInstruction />} />
+            <Route path="/ParentInstruction" element={<ParentInstruction />} />
+            <Route path="/Register" element={<Register />} />
+            <Route path="/Profile" element={<Profile />} />
+            <Route path="/Profile/Edit" element={<EditProfile />} />
+            <Route path="/Nanny" element={<HomePageNanny />} />
+            <Route path="/Nanny/Guide" element={<NannyGuide />} />
+            <Route path="/Nanny/EligibilityCriteria" element={<EligibilityCriteria />} />
+            <Route path="/Parent" element={<HomePageParent />} />
+            <Route path="/Parent/ParentsGuide" element={<ParentsGuide />} />
+            <Route path="/Parent/FundingRequirements" element={<FundingRequirements />} />
+            <Route path="/Parent/ParticipationRequirements" element={<ParticipationRequiremenents />} />
+            <Route path="/Parent/Actions/Search" element={<Search/>} />
+            <Route path="/Parent/Actions/Search/NannyResults" element={<NannyResults/>} />
+            <Route path="/Parent/Actions/Search/NannyResults/ScheduleMeeting" element={<ScheduleMeeting />} />
+            <Route path="/Parent/Actions" element={<ParentsActions/>} />
+            <Route path="/Parent/Actions/ParentsRequest" element={<ParentsRequest/>} />
+            <Route path="/Parent/Actions/ParentsRequest/CreateInterestRequest" element={<CreateInterestRequest/>} />
+            <Route path="/Nanny/Actions" element={<NannyActions/>} />
+            <Route path="/Nanny/Actions/Requests" element={<RequestsNanny />} />
+            <Route path="/Nanny/Actions/Advertisement" element={<Advertisement />} />
+            <Route path="/Nanny/Actions/Advertisement/CreateAdvertisement" element={<CreateAdvertisement />} />
+            <Route path="/Nanny/Actions/NannyMeetings" element={<NannyMeetings />} />
+            
+            <Route path="*" element={<PageNotFound/>} />
+        </Routes>
+      </div>
+
+      {/* Fixed Footer */}
+      <footer className="App-footer">
+        <Footer />
+      </footer>
     </div>
   );
 }
