@@ -30,11 +30,13 @@ const images = [
       url: payment_image,
       title: 'Πληρώμη Νταντάς',
       width: '100%',
+      route: 'ParentPayment'
     },
     {
         url: history_activity_image,
         title: 'Ιστορικό Ενεργειών',
         width: '100%',
+        route: 'ParentActionHistory'
     },
     {
         url: handshake_image,

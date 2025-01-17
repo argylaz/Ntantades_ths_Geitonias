@@ -136,6 +136,14 @@ function CreateAdvertisement() {
 
       fetchUserData();
 
+      // Find the user with the given email
+      const user = await findUserByEmail(nanny_email);
+      if (!user) {
+        console.log("User not found.");
+        alert("User not found.");
+        return; // Exit if user is not found
+      }
+
       // // Ensure selectedDate is a valid Date
       // if (!startDate || isNaN(startDate.getTime())  || !endDate || isNaN(endDate.getTime())) {
       //   throw new Error("Invalid date selected");
@@ -145,21 +153,21 @@ function CreateAdvertisement() {
       // Convert the selected date to Firebase Timestamp
 
 
-      // Find the user with the given email
-      await findUserByEmail(nanny_email).then((user) => {
-        if (user) {
-            setToUser(user.id)
-            // console.log("User found and set:", user.id);
-            // console.log("Hello User");
-        } else {
-          console.log("User not found.");
-          alert("User not found.");
-        }
-      });
+      // // Find the user with the given email
+      // await findUserByEmail(nanny_email).then((user) => {
+      //   if (user) {
+      //       setToUser(user.id)
+      //       console.log("User found and set:", user.id);
+      //       // console.log("Hello User");
+      //   } else {
+      //     console.log("User not found.");
+      //     alert("User not found.");
+      //   }
+      // });
 
-      createAdvertisement({
+      await createAdvertisement({
         FromUser: fromUser,
-        ToUser: ToUser,
+        ToUser: user.id,
         
         
         place: place,
@@ -194,93 +202,93 @@ function CreateAdvertisement() {
        <div>
 
             
-        <Box sx={{ maxWidth: 500, maxHeight:500, margin: "0 auto", mt: 4 }}>
-        <Card>
-            <CardContent>
-            <Typography variant="h4" gutterBottom>
-                Συμπληρώστε τα στοιχεία Νταντάς
-            </Typography>
-            {email && (
-                <Typography variant="body1" sx={{ mb: 2 }}>
-                Το email σας είναι: {email}
-                </Typography>
-            )}
-            <Box
-                component="form"
-                // onSubmit={handleFormSubmit}
-                noValidate
-                sx={{ display: "flex", flexDirection: "column", gap: 2 }}
-                >
+          <Box sx={{ maxWidth: 500, maxHeight:500, margin: "0 auto", mt: 4 }}>
+          <Card>
+              <CardContent>
+              <Typography variant="h4" gutterBottom>
+                  Συμπληρώστε τα στοιχεία Νταντάς
+              </Typography>
+              {email && (
+                  <Typography variant="body1" sx={{ mb: 2 }}>
+                  Το email σας είναι: {email}
+                  </Typography>
+              )}
+              <Box
+                  component="form"
+                  // onSubmit={handleFormSubmit}
+                  noValidate
+                  sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+                  >
+                  
+                  <TextField
+                  label="Email Νταντάς"
+                  value={nanny_email}
+                  onChange={(e) => setNannyEmail(e.target.value)}
+                  required
+                  fullWidth
+                  />
+
+                  <TextField
+                  label="Τοποθεσία Εργασίας"
+                  value={place}
+                  onChange={(e) => setPlace(e.target.value)}
+                  type="string"
+                  required
+                  fullWidth
+                  />
+
+                  <TextField
+                  label="Καθεστώς Απασχόλησης"
+                  value={employmentStatus}
+                  onChange={(e) => setEmploymentStatus(e.target.value)}
+                  required
+                  fullWidth
+                  />
                 
+              </Box>
+              {formMessage && (
+                  <Alert severity="info" sx={{ mt: 2 }}>
+                  {formMessage}
+                  </Alert>
+              )}
+              </CardContent>
+
+              <Box sx={{ display: 'flex', flexDirection: "row", width: '100%', justifyContent:"center", marginTop:"4%", marginBottom:"4%"}}>
+
+            
                 <TextField
-                label="Email Νταντάς"
-                value={nanny_email}
-                onChange={(e) => setNannyEmail(e.target.value)}
-                required
-                fullWidth
-                />
+                  label="Ημ. Έναρξης"
+                  type="date"
+                  InputLabelProps={{ shrink: true }}
+                  value={startDate}
+                  onChange={(e) => setStartDate(e.target.value)}
+                  required
+                  // sx={{color:"black",display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 4,}}
+                  />    
 
                 <TextField
-                label="Τοποθεσία Εργασίας"
-                value={place}
-                onChange={(e) => setPlace(e.target.value)}
-                type="string"
-                required
-                fullWidth
-                />
+                  label="Ημ. Λήξης"
+                  type="date"
+                  InputLabelProps={{ shrink: true }}
+                  value={endDate}
+                  onChange={(e) => setEndDate(e.target.value)}
+                  required
+                  // sx={{color:"black",display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 4,}}
+                  />  
 
-                <TextField
-                label="Καθεστώς Απασχόλησης"
-                value={employmentStatus}
-                onChange={(e) => setEmploymentStatus(e.target.value)}
-                required
-                fullWidth
-                />
-               
-            </Box>
-            {formMessage && (
-                <Alert severity="info" sx={{ mt: 2 }}>
-                {formMessage}
-                </Alert>
-            )}
-            </CardContent>
+              </Box>
 
-            <Box sx={{ display: 'flex', flexDirection: "row", width: '100%', justifyContent:"center", marginTop:"4%", marginBottom:"4%"}}>
+              <Button onClick={handleTempSave} variant="contained" color="primary" type="submit" sx={{marginBottom:'3%', marginRight:'3%',}}>
+                  ΠΡΟΣΩΡΙΝΗ ΑΠΟΘΗΚΕΥΣΗ
+              </Button>
 
-          
-              <TextField
-                label="Ημ. Έναρξης"
-                type="date"
-                InputLabelProps={{ shrink: true }}
-                value={startDate}
-                onChange={(e) => setStartDate(e.target.value)}
-                required
-                // sx={{color:"black",display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 4,}}
-                />    
+              <Button onClick={handleSubmit} variant="contained" color="primary" type="submit" sx={{marginBottom:'3%', marginLeft:'3%',}}>
+                  ΟΡΙΣΤΙΚΗ ΥΠΟΒΟΛΗ
+              </Button>
 
-              <TextField
-                label="Ημ. Λήξης"
-                type="date"
-                InputLabelProps={{ shrink: true }}
-                value={endDate}
-                onChange={(e) => setEndDate(e.target.value)}
-                required
-                // sx={{color:"black",display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 4,}}
-                />  
-
-            </Box>
-
-            <Button onClick={handleTempSave} variant="contained" color="primary" type="submit" sx={{marginBottom:'3%', marginRight:'3%',}}>
-                ΠΡΟΣΩΡΙΝΗ ΑΠΟΘΗΚΕΥΣΗ
-            </Button>
-
-            <Button onClick={handleSubmit} variant="contained" color="primary" type="submit" sx={{marginBottom:'3%', marginLeft:'3%',}}>
-                ΟΡΙΣΤΙΚΗ ΥΠΟΒΟΛΗ
-            </Button>
-
-        </Card>
-  
-      </Box>
+          </Card>
+    
+        </Box>
 
         </div>
         

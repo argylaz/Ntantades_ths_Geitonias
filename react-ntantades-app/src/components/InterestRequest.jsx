@@ -1,5 +1,5 @@
 import { FIREBASE_DB, FIREBASE_AUTH } from "../config/firebase";
-import { collection, query, where, onSnapshot, addDoc, serverTimestamp } from "firebase/firestore";
+import { doc, addDoc, getDoc, collection, Timestamp, query, where, getDocs, onSnapshot} from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import {
   Table,
@@ -10,6 +10,7 @@ import {
   TableRow,
   Paper,
   Button,
+  Typography,
 } from "@mui/material";
 import { onAuthStateChanged } from "firebase/auth";
 
@@ -19,21 +20,34 @@ import { onAuthStateChanged } from "firebase/auth";
 // };
 
 
-// Method to add an Interest request in
-const sendRequest = async (fromUserId, toUserId) => {
-  await addDoc(collection(FIREBASE_DB, "requests"), {
-    fromUserId,
-    toUserId,
-    status: "pending",
-    timestamp: serverTimestamp(),
-  });
-  alert("Request sent!");
-};
-
 
 const RequestTable = ({ onUpdateStatus }) => {
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [parentDataMap, setParentDataMap] = useState({}); // Map for parent data
+
+  // Fetch parent data for a given user ID and update the map
+  const fetchUserData = async (id) => {
+    if (parentDataMap[id]) {
+      // If data for this user ID is already fetched, return early
+      return;
+    }
+
+    try {
+      const docRef = doc(FIREBASE_DB, "users", id);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        setParentDataMap((prev) => ({
+          ...prev,
+          [id]: { id: docSnap.id, ...docSnap.data() },
+        }));
+      } else {
+        console.error("No document found with ID:", id);
+      }
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, (user) => {
@@ -43,17 +57,16 @@ const RequestTable = ({ onUpdateStatus }) => {
         console.error("No user logged in.");
       }
     });
-  
+
     return () => unsubscribe(); // Cleanup listener
   }, []);
 
-  // Method to get the interest requests sent to a certain user
   const getRequestsNanny = async (setRequests) => {
     const currentUser = FIREBASE_AUTH.currentUser;
 
     if (!currentUser) {
       console.error("No authenticated user.");
-      return () => {}; // Return an empty cleanup function if no user is logged in
+      return () => {};
     }
 
     const userId = currentUser.uid;
@@ -63,11 +76,13 @@ const RequestTable = ({ onUpdateStatus }) => {
     const unsubscribe = onSnapshot(
       q,
       (snapshot) => {
-        console.log("Snapshot size:", snapshot.size);
-        console.log("Snapshot data:", snapshot.docs.map(doc => doc.data()));
-
         const requests = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
         setRequests(requests);
+
+        // Fetch parent data for all requests
+        requests.forEach((request) => {
+          fetchUserData(request.FromUser);
+        });
       },
       (error) => {
         console.error("Error fetching requests: ", error);
@@ -77,9 +92,8 @@ const RequestTable = ({ onUpdateStatus }) => {
     return unsubscribe;
   };
 
-  // Get needed data when component mounted
   useEffect(() => {
-    let unsubscribe = () => {}; // Default to a no-op function
+    let unsubscribe = () => {};
   
     const fetchData = async () => {
       unsubscribe = await getRequestsNanny(setRequests);
@@ -96,55 +110,76 @@ const RequestTable = ({ onUpdateStatus }) => {
   }, []);
 
   if (loading) {
-      return <p>Loading...</p>;
+    return <p>Loading...</p>;
   }
 
   return (
     <TableContainer component={Paper}>
       {requests.length === 0 ? (
-        <p>Δεν βρέθηκαν αποτελέσματα.</p> // Display this message if the array is empty
+        <p>Δεν βρέθηκαν αποτελέσματα.</p>
       ) : (
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Από Χρήστη</TableCell>
-              <TableCell>Κατάσταση</TableCell>
-              <TableCell>Ενέργειες</TableCell>
+              <TableCell align="center"><strong>Ονοματεπώνυμο Κηδεμόνα</strong></TableCell>
+              <TableCell align="center"><strong>Ημερμονηνία Έναρξης</strong></TableCell>
+              <TableCell align="center"><strong>Ημερμονηνία Λήξης</strong></TableCell>
+              <TableCell align="center"><strong>Καθεστώς Απασχόλησης</strong></TableCell>
+              <TableCell align="center"><strong>Κατάσταση</strong></TableCell>
+              <TableCell align="center"><strong>Ενέργειες</strong></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {requests.map((request) => (
-              <TableRow key={request.id}>
-                 <TableCell>{request.fromUserId}</TableCell> {/* TO BE REPLACED BY A USER PROFILE BUTTON */}
-                <TableCell>{request.status}</TableCell>
-                <TableCell>
-                  {request.status === "pending" && (
-                    <>
-                      <Button
-                        variant="contained"
-                        color="success"
-                        onClick={() => onUpdateStatus(request.id, "accepted")}
-                        style={{ marginRight: 8 }}
-                      >
-                        Αποδοχή
-                      </Button>
-                      <Button
-                        variant="contained"
-                        color="error"
-                        onClick={() => onUpdateStatus(request.id, "rejected")}
-                      >
-                        Απόρριψη
-                      </Button>
-                    </>
-                  )}
-                </TableCell>
-              </TableRow>
-            ))}
+            {requests.map((request) => {
+              const parent = parentDataMap[request.FromUser] || {};
+              return (
+                <TableRow key={request.id}>
+                  <TableCell align="center">{parent.firstname ? `${parent.firstname} ${parent.lastname}` : "Unknown User"}</TableCell>
+                  <TableCell align="center">
+                    <Typography>{request.start_date ? new Date(request.start_date.seconds * 1000).toLocaleDateString() : "No date available"}</Typography>
+                  </TableCell>
+                  <TableCell align="center">
+                    <Typography>{request.end_date ? new Date(request.end_date.seconds * 1000).toLocaleDateString() : "No date available"}</Typography>
+                  </TableCell>
+                  <TableCell align="center">{request.employmentStatus}</TableCell>
+                  <TableCell align="center">
+                    {request.status === "pending" 
+                      ? "Εκκρεμής" 
+                      : request.status === "accepted" 
+                      ? "Ενεργή" 
+                      : request.status === "rejected" 
+                      ? "Απορρίφθηκε" 
+                      : "Unknown Status" }
+                  </TableCell>
+                  <TableCell align="center">
+                    {request.status === "pending" && (
+                      <>
+                        <Button
+                          variant="contained"
+                          color="success"
+                          onClick={() => onUpdateStatus(request.id, "accepted")}
+                          style={{ marginRight: 8 }}
+                        >
+                          Αποδοχή
+                        </Button>
+                        <Button
+                          variant="contained"
+                          color="error"
+                          onClick={() => onUpdateStatus(request.id, "rejected")}
+                        >
+                          Απόρριψη
+                        </Button>
+                      </>
+                    )}
+                  </TableCell>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       )}
     </TableContainer>
-  )
-}
+  );
+};
 
 export default RequestTable;

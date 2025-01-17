@@ -28,28 +28,31 @@ const images = [
       url: job_image,
       title: 'Οι Αγγελίες μου',
       width: '100%',
-      route: 'Advertisement'
+      route: 'Advertisement',
     },
     {
       url: payment_image,
       title: 'Λήψη Πληρωμής',
       width: '100%',
+      route: 'NannyPayment'
     },
     {
         url: history_activity_image,
         title: 'Ιστορικό Ενεργειών',
         width: '100%',
+        route: 'NannyActionHistory'
     },
     {
         url: handshake_image,
         title: 'Τα Ραντεβού μου',
         width: '100%',
-        route: 'NannyMeetings'
+        route: 'NannyMeetings',
     },    
     {
         url: rating_image,
         title: 'Προβολή Αξιολογήσεων',
         width: '100%',
+        route: 'NannyReviews',
     },    
 
   ];
