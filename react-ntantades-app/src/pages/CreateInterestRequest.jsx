@@ -136,6 +136,14 @@ function CreateAdvertisement() {
 
       fetchUserData();
 
+      // Find the user with the given email
+      const user = await findUserByEmail(nanny_email);
+      if (!user) {
+        console.log("User not found.");
+        alert("User not found.");
+        return; // Exit if user is not found
+      }
+
       // // Ensure selectedDate is a valid Date
       // if (!startDate || isNaN(startDate.getTime())  || !endDate || isNaN(endDate.getTime())) {
       //   throw new Error("Invalid date selected");
@@ -145,21 +153,21 @@ function CreateAdvertisement() {
       // Convert the selected date to Firebase Timestamp
 
 
-      // Find the user with the given email
-      await findUserByEmail(nanny_email).then((user) => {
-        if (user) {
-            setToUser(user.id)
-            // console.log("User found and set:", user.id);
-            // console.log("Hello User");
-        } else {
-          console.log("User not found.");
-          alert("User not found.");
-        }
-      });
+      // // Find the user with the given email
+      // await findUserByEmail(nanny_email).then((user) => {
+      //   if (user) {
+      //       setToUser(user.id)
+      //       console.log("User found and set:", user.id);
+      //       // console.log("Hello User");
+      //   } else {
+      //     console.log("User not found.");
+      //     alert("User not found.");
+      //   }
+      // });
 
-      createAdvertisement({
+      await createAdvertisement({
         FromUser: fromUser,
-        ToUser: ToUser,
+        ToUser: user.id,
         
         
         place: place,

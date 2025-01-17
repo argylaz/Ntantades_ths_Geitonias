@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import PaidIcon from '@mui/icons-material/Paid';
@@ -7,22 +7,82 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
+import { FIREBASE_AUTH , FIREBASE_DB} from '../config/firebase';
+import { useLocation } from "react-router-dom";
+import { onAuthStateChanged } from "firebase/auth";
+import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
 
 import qr_code from "../images/qr_code.png"
 
 import '../StyleSheets/HomePage.css';
 
-function Home() {
+function NannyPayment() {
   const [open, setOpen] = useState(false);
+  const [hasPaymentRecord, setHasPaymentRecord] = useState(false); // State to track if payment exists
   const [dialogOpen, setDialogOpen] = useState(false);
+  const location = useLocation();
+  const [payment, setPayment] = useState([]);
+  const [startDate, setStartDate] = useState(null);
 
-  const handleClick = () => {
-    setDialogOpen(true);
+
+  
+  
+  const handleClick = async () => {
+    if (!userId) {
+      console.error("User ID is not available.");
+      return;
+    }
+
+    try {
+      const q = query(
+        collection(FIREBASE_DB, "Payments"),
+        where("ToUser", "==", userId) // Query to check for matching record
+      );
+      
+      const querySnapshot = await getDocs(q);
+      if (!querySnapshot.empty) {
+        setHasPaymentRecord(true); // Record exists
+        setDialogOpen(true); // Open the dialog
+      } else {
+        setHasPaymentRecord(false); // No record found
+        alert("Δεν βρέθηκε καμία πληρωμή για τον χρήστη αυτό.");
+      }
+    } catch (error) {
+      console.error("Error fetching payment records:", error);
+    }
   };
 
   const handleClose = () => {
     setDialogOpen(false);
   };
+  
+
+  const [email, setEmail] = useState("");
+  const [userId, setUserId] = useState(""); // Store the user ID
+  // const [firstname, setFirstName] = useState
+
+  useEffect(() => {
+      const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, (user) => {
+          if (user) {
+              setEmail(user.email);
+              setUserId(user.uid); // Store the user's UID
+          } else {
+              setEmail(null);
+              setUserId(null);
+          }
+
+      });
+
+      return () => unsubscribe();
+  }, []);
+
+
+    useEffect(() => {
+      if (userId) {
+          console.log(userId);
+          // SearchMeetings(); // Fetch user data only after the user_id is available
+      }
+  }, [userId]);
 
   return (
     <div className="inner-page">
@@ -41,7 +101,7 @@ function Home() {
           </Button>
         </header>
 
-        <Link to="/Parent/Actions" style={{ textDecoration: 'none' }}>
+        <Link to="/Nanny/Actions" style={{ textDecoration: 'none' }}>
           <Button
             variant="contained"
             startIcon={<BackIcon />}
@@ -72,4 +132,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default NannyPayment;

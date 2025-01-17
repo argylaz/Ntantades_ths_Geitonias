@@ -34,7 +34,7 @@ import "../StyleSheets/HomePage.css"
 
 
 
-function NannyScheduledMeetings() {
+function NannyActionHistory() {
   const location = useLocation();
   
   const [meetings, setMeetings] = useState([]);
@@ -65,15 +65,16 @@ function NannyScheduledMeetings() {
 
     useEffect(() => {
       if (userId) {
-          SearchMeetings(); // Fetch user data only after the user_id is available
+          SearchActions(); // Fetch user data only after the user_id is available
       }
   }, [userId]);
 
     
   
-  const SearchMeetings = async () => {
+  const SearchActions = async () => {
     try {
         // Get collection
+        ////////////////////////////////////////// Actions
         const colRef = collection(FIREBASE_DB, "Meetings");
 
         // Query based on the ToUser field
@@ -114,7 +115,7 @@ function NannyScheduledMeetings() {
 
     
     <div className='inner-page'>
-        <h1>Αιτήματα Ραντεβού</h1>
+        <h1>Ιστορικό Ενεργειών</h1>
 
       <main>
       <Box sx={{color:"black",display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 4,}}> 
@@ -163,10 +164,10 @@ function NannyScheduledMeetings() {
       </Box>
 
 
-      <Link to="/Nanny/Actions/NannyMeetings" style={{ textDecoration: 'none', marginRight: '48%',}}>
+      <Link to="/Nanny/Actions" style={{ textDecoration: 'none', marginRight: '48%',}}>
             <Button variant="contained" startIcon={<BackIcon />} 
                 sx={{ whiteSpace: 'normal',textAlign: 'center', marginBottom:'2%',}}>
-                ΕΠΙΣΤΡΟΦΗ ΣΤΑ ΡΑΝΤΕΒΟΥ ΜΟΥ
+                ΕΠΙΣΤΡΟΦΗ ΣΤΗ ΣΕΛΙΔΑ ΕΝΕΡΓΕΙΩΝ
             </Button>
       </Link>
 
@@ -179,4 +180,4 @@ function NannyScheduledMeetings() {
   );
 }
 
-export default NannyScheduledMeetings;
+export default NannyActionHistory;

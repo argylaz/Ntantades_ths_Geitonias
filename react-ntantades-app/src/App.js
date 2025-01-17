@@ -35,7 +35,9 @@ import MeetingRequests from "./pages/MeetingRequests.jsx"
 import NannyMeetings from "./pages/NannyMeetings.jsx"
 import ParentPayment from "./pages/ParentPayment.jsx"
 import NannyPayment from "./pages/NannyPayment.jsx"
-
+import NannyReviews from "./pages/NannyReviews.jsx";
+import NannyActionHistory from "./pages/NannyActionHistory.jsx"
+import ParentActionHistory from "./pages/ParentActionHistory.jsx"
 
 import './StyleSheets/App.css';
 import './config/firebase.js'
@@ -71,6 +73,7 @@ function App() {
               <Route path="/Parent/Actions/ParentPayment" element={<ParentPayment/>} />
               <Route path="/Parent/Actions/ParentsRequest" element={<ParentsRequest/>} />
               <Route path="/Parent/Actions/ParentsRequest/CreateInterestRequest" element={<CreateInterestRequest/>} />
+              <Route path="/Parent/Actions/ParentActionHistory" element={<ParentActionHistory/>} />
               <Route path="/Nanny/Actions" element={<NannyActions/>} />
               <Route path="/Nanny/Actions/Requests" element={<RequestsNanny />} />
               <Route path="/Nanny/Actions/Advertisement" element={<Advertisement />} />
@@ -79,6 +82,8 @@ function App() {
               <Route path="/Nanny/Actions/NannyMeetings/MeetingRequests" element={<MeetingRequests />} />
               <Route path="/Nanny/Actions/NannyMeetings" element={<NannyMeetings />} />
               <Route path="/Nanny/Actions/NannyPayment" element={<NannyPayment />} />
+              <Route path="/Nanny/Actions/NannyReviews" element={<NannyReviews/>} />
+              <Route path="/Nanny/Actions/NannyActionHistory" element={<NannyActionHistory/>} />
 
               <Route path="*" element={<PageNotFound/>} />
           </Routes>

@@ -79,8 +79,8 @@ function ResultsPage() {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell align="left"><strong>Όνομα</strong></TableCell>
-                  <TableCell align="left"><strong>Επώνυμο</strong></TableCell>
+                  <TableCell align="center"><strong>Όνομα</strong></TableCell>
+                  <TableCell align="center"><strong>Επώνυμο</strong></TableCell>
                   <TableCell align="center"><strong>Ηλικία</strong></TableCell>
                   <TableCell align="center"><strong>Περιοχή</strong></TableCell>
                   <TableCell align="center"><strong> Ημ. Έναρξης</strong></TableCell>
@@ -91,13 +91,13 @@ function ResultsPage() {
               <TableBody>
                 {results.map((nanny) => (
                   <TableRow key={nanny.id}>
-                    <TableCell align="left">{nanny.firstname}</TableCell>
-                    <TableCell align="left">{nanny.lastname}</TableCell>
+                    <TableCell align="center">{nanny.firstname}</TableCell>
+                    <TableCell align="center">{nanny.lastname}</TableCell>
                     <TableCell align="center">{nanny.age}</TableCell>
                     <TableCell align="center">{nanny.place}</TableCell>
-                    {console.log("start_date:", nanny.start_date)}
-                    <TableCell> <Typography>{nanny.start_date ?  new Date(nanny.start_date.seconds * 1000).toLocaleDateString() : "No date available"}</Typography> </TableCell>
-                    <TableCell> <Typography>{nanny.end_date  ? new Date(nanny.end_date.seconds * 1000).toLocaleDateString() : "No date available"}</Typography> </TableCell>
+
+                    <TableCell align="center"> <Typography>{nanny.start_date ?  new Date(nanny.start_date.seconds * 1000).toLocaleDateString() : "No date available"}</Typography> </TableCell>
+                    <TableCell align="center"> <Typography>{nanny.end_date  ? new Date(nanny.end_date.seconds * 1000).toLocaleDateString() : "No date available"}</Typography> </TableCell>
                     <TableCell align="center"> <Button onClick={() => scheduleMeeting(nanny)} variant="contained"> ΠΡΟΓΡΑΜΜΑΤΙΣΜΟΣ ΡΑΝΤΕΒΟΥ </Button> </TableCell>
                   </TableRow>
                 ))}

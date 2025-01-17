@@ -6,12 +6,11 @@ import { format } from "date-fns";
 
 // import Box from '@mui/material/Box';
 import { doc, getDoc, collection, onSnapshot, query, where,} from "firebase/firestore";
-import { FIREBASE_AUTH , FIREBASE_DB} from '../config/firebase'; // Import your Firebase config
+import { FIREBASE_AUTH , FIREBASE_DB} from '../config/firebase'; 
 
 import { Link } from 'react-router-dom';
 import BackIcon from '@mui/icons-material/ArrowBack';
-import RightIcon from '@mui/icons-material/ArrowForward';
-import { useNavigate } from "react-router-dom";
+
 
 import {
   Button,
@@ -163,10 +162,10 @@ function NannyScheduledMeetings() {
       </Box>
 
 
-      <Link to="/Nanny/Actions" style={{ textDecoration: 'none', marginRight: '48%',}}>
+      <Link to="/Nanny/Actions/NannyMeetings" style={{ textDecoration: 'none', marginRight: '48%',}}>
             <Button variant="contained" startIcon={<BackIcon />} 
                 sx={{ whiteSpace: 'normal',textAlign: 'center', marginBottom:'2%',}}>
-                ΕΠΙΣΤΡΟΦΗ ΣΤΗ ΣΕΛΙΔΑ ΕΝΕΡΓΕΙΩΝ
+                ΕΠΙΣΤΡΟΦΗ ΣΤΑ ΡΑΝΤΕΒΟΥ ΜΟΥ
             </Button>
       </Link>
 

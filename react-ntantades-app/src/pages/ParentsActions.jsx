@@ -36,6 +36,7 @@ const images = [
         url: history_activity_image,
         title: 'Ιστορικό Ενεργειών',
         width: '100%',
+        route: 'ParentActionHistory'
     },
     {
         url: handshake_image,
