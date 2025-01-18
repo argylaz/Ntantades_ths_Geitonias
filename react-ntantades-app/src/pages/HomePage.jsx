@@ -12,7 +12,7 @@ function Home () {
     return (
         <div className = "home-page">
 
-            <div style={{justifyContent: 'center',}}> 
+            <div style={{justifyContent: 'center', backgroundColor: 'rgba(0, 0, 0, 0)',}}> 
                 
                 <header>
                     <h2>Δράση “Νταντάδες της Γειτονιάς”</h2>

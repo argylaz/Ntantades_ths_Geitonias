@@ -19,6 +19,9 @@ export default function RegisterForm() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  
+  const [childData, setChildData] = useState({ name: "", gender: "", age: "" }); // State for child data
+  const [cvData, setCvData] = useState({ experience: "", specialization: "", studies: "", file: null }); // State for CV data
 
   // Check Authentication State
   useEffect(() => {
@@ -51,16 +54,31 @@ export default function RegisterForm() {
       const user = res.user;
 
       // Save user info to Firestore
-      await setDoc(doc(FIREBASE_DB, "users", user.uid), {
-        firstname: firstname,
-        lastname: lastname,
-        AMKA: AMKA,
-        age: age,
-        phone: phone,
-        email: email,
-        createdAt: new Date().toISOString(),
-        role: role, // Set the selected role
-      });
+      if(role === "parent") {
+        await setDoc(doc(FIREBASE_DB, "users", user.uid), {
+          firstname: firstname,
+          lastname: lastname,
+          AMKA: AMKA,
+          age: age,
+          phone: phone,
+          email: email,
+          createdAt: new Date().toISOString(),
+          role: role, // Set the selected role
+          childData: childData, // Save child data for parent
+        });
+      } else if (role === "nanny") {
+        await setDoc(doc(FIREBASE_DB, "users", user.uid), {
+          firstname: firstname,
+          lastname: lastname,
+          AMKA: AMKA,
+          age: age,
+          phone: phone,
+          email: email,
+          createdAt: new Date().toISOString(),
+          role: role, // Set the selected role
+          cvData: cvData, // Save CV data for nanny
+        });
+      }
 
       console.log("User registered successfully:", user);
       navigate("/Profile"); // Redirect after successful registration
@@ -187,7 +205,7 @@ export default function RegisterForm() {
             </Grid>
             <Grid item xs={6}>
             <TextField
-              label="Confirm Password"
+              label="Επιβεβαίωση Password"
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}

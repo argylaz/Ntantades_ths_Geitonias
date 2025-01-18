@@ -38,6 +38,7 @@ import NannyPayment from "./pages/NannyPayment.jsx"
 import NannyReviews from "./pages/NannyReviews.jsx";
 import NannyActionHistory from "./pages/NannyActionHistory.jsx"
 import ParentActionHistory from "./pages/ParentActionHistory.jsx"
+import NannyCreateCV from "./pages/NannyCreateCV.jsx";
 
 import './StyleSheets/App.css';
 import './config/firebase.js'
@@ -47,9 +48,11 @@ function App() {
   return (
     <div className = "App">
       <header className = "App-header">
-        {/* Header is always the same (for now) */}
+        {/* Header is always the same */}
         <Header />
+      </header>  
 
+      <div className="App-content">
           <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/Login" element={<Login />} />
@@ -62,6 +65,7 @@ function App() {
               <Route path="/Nanny" element={<HomePageNanny />} />
               <Route path="/Nanny/Guide" element={<NannyGuide />} />
               <Route path="/Nanny/EligibilityCriteria" element={<EligibilityCriteria />} />
+              <Route path="/Nanny/CreateCV" element={<NannyCreateCV />} />
               <Route path="/Parent" element={<HomePageParent />} />
               <Route path="/Parent/ParentsGuide" element={<ParentsGuide />} />
               <Route path="/Parent/FundingRequirements" element={<FundingRequirements />} />
@@ -87,10 +91,12 @@ function App() {
 
               <Route path="*" element={<PageNotFound/>} />
           </Routes>
+      </div>
 
-        {/* Footer is also alwats the same */}
-        <Footer/>
-      </header>
+      {/* Fixed Footer */}
+      <footer className="App-footer">
+        <Footer />
+      </footer>
     </div>
   );
 }

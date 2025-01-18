@@ -4,7 +4,7 @@ import { FIREBASE_AUTH , FIREBASE_DB} from '../config/firebase';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { collection, addDoc, query, where, getDocs, doc, getDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
-import { Button, Card, CardContent, Typography, Box } from "@mui/material";
+import { Button, Card, CardContent, Typography, Box, TextField  } from "@mui/material";
 import { Link } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
 
@@ -13,7 +13,6 @@ import EditIcon from '@mui/icons-material/Edit';
 export default function Profile() {
     const [email, setEmail] = useState("");
     const [userId, setUserId] = useState(""); // Store the user ID
-    // const [firstname, setFirstName] = useState
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
@@ -68,7 +67,6 @@ export default function Profile() {
         }
     };
 
-
     const currentUser = FIREBASE_AUTH.currentUser;
 
     if (!currentUser) {
@@ -91,6 +89,7 @@ export default function Profile() {
         <Box className="profileContainer" sx={{ maxWidth: 600, margin: "0 auto", mt: 4 }}>
             <Card variant="outlined">
                 <CardContent>
+
                 <Typography variant="h4" gutterBottom>
                     Το προφίλ μου {userData.role === "parent" ? "(Κηδεμόνας)" : "(Νταντά)"}
                 </Typography>
@@ -98,22 +97,68 @@ export default function Profile() {
                 <Typography variant="body1" sx={{ mb: 2 }}>
                     <strong>Ονομα:</strong> {userData.firstname || "Δεν βρεθηκε Ονομα"}
                 </Typography>
+
                 <Typography variant="body1" sx={{ mb: 2 }}>
                     <strong>Επίθετο:</strong> {userData.lastname || "Δεν βρεθηκε Επίθετο"}
                 </Typography>
+
                 <Typography variant="body1" sx={{ mb: 2 }}>
                     <strong>Ηλικία:</strong> {userData.age || "Δεν βρεθηκε Ηλικία"}
                 </Typography>
+
                 <Typography variant="body1" sx={{ mb: 2 }}>
                     <strong>Email:</strong> {email || "Δεν βρεθηκε Email"}
                 </Typography>
+
                 <Typography variant="body1" sx={{ mb: 2 }}>
                     <strong>Τηλέφωνο:</strong> {userData.phone || "Δεν βρεθηκε Τηλέφωνο"}
                 </Typography>
+
                 <Typography variant="body1" sx={{ mb: 2 }}>
                     <strong>AMKA:</strong> {userData.AMKA || "Δεν βρεθηκε AMKA"}
                 </Typography>
 
+
+                {/* Conditional Sections */}
+                {userData.role === "nanny" && (
+                    <Box sx={{ mt: 4 }}>
+                    <Typography variant="h5" gutterBottom>Βιογραφικό</Typography>
+
+                    <Typography variant="body1" sx={{ mb: 2 }}>
+                    <strong>Εμπειρία:</strong> {userData.cvData.experience || "Δεν βρέθηκε εμπειρία"}
+                    </Typography>
+
+                    <Typography variant="body1" sx={{ mb: 2 }}>
+                    <strong>Ειδίκευση:</strong> {userData.cvData.specialization || "Δεν βρέθηκε ειδίκευση"}
+                    </Typography>
+
+                    <Typography variant="body1" sx={{ mb: 2 }}>
+                    <strong>Σπουδές:</strong> {userData.cvData.studies || "Δεν βρέθηκαν σπουδές"}
+                    </Typography>
+
+                    </Box>
+                )}
+
+                {userData.role === "parent" && (
+                    <Box sx={{ mt: 4 }}>
+                    <Typography variant="h5" gutterBottom>Παιδί</Typography>
+
+                    <Typography variant="body1" sx={{ mb: 2 }}>
+                    <strong>Ονομα παιδιού:</strong> {userData.childData.name || "Δεν βρέθηκε όνομα παιδιού"}
+                    </Typography>
+
+                    <Typography variant="body1" sx={{ mb: 2 }}>
+                    <strong>Ηλικία παιδιού </strong> {userData.childData.age || "Δεν βρέθηκε ηλικία παιδιού"}
+                    </Typography>
+
+                    <Typography variant="body1" sx={{ mb: 2 }}>
+                    <strong>Φύλλο παιδιού:</strong> {userData.childData.gender || "Δεν βρέθηκε φυλλο παιδιού"}
+                    </Typography>
+
+                    </Box>
+                )}
+                
+                {/* Βuttons */}
                 <Link to="/Profile/Edit" style={{ textDecoration: 'none',}}>
                     <Button variant="contained" startIcon={<EditIcon />} 
                         sx={{ whiteSpace: 'normal',textAlign: 'center', marginBottom:'2%', marginRight: '2%',}}>

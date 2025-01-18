@@ -2,7 +2,12 @@ import React from "react";
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import ButtonBase from '@mui/material/ButtonBase';
+
+import { Link } from 'react-router-dom';
+import Button from '@mui/material/Button';
+import EditIcon from '@mui/icons-material/Edit';
 import Typography from '@mui/material/Typography';
+
 import nanny_image from "../images/nanny.jpg"
 import handshake_image from "../images/handshake.jpg"
 import payment_image from "../images/payment.webp"
@@ -164,6 +169,16 @@ function NannyActions () {
                 </ImageButton>
             ))}
             </Box>
+
+            {/* Βuttons */}
+            <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: '2%'}}>
+              <Link to="/Nanny/CreateCV" style={{ textDecoration: 'none',}}>
+                  <Button variant="contained" startIcon={<EditIcon />} 
+                      sx={{ whiteSpace: 'normal',textAlign: 'center', marginBottom:'2%', marginRight: '2%',}}>
+                      Δημιουργία Βιογραφικού
+                  </Button>
+              </Link>
+            </div>
    
 
         </div>

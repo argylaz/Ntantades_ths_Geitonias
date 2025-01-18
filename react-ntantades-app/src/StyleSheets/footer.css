@@ -8,8 +8,8 @@
 
 
 .footer {
-    background-color: #0000005c;  /* Transparent black background */
-    height: 12%;  
+    background-color: #2dbdfb;
+    height: 100%;  
     position: absolute;  /* Position at the bottom */
     margin: 0;
     padding: 0;
@@ -35,6 +35,9 @@
     line-height: var(--body-s-line-height);
     /* position: absolute; */
     width: 25%;
+    align-items: center;
+    color: white;
+    
 }
 
 /* .footer .logo-container {

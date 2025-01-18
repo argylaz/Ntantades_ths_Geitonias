@@ -1,5 +1,9 @@
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .App-logo {
@@ -7,37 +11,44 @@
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
-  /* background-color: #282c34; */
-  background-color: bisque;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  /* font-size: calc(10px + 2vmin); */
   color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 15%;
+  z-index: 1000; /* Ensure header is on top */
+}
+
+.App-content {
+  /* background-color: bisque; */
+  flex: 1;
+  margin-top: 0px; /* Adjust to match Header height */
+  margin-bottom: 0px; /*Adjust to match Footer height */
+  overflow-y: auto; /* Enable scrolling only for this area */
+  /* padding: 20px; Optional padding */
+  z-index: 1; /* Lower than header/footer */
+  position: relative; /* Ensure proper stacking context */
+  /* background-color: #f9f9f9; Background for content */
+}
+
+.App-footer {
+  /* background-color: bisque; */
+  position: fixed;
+  height: 12%;
+  width: 100%;
+  bottom: 0%;
+  left: 0;
+  z-index: 1000;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .App-link {
   color: #61dafb;
 }
-
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-
-
