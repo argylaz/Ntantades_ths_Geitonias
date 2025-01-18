@@ -7,16 +7,16 @@ import BackIcon from '@mui/icons-material/ArrowBack';
 
 function ParentInstruction () {
     return (
-        <div className="inner-page" style={{color:"black",}}>
+        <div className="inner-page">
             <div>
                 <h2>Οδηγίες προς τους Κηδεμόνες </h2>
 
             </div>
 
            
-            <div>
+            <div style={{ width: '75%', margin: 'auto', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
  
-                <ul style={{textAlign:'left', }}>
+                <ul style={{textAlign:'justify', }}>
                     <b>Οδηγίες Υποβολής Αίτησης για Εύρεση Νταντάς</b>
 
                     <li> Για να συμμετάσχετε στην Δράση “Νταντάδες της Γειτονιάς” ως κηδεμόνας, αρχικά πρέπει να επιλέξετε “Είμαι Κηδεμόνας” στην Αρχική Σελίδα, και στη συνέχεια να πατήσετε το κουμπί “Είσοδος στην Υπηρεσία με κωδικούς taxisNet”. </li>

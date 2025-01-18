@@ -20,11 +20,48 @@ import { onAuthStateChanged } from "firebase/auth";
 // };
 
 
-
 const RequestTable = ({ onUpdateStatus }) => {
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [UserId, setUserId] = useState("");
   const [parentDataMap, setParentDataMap] = useState({}); // Map for parent data
+
+  const addActionAccepted = async (userId, parent_firstname, parent_lastname) => {
+    if (!userId) {
+      console.error("User ID is not available.");
+      return;
+    }
+  
+    try {
+      addDoc(collection(FIREBASE_DB, "Actions"), {
+        user: userId,
+        date: new Date(),
+        type: "Αποδοχή Αίτησης Κηδεμόνα " + parent_firstname + " " + parent_lastname ,
+        actionDate: Timestamp.now(),  // Timestamp of the payment
+      });
+    } catch (error) {
+      console.error("Error adding action record:", error);
+    }
+  }
+
+  const addActionRejected = async (userId, parent_firstname, parent_lastname) => {
+    if (!userId) {
+      console.error("User ID is not available.");
+      return;
+    }
+  
+    try {
+      addDoc(collection(FIREBASE_DB, "Actions"), {
+        user: userId,
+        date: new Date(),
+        type: "Απόρριψης Αίτησης Κηδεμόνα"  + parent_firstname + " " + parent_lastname,
+        actionDate: Timestamp.now(),  // Timestamp of the payment
+      });
+    } catch (error) {
+      console.error("Error adding action record:", error);
+    }
+  }
+
 
   // Fetch parent data for a given user ID and update the map
   const fetchUserData = async (id) => {
@@ -63,6 +100,7 @@ const RequestTable = ({ onUpdateStatus }) => {
 
   const getRequestsNanny = async (setRequests) => {
     const currentUser = FIREBASE_AUTH.currentUser;
+    setUserId(currentUser.uid);
 
     if (!currentUser) {
       console.error("No authenticated user.");
@@ -113,6 +151,18 @@ const RequestTable = ({ onUpdateStatus }) => {
     return <p>Loading...</p>;
   }
 
+  
+  const Accept = (request_id, parent_firstname, parent_lastname) =>{
+    onUpdateStatus(request_id, "accepted");
+    addActionAccepted(UserId, parent_firstname, parent_lastname);
+  }  
+
+  const Reject = (request_id, parent_firstname, parent_lastname) =>{
+
+    onUpdateStatus(request_id, "rejected");
+    addActionRejected(UserId, parent_firstname, parent_lastname);
+  } 
+
   return (
     <TableContainer component={Paper}>
       {requests.length === 0 ? (
@@ -157,7 +207,8 @@ const RequestTable = ({ onUpdateStatus }) => {
                         <Button
                           variant="contained"
                           color="success"
-                          onClick={() => onUpdateStatus(request.id, "accepted")}
+                          // onClick={() => onUpdateStatus(request.id, "accepted")}
+                          onClick={ () => Accept(request.id, parent.firstname, parent.lastname)}
                           style={{ marginRight: 8 }}
                         >
                           Αποδοχή
@@ -165,7 +216,8 @@ const RequestTable = ({ onUpdateStatus }) => {
                         <Button
                           variant="contained"
                           color="error"
-                          onClick={() => onUpdateStatus(request.id, "rejected")}
+                          // onClick={() => onUpdateStatus(request.id, "rejected")}
+                          onClick={() => Reject(request.id, parent.firstname, parent.lastname)}
                         >
                           Απόρριψη
                         </Button>

@@ -2,7 +2,8 @@
 .header {
     display: flex;
     align-items:      center;
-    background-color: #2dbdfb;
+    background-color: #7dbdfb;
+    /* background-color: #819ad7; */
     position:         absolute;
     top:              0%;
     z-index: 1000; /* Keeps it above other elements */

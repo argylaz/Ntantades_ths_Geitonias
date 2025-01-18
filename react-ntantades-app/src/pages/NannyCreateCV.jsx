@@ -73,7 +73,7 @@ function NannyCreateCV () {
   };
 
   return (
-    <div >
+    <div style={{marginTop:"10%"}}>
       <h1>Δημιουργία βιογραφικού</h1>
 
             <Box

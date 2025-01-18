@@ -37,7 +37,7 @@ import "../StyleSheets/HomePage.css"
 function NannyActionHistory() {
   const location = useLocation();
   
-  const [meetings, setMeetings] = useState([]);
+  const [actions, setActions] = useState([]);
   
   const [startDate, setStartDate] = useState(null);
 
@@ -75,34 +75,34 @@ function NannyActionHistory() {
     try {
         // Get collection
         ////////////////////////////////////////// Actions
-        const colRef = collection(FIREBASE_DB, "Meetings");
+        const colRef = collection(FIREBASE_DB, "Actions");
 
         // Query based on the ToUser field
         console.log(userId); // Assuming userId is the ID of the current user
-        const q = query(colRef, where("ToUser", "==", userId));
+        const q = query(colRef, where("user", "==", userId));
         const comb_results = [];
 
         onSnapshot(q, async (snapshot) => {
             let temp = [];
 
             for (const docSnap of snapshot.docs) {
-                const meetingData = { ...docSnap.data(), id: docSnap.id };
+                const actionData = { ...docSnap.data(), id: docSnap.id };
 
-                // Fetch additional details if necessary
-                if (meetingData.FromUser) {
-                    const userRef = doc(FIREBASE_DB, "users", meetingData.FromUser); // Adjust collection name if needed
-                    const userSnap = await getDoc(userRef);
+                // // Fetch additional details if necessary
+                // if (actionData.FromUser) {
+                //     const userRef = doc(FIREBASE_DB, "users", actionData.user); // Adjust collection name if needed
+                //     const userSnap = await getDoc(userRef);
 
-                    if (userSnap.exists()) {
-                        meetingData.FromUserDetails = userSnap.data(); // Add user details
-                    }
-                }
+                //     if (userSnap.exists()) {
+                //         actionData.UserDetails = userSnap.data(); // Add user details
+                //     }
+                // }
 
-                temp.push(meetingData);
+                temp.push(actionData);
             }
 
             comb_results.push(...temp);
-            setMeetings(comb_results);
+            setActions(comb_results);
         });
     } catch (error) {
         console.error("Error fetching meetings:", error.message);
@@ -121,29 +121,22 @@ function NannyActionHistory() {
       <Box sx={{color:"black",display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 4,}}> 
 
       <TableContainer component={Paper} sx={{ marginTop: 4, width:"70%", display:"flex", justifyContent:"center", alignItems:"center",}}>
-          {meetings.length > 0 ? (
+          {actions.length > 0 ? (
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell align="left"><strong>Όνομα</strong></TableCell>
-                  <TableCell align="left"><strong>Επώνυμο</strong></TableCell>
-                  <TableCell align="left"><strong>Περιοχή</strong></TableCell>
-                  <TableCell align="center"><strong>Ημ. Έναρξης</strong></TableCell>
+                  <TableCell align="center"><strong>Τυπος Ενέργειας</strong></TableCell>
+                  {/* <TableCell align="left"><strong></strong></TableCell> */}
+                  {/* <TableCell align="left"><strong>Περιοχή</strong></TableCell */}
+                  <TableCell align="center"><strong>Ημερομηνία</strong></TableCell>
                   <TableCell align="center"><strong> </strong></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {meetings.map((ad) => (
-                  <TableRow key={ad.id}>
-                    <TableCell align="left">{ad.ToUserDetails?.firstname || "N/A"}</TableCell>
-                    <TableCell align="left">{ad.ToUserDetails?.lastname || "N/A"}</TableCell>
-                    <TableCell align="left">{ad.place}</TableCell>
-                    <TableCell align="center">
-                      <Typography>
-                        {ad.start_date ? ad.start_date.toDate().toLocaleDateString() : "No date available"}
-                      </Typography></TableCell>
-                    
-                    (<TableCell align="center"> <Button variant="contained"> ΠΡΟΒΟΛΗ ΛΕΠΤΟΜΕΡΕΙΩΝ </Button> </TableCell>)
+                {actions.map((ac) => (
+                  <TableRow key={ac.id}>
+                    <TableCell align="center">{ac.type || "N/A"}</TableCell>
+                    <TableCell align="center">{ac.date.toDate().toLocaleDateString() || "N/A"}</TableCell>
                     
                     </TableRow>
                 ))}

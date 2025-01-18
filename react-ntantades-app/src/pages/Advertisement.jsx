@@ -93,7 +93,7 @@ function Advertisement() {
                   });
                   console.log(ads);
         comb_results = [...comb_results, ...temp];
-        setAds(comb_results); 
+        setAds(comb_results);
 
         console.log(comb_results)
     
@@ -112,7 +112,7 @@ function Advertisement() {
 
     
     <div className='inner-page'>
-        <h1>Οι Αγγελίες μου</h1>
+        <h1 style={{ marginTop:"10%"}}>Οι Αγγελίες μου</h1>
 
       <main>
       <Box sx={{color:"black",display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 4,}}> 
@@ -184,7 +184,7 @@ function Advertisement() {
           sx={{
             whiteSpace: 'normal',
             textAlign: 'center',
-            marginBottom: '2%',
+            marginBottom: '12%',
             marginLeft: '5%', // Add space to the left
           }}
         >

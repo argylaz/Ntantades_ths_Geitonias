@@ -86,7 +86,7 @@ export default function Profile() {
     return (
     
     <div className="inner-page">    
-        <Box className="profileContainer" sx={{ maxWidth: 600, margin: "0 auto", mt: 4 }}>
+        <Box className="profileContainer" sx={{ maxWidth: 600, margin: "0 auto", mt: '8%', mb : '8%' }}>
             <Card variant="outlined">
                 <CardContent>
 
@@ -170,9 +170,9 @@ export default function Profile() {
                     variant="contained"
                     color="primary"
                     onClick={handleLogout}
-                    sx={{ mt: -1, ml: 2 }}
+                    sx={{ ml: 2, marginBottom:'2%' }}
                 >
-                    Logout
+                        ΑΠΟΣΥΝΔΕΣΗ
                 </Button>
                 </CardContent>
             </Card>

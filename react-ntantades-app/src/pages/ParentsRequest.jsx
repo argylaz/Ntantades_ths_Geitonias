@@ -141,8 +141,19 @@ const SearchAds = async () => {
                         {ad.start_date ? ad.start_date.toDate().toLocaleDateString() : "No date available"}
                       </Typography></TableCell>
                     { ad.submitted == "permanent" ?
-                    (<TableCell align="center"> <Button variant="contained"> Προεπισκόπηση </Button> </TableCell>) :
-                    (<TableCell align="center"> <Button variant="contained"> Επεξεργασια </Button> </TableCell>)
+                      (<TableCell align="center"> 
+                        <Link to={`/viewRequest/${ad.id}`}>
+                          <Button variant="contained"> 
+                            Προεπισκόπηση 
+                          </Button> 
+                        </Link>
+                      </TableCell>) :
+                    
+                      (<TableCell align="center"> 
+                        <Button variant="contained"> 
+                        Επεξεργασια
+                        </Button>
+                      </TableCell>)
                     }
                     </TableRow>
                 ))}

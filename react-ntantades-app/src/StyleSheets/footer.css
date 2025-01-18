@@ -8,7 +8,10 @@
 
 
 .footer {
-    background-color: #2dbdfb;
+    background-color: #7dbdfb;
+    /* background-color: #1976c2; */
+    /* background-color: #819ad7; */
+    /* background-color:grey; */
     height: 100%;  
     position: absolute;  /* Position at the bottom */
     margin: 0;

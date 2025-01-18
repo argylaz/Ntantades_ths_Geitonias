@@ -75,7 +75,7 @@ function NannyReviews() {
     try {
         // Get collection
         ////////////////////////////////////////// Reviews
-        const colRef = collection(FIREBASE_DB, "Meetings");
+        const colRef = collection(FIREBASE_DB, "Review");
 
         // Query based on the ToUser field
         console.log(userId); // Assuming userId is the ID of the current user
@@ -86,19 +86,19 @@ function NannyReviews() {
             let temp = [];
 
             for (const docSnap of snapshot.docs) {
-                const meetingData = { ...docSnap.data(), id: docSnap.id };
+                const reviewData = { ...docSnap.data(), id: docSnap.id };
 
                 // Fetch additional details if necessary
-                if (meetingData.FromUser) {
-                    const userRef = doc(FIREBASE_DB, "users", meetingData.FromUser); // Adjust collection name if needed
+                if (reviewData.FromUser) {
+                    const userRef = doc(FIREBASE_DB, "users", reviewData.FromUser); // Adjust collection name if needed
                     const userSnap = await getDoc(userRef);
 
                     if (userSnap.exists()) {
-                        meetingData.FromUserDetails = userSnap.data(); // Add user details
+                        reviewData.FromUserDetails = userSnap.data(); // Add user details
                     }
                 }
 
-                temp.push(meetingData);
+                temp.push(reviewData);
             }
 
             comb_results.push(...temp);
@@ -115,35 +115,41 @@ function NannyReviews() {
 
     
     <div className='inner-page'>
-        <h1>Οι Αξιολογήσεις μου</h1>
+        <h1 style={{marginTop:"10%",}}>Οι Αξιολογήσεις μου</h1>
 
       <main>
       <Box sx={{color:"black",display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 4,}}> 
 
-      <TableContainer component={Paper} sx={{ marginTop: 4, width:"70%", display:"flex", justifyContent:"center", alignItems:"center",}}>
+      <TableContainer component={Paper} sx={{ marginTop: 4, width:"70%", display:"flex", justifyContent:"center", alignItems:"center", marginBottom:"5%"}}>
           {meetings.length > 0 ? (
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell align="left"><strong>Όνομα</strong></TableCell>
-                  <TableCell align="left"><strong>Επώνυμο</strong></TableCell>
-                  <TableCell align="left"><strong>Περιοχή</strong></TableCell>
-                  <TableCell align="center"><strong>Ημ. Έναρξης</strong></TableCell>
+                  <TableCell align="center"><strong>Όνομα</strong></TableCell>
+                  <TableCell align="center"><strong>Επώνυμο</strong></TableCell>
+                  <TableCell align="center"><strong>Αξιολόγηση</strong></TableCell>
+                  <TableCell align="center"><strong>Σχόλιο</strong></TableCell>
                   <TableCell align="center"><strong> </strong></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {meetings.map((ad) => (
                   <TableRow key={ad.id}>
-                    <TableCell align="left">{ad.ToUserDetails?.firstname || "N/A"}</TableCell>
-                    <TableCell align="left">{ad.ToUserDetails?.lastname || "N/A"}</TableCell>
-                    <TableCell align="left">{ad.place}</TableCell>
+                    <TableCell align="center">{ad.FromUserDetails?.firstname || "N/A"}</TableCell>
+                    <TableCell align="center">{ad.FromUserDetails?.lastname || "N/A"}</TableCell>
+                    <TableCell align="center">{ad.rating}/5</TableCell>
                     <TableCell align="center">
                       <Typography>
-                        {ad.start_date ? ad.start_date.toDate().toLocaleDateString() : "No date available"}
+                        {ad.comment || "Δεν βρέθηκε σχόλιο"}
                       </Typography></TableCell>
                     
-                    (<TableCell align="center"> <Button variant="contained"> ΠΡΟΒΟΛΗ ΛΕΠΤΟΜΕΡΕΙΩΝ </Button> </TableCell>)
+                    {/* <TableCell align="center"> 
+                      <Link to={{ pathname: "/Nanny/ReviewDetails", state: { reviewData: ad } }} style={{ textDecoration: 'none',}}>
+                        <Button variant="contained"> 
+                          ΠΡΟΒΟΛΗ ΛΕΠΤΟΜΕΡΕΙΩΝ 
+                        </Button>
+                      </Link>
+                    </TableCell> */}
                     
                     </TableRow>
                 ))}
@@ -164,9 +170,9 @@ function NannyReviews() {
       </Box>
 
 
-      <Link to="/Nanny/Actions" style={{ textDecoration: 'none', marginRight: '48%',}}>
+      <Link to="/Nanny/Actions" style={{ textDecoration: 'none', marginRight: '48%'}}>
             <Button variant="contained" startIcon={<BackIcon />} 
-                sx={{ whiteSpace: 'normal',textAlign: 'center', marginBottom:'2%',}}>
+                sx={{ whiteSpace: 'normal',textAlign: 'center', marginBottom:'10%',}}>
                 ΕΠΙΣΤΡΟΦΗ ΣΤΗ ΣΕΛΙΔΑ ΕΝΕΡΓΕΙΩΝ
             </Button>
       </Link>

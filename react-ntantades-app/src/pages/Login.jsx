@@ -72,11 +72,12 @@ export default function Login() {
             <div style={{
                 display: "flex",
                 flexDirection: "column", // Stack children vertically
+                backgroundColor: "transparent",
                 }}>
 
                 
                                                     
-                <form onSubmit={handleLogin} className="login-container">
+                <form onSubmit={handleLogin} className="login-container" style={{ boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.5)", padding: "20px", borderRadius: "8px" }}>
                         <h2>Σύνδεση</h2>
 
                         {error && <p className="error-message" aria-live="polite" style={{ color: 'red' }}>{error}</p>} {/* Display error message */}
@@ -110,15 +111,17 @@ export default function Login() {
                             {loading ? 'Logging in...' : 'Login'} 
                         </Button> */}
 
-                        <Button type="submit" disabled={loading} style={{ justifyContent: "center", marginTop: "5%" }} variant='contained'> 
+                        <Button type="submit" disabled={loading} style={{ justifyContent: "center", marginTop: "5%", boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)"}} variant='contained'> 
                             {loading ? <CircularProgress size={24} /> : 'ΣΥΝΔΕΣΗ'}
                         </Button>
                 
                 </form>
                 
-                <div style={{ marginTop: "1rem", marginBottom: "1rem", textAlign: "center" }}>
-                    <Link to="/register" style={{ textDecoration: 'none'}} >
-                        <Button  variant='contained' > ΔΗΜΙΟΥΡΓΙΑ ΝΕΟΥ ΧΡΗΣΤΗ </Button>
+                <div style={{ marginTop: "1rem", marginBottom: "1rem", textAlign: "center", backgroundColor: "transparent",}}>
+                    <Link to="/register" style={{ textDecoration: 'none', backgroundColor: "transparent", }} >
+                        <Button  variant='contained' style={{boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.4)"}}> 
+                            ΔΗΜΙΟΥΡΓΙΑ ΝΕΟΥ ΧΡΗΣΤΗ
+                        </Button>
                     </Link>
                 </div>
                 

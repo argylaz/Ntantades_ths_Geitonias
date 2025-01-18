@@ -88,7 +88,7 @@ function Home() {
             onClick={handleClick}
             disabled={loading} // Disable button during loading
           >
-            Πληρωμή Νταντάς
+            ΠΛΗΡΩΜΗ ΝΤΑΝΤΑΣ
           </Button>
           
           {error && <p style={{ color: "red" }}>{error}</p>} {/* Display error message */}
@@ -106,10 +106,10 @@ function Home() {
 
       {/* Snackbar for success */}
       <Snackbar
-        open={open}
+        // open={open}
         autoHideDuration={3000}
         onClose={handleClose}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        anchorOrigin={{ vertical: 'center', horizontal: 'center' }}
       >
         <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
           Η πληρωμή Νταντάς ολοκληρώθηκε!

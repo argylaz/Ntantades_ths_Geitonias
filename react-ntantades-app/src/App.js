@@ -39,6 +39,10 @@ import NannyReviews from "./pages/NannyReviews.jsx";
 import NannyActionHistory from "./pages/NannyActionHistory.jsx"
 import ParentActionHistory from "./pages/ParentActionHistory.jsx"
 import NannyCreateCV from "./pages/NannyCreateCV.jsx";
+import ViewRequest from "./pages/ViewRequest.jsx";
+import TerminateContract from "./pages/TerminateContract.jsx";
+import ParentReview from "./pages/ParentReview.jsx";
+import ReviewCompleted from "./pages/ReviewCompleted.jsx";
 
 import './StyleSheets/App.css';
 import './config/firebase.js'
@@ -62,6 +66,7 @@ function App() {
               <Route path="/Register" element={<Register />} />
               <Route path="/Profile" element={<Profile />} />
               <Route path="/Profile/Edit" element={<EditProfile />} />
+              <Route path="/viewRequest/:requestID" element={<ViewRequest />} />
               <Route path="/Nanny" element={<HomePageNanny />} />
               <Route path="/Nanny/Guide" element={<NannyGuide />} />
               <Route path="/Nanny/EligibilityCriteria" element={<EligibilityCriteria />} />
@@ -78,6 +83,9 @@ function App() {
               <Route path="/Parent/Actions/ParentsRequest" element={<ParentsRequest/>} />
               <Route path="/Parent/Actions/ParentsRequest/CreateInterestRequest" element={<CreateInterestRequest/>} />
               <Route path="/Parent/Actions/ParentActionHistory" element={<ParentActionHistory/>} />
+              <Route path="/Parent/Actions/TerminateContract" element={<TerminateContract/>} />
+              <Route path="/Parent/Actions/TerminateContract/ParentReview" element={<ParentReview/>} />
+              <Route path="/Parent/Actions/TerminateContract/ParentReview/ReviewCompleted" element={<ReviewCompleted />} />
               <Route path="/Nanny/Actions" element={<NannyActions/>} />
               <Route path="/Nanny/Actions/Requests" element={<RequestsNanny />} />
               <Route path="/Nanny/Actions/Advertisement" element={<Advertisement />} />
@@ -88,6 +96,7 @@ function App() {
               <Route path="/Nanny/Actions/NannyPayment" element={<NannyPayment />} />
               <Route path="/Nanny/Actions/NannyReviews" element={<NannyReviews/>} />
               <Route path="/Nanny/Actions/NannyActionHistory" element={<NannyActionHistory/>} />
+
 
               <Route path="*" element={<PageNotFound/>} />
           </Routes>

@@ -28,12 +28,8 @@ const StyledMenu = styled((props) => (
   '& .MuiPaper-root': {
     borderRadius: 6,
     marginTop: theme.spacing(1),
-    // color: 'rgb(55, 65, 81)',
-    // boxShadow:
-    //   'rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px',
-    // '& .MuiMenu-list': {
-    //   padding: '4px 0',
-    // },
+    border: `1px solid ${alpha(theme.palette.common.black, 0.1)}`, // Add a border with a subtle color
+    boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.06)', // Add a subtle shadow
     '& .MuiMenuItem-root': {
       '& .MuiSvgIcon-root': {
         fontSize: 18,
@@ -47,11 +43,9 @@ const StyledMenu = styled((props) => (
         ),
       },
     },
-    ...theme.applyStyles('dark', {
-      color: theme.palette.grey[300],
-    }),
   },
 }));
+
 
 export default function CustomizedMenus() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -89,14 +83,14 @@ export default function CustomizedMenus() {
         onClose={handleClose}
       >
         <Link to="/NannyInstruction" style={{ textDecoration: 'none',}}>
-            <MenuItem onClick={handleClose} disableRipple>
-            ΟΔΗΓΙΕΣ ΠΡΟΣ ΝΤΑΝΤΑΔΕΣ
+            <MenuItem onClick={handleClose} disableRipple >
+              ΟΔΗΓΙΕΣ ΠΡΟΣ ΝΤΑΝΤΑΔΕΣ
             </MenuItem>
         </Link>
 
         <Link to="/ParentInstruction" style={{ textDecoration: 'none',}}>
             <MenuItem onClick={handleClose} disableRipple>
-            ΟΔΗΓΙΕΣ ΠΡΟΣ ΚΗΔΕΜΟΝΕΣ
+              ΟΔΗΓΙΕΣ ΠΡΟΣ ΚΗΔΕΜΟΝΕΣ
             </MenuItem>
         </Link>
       </StyledMenu>

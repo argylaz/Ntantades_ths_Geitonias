@@ -134,15 +134,15 @@ function NannyScheduledMeetings() {
               <TableBody>
                 {meetings.map((ad) => (
                   <TableRow key={ad.id}>
-                    <TableCell align="left">{ad.ToUserDetails?.firstname || "N/A"}</TableCell>
-                    <TableCell align="left">{ad.ToUserDetails?.lastname || "N/A"}</TableCell>
+                    <TableCell align="left">{ad.FromUserDetails?.firstname || "N/A"}</TableCell>
+                    <TableCell align="left">{ad.FromUserDetails?.lastname || "N/A"}</TableCell>
                     <TableCell align="left">{ad.place}</TableCell>
                     <TableCell align="center">
                       <Typography>
                         {ad.start_date ? ad.start_date.toDate().toLocaleDateString() : "No date available"}
                       </Typography></TableCell>
                     
-                    (<TableCell align="center"> <Button variant="contained"> ΠΡΟΒΟΛΗ ΛΕΠΤΟΜΕΡΕΙΩΝ </Button> </TableCell>)
+                    {/* <TableCell align="center"> <Button variant="contained"> ΠΡΟΒΟΛΗ ΛΕΠΤΟΜΕΡΕΙΩΝ </Button> </TableCell> */}
                     
                     </TableRow>
                 ))}

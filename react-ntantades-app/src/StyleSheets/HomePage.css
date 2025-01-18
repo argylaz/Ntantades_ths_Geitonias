@@ -8,12 +8,13 @@
     background-position: top;
     background-repeat: no-repeat; 
     backdrop-filter: 'blur(5px)';
+
     
+    font-size: x-large;
     justify-content: center;
     align-content: center;
     position: absolute; 
     font-family: Arial, Helvetica, sans-serif;
-    font-style: italic;
     color: rgb(255, 255, 255);
 
 
@@ -30,8 +31,8 @@ main {
     /* Background  */
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(white, #e6f3f9, white);
-    background-color: rgb(255, 255, 255);
+    background-image: linear-gradient(#d6e3ff, white, #d6e3ff);
+    /* background-color: rgb(255, 255, 255); */
     
     /* background-image: url('../images/background_blurred.png'); */
     background-size: cover;
@@ -43,7 +44,7 @@ main {
     align-content: center;
     position: relative; 
     font-family: Arial, Helvetica, sans-serif;
-    font-style: italic;
+    font-size: 20px;
     /* color: #948472; */
     /* color: black; */
     /* color: rgb(255, 255, 255); */

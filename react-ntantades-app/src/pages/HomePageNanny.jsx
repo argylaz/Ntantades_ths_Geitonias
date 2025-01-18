@@ -10,10 +10,12 @@ import '../StyleSheets/HomePageNanny.css';
 
 function HomePageNanny () {
     return (
-        <div className = "home-page" style = {{backgroundColor: 'rgba(0, 0, 0, 0)',}}>
-            <div className = "main-text">
+        <div className = "home-page">
+            <div className = "main-text" style = {{backgroundColor: "transparent"}}>
                 <header>
-                    <h2 style={{ fontStyle: 'normal' }}>Ξεκινήστε την διαδικασία εγγραφής στο Μητρώο Νταντάδων</h2>
+                    <h2 style={{ fontStyle: 'normal', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)'}}>
+                        Ξεκινήστε την διαδικασία εγγραφής στο Μητρώο Νταντάδων
+                    </h2>
 
                     <br/>
                 </header>
@@ -23,14 +25,14 @@ function HomePageNanny () {
             <IfLoggedInButton link="/Nanny/Actions" text="ΕΙΣΟΔΟΣ ΣΤΗΝ ΥΠΗΡΕΣΙΑ" targetRole="nanny" />
 
             <Link to="/Nanny/EligibilityCriteria" style={{ textDecoration: 'none', marginRight: '4%',}}>
-                <Button variant="contained" startIcon={<PersonIcon />}
+                <Button variant="contained" startIcon={<PersonIcon />} style={{boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.5)"}}
                     sx={{ width: '250px', height: "70px", whiteSpace: 'normal',textAlign: 'center',}}>
                     ΚΡΙΤΗΡΙΑ ΕΠΙΛΕΞΙΜΟΤΗΤΑΣ
                 </Button>
             </Link>
 
             <Link to="/Nanny/Guide" style={{ textDecoration: 'none', marginLeft: '4%',}}>
-                <Button variant="contained" startIcon={<HelpIcon />} 
+                <Button variant="contained" startIcon={<HelpIcon />} style={{boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.5)"}}
                     sx={{ width: '250px', height: "70px", whiteSpace: 'normal',textAlign: 'center',}}>
                     ΟΔΗΓΙΕΣ ΓΙΑ ΤΗΝ ΕΓΓΡΑΦΗ ΣΤΟ ΜΗΤΡΩΟ ΝΤΑΝΤΑΔΩΝ
                 </Button>

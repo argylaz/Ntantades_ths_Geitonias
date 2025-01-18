@@ -37,6 +37,31 @@ function CreateAdvertisement() {
   const [userData, setUserData] = useState(null);
 
 
+  const addAction = (userId, place, status) => {
+    if (!userId) {
+      console.error("User ID is not available.");
+      return;
+    }
+
+    let x;
+    if( status == "permanent"){
+      x = " οριστικής "
+    }
+    else{
+      x = " προσωρινής "
+    }
+
+    try {
+      addDoc(collection(FIREBASE_DB, "Actions"), {
+        user: userId,
+        date: new Date(),
+        type: "Δημιουργία" + x + "Αγγελίας στην περιοχή " + place,
+        actionDate: Timestamp.now(),  // Timestamp of the payment
+      });
+    } catch (error) {
+      console.error("Error adding action record:", error);
+    }
+  }
   
 
   useEffect(() => {
@@ -118,6 +143,7 @@ function CreateAdvertisement() {
       }
 
       fetchUserData();
+      
 
       // // Ensure selectedDate is a valid Date
       // if (!startDate || isNaN(startDate.getTime())  || !endDate || isNaN(endDate.getTime())) {
@@ -146,6 +172,9 @@ function CreateAdvertisement() {
 
       // console.log("Document written with ID: ", docRef.id);
       setFormMessage("Advertisement added successfully!");
+
+      
+      addAction(fromUser, place, status);
       // fetchUserData(); // Refresh user data after update
   
       

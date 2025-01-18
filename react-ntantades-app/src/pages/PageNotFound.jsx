@@ -16,14 +16,14 @@ function PageNotFound() {
 
         <h1> ERROR 404 </h1>
         <p>Η σελίδα δεν βρέθηκε </p>
-        <Link to="/" style={{ textDecoration: 'none',}}>
-        <img
-        style={{ width:"15%",}}
-        className = "Logo"
-        alt = "Rectangle stroke"
-        src = {logo}
-        />
-        </Link>        
+        {/* <Link to="/" style={{ textDecoration: 'none',}}> */}
+        {/* <img
+          style={{ width:"15%",}}
+          className = "Logo"
+          alt = "Rectangle stroke"
+          src = {logo}
+        /> */}
+        {/* </Link>         */}
 
     
 

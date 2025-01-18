@@ -28,6 +28,7 @@ function ScheduleMeeting() {
     const [selectedDateTime, setSelectedDateTime] = useState(null);
     const [fromUser, setFromUser] = useState("")
     const [toUser, setToUser] = useState("");
+    const [startDateTime, setStartDateTime] = useState("");
     const [userId, setUserId] = useState("");
     const [place, setplace] = useState("");
     const [formMessage,setFormMessage] = useState("");
@@ -187,7 +188,7 @@ function ScheduleMeeting() {
                 </Link>
 
                 <Button variant="contained" onClick={handleFormSubmit} sx={{marginLeft:"5%",}}>
-                    Υποβολή Αιτήματος Ραντεβού
+                    ΥΠΟΒΟΛΗ ΑΙΤΗΜΑΤΟΣ ΡΑΝΤΕΒΟΥ
                 </Button>
             </div>
 

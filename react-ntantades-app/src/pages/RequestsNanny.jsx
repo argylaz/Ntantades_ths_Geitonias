@@ -3,8 +3,13 @@ import { Link } from 'react-router-dom';
 import BackIcon from '@mui/icons-material/ArrowBack';
 import { Button, containerClasses } from '@mui/material'; 
 import RequestTable from "../components/InterestRequest"
-import { FIREBASE_DB } from "../config/firebase";
-import { doc, updateDoc } from "firebase/firestore";
+
+import { doc, updateDoc} from "firebase/firestore";
+import { FIREBASE_DB} from "../config/firebase"; // Import the Firebase DB
+
+
+
+
 
 function RequestsNanny() {
 
@@ -15,7 +20,7 @@ function RequestsNanny() {
       await updateDoc(requestRef, {
         status: newStatus,
       });
-      alert(`Request has been ${newStatus}`);
+      alert(`Επιτυχής ${newStatus === "accepted" ? "Αποδοχή" : " Απόρριψη"} Αίτησης`);
     } catch (error) {
       console.error("Error updating request status:", error);
       alert("Failed to update request status");

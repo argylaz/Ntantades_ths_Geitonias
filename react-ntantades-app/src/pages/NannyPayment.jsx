@@ -10,7 +10,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { FIREBASE_AUTH , FIREBASE_DB} from '../config/firebase';
 import { useLocation } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
-import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
+import { getFirestore, collection, query, where, getDocs, addDoc, Timestamp } from "firebase/firestore";
 
 import qr_code from "../images/qr_code.png"
 
@@ -25,13 +25,35 @@ function NannyPayment() {
   const [startDate, setStartDate] = useState(null);
 
 
+
   
+  const addAction = async (userId) => {
+    if (!userId) {
+      console.error("User ID is not available.");
+      return;
+    }
+
+    try {
+      addDoc(collection(FIREBASE_DB, "Actions"), {
+        user: userId,
+        date: new Date(),
+        type: "Λήψη Πληρωμης",
+        actionDate: Timestamp.now(),  // Timestamp of the payment
+      });
+    } catch (error) {
+      console.error("Error adding action record:", error);
+    }
+  }
   
+
+
   const handleClick = async () => {
     if (!userId) {
       console.error("User ID is not available.");
       return;
     }
+
+    
 
     try {
       const q = query(
@@ -43,6 +65,7 @@ function NannyPayment() {
       if (!querySnapshot.empty) {
         setHasPaymentRecord(true); // Record exists
         setDialogOpen(true); // Open the dialog
+        addAction(userId);
       } else {
         setHasPaymentRecord(false); // No record found
         alert("Δεν βρέθηκε καμία πληρωμή για τον χρήστη αυτό.");
@@ -124,7 +147,7 @@ function NannyPayment() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
-            Κλείσιμο
+            ΚΛΕΙΣΙΜΟ
           </Button>
         </DialogActions>
       </Dialog>

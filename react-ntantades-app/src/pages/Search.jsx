@@ -82,8 +82,7 @@ function SearchNannies() {
                 console.log(names);
                 comb_results = [...comb_results, ...names];
                 setResults(comb_results); 
-                navigate("NannyResults", { state: { results: comb_results } 
-            }); 
+                navigate("NannyResults", { state: {results: comb_results }}); 
 
         });
 
@@ -98,6 +97,7 @@ function SearchNannies() {
 
     return (
 
+        <div className='inner-page'>
         <div className='search-box'  >
 
             <header style={{color:"#948472",}}> <b>Συμπληρώστε τα φίλτρα Αναζήτησης</b></header>
@@ -287,6 +287,7 @@ function SearchNannies() {
             </div>
 
 
+        </div>
         </div>
     );
 }

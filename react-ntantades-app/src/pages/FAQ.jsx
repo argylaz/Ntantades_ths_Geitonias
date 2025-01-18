@@ -22,11 +22,20 @@ export default function FAQ() {
       alignItems: "center",
       justifyContent: "center",
     }}>
-      <h3 style={{ color: "#494030", fontStyle: 'normal' }}> Συχνές Ερωτήσεις </h3>
+      <Typography
+        variant="h3"
+        style={{ fontSize: 'x-large', fontStyle: 'bold', marginBottom: '2%' }}
+      >
+        Συχνές Ερωτήσεις
+      </Typography>
 
-      <Accordion 
-        style={{ backgroundColor: "#ffffff", width: "50%" }} 
-        expanded={expanded === 'panel1'} 
+      <Accordion
+        style={{
+          backgroundColor: "#ffffff",
+          width: "50%",
+          boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.3)" // Add shadow here
+        }}
+        expanded={expanded === 'panel1'}
         onChange={handleChange('panel1')}
       >
         <AccordionSummary
@@ -38,7 +47,7 @@ export default function FAQ() {
         </AccordionSummary>
         <AccordionDetails style={{ backgroundColor: "#ffffff" }}>
           <Typography>
-            <ul style={{ textAlign: 'left' }}>
+            <ul style={{ textAlign: 'justify' }}>
               Όσοι
               <li> έχουν συμπληρώσει το 18ο έτος της ηλικίας τους, </li>
               <li> είναι Έλληνες ή αλλοδαποί πολίτες που διαμένουν νόμιμα στην Ελλάδα και
@@ -50,9 +59,13 @@ export default function FAQ() {
         </AccordionDetails>
       </Accordion>
 
-      <Accordion 
-        style={{ backgroundColor: "#1976d2", width: "50%" }} 
-        expanded={expanded === 'panel2'} 
+      <Accordion
+        style={{
+          backgroundColor: "#1976d2",
+          width: "50%",
+          boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.3)"
+        }}
+        expanded={expanded === 'panel2'}
         onChange={handleChange('panel2')}
       >
         <AccordionSummary
@@ -64,16 +77,20 @@ export default function FAQ() {
         </AccordionSummary>
         <AccordionDetails style={{ backgroundColor: "#1976d2" }}>
           <Typography style={{ color: 'white' }}>
-            <ul style={{ textAlign: 'left' }}>
-              Μετά την ολοκλήρωση της εργασίας ενός μήνα, συνδέεστε ως κηδεμόνας στην πλατφόρμα και επιλέγεται το κουμπί “Πληρωμή Νταντάς”. Μόλις η Νταντά που συνεργάζεστε λάβει την πληρωμή της μέσω QR code, θα λάβεται μια ειδοποίηση. 
+            <ul style={{ textAlign: 'justify' }}>
+              Μετά την ολοκλήρωση της εργασίας ενός μήνα, συνδέεστε ως κηδεμόνας στην πλατφόρμα και επιλέγεται το κουμπί “Πληρωμή Νταντάς”. Μόλις η Νταντά που συνεργάζεστε λάβει την πληρωμή της μέσω QR code, θα λάβεται μια ειδοποίηση.
             </ul>
           </Typography>
         </AccordionDetails>
       </Accordion>
 
-      <Accordion 
-        style={{ backgroundColor: "#ffffff", width: "50%" }} 
-        expanded={expanded === 'panel3'} 
+      <Accordion
+        style={{
+          backgroundColor: "#ffffff",
+          width: "50%",
+          boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.3)" // Add shadow here
+        }}
+        expanded={expanded === 'panel3'}
         onChange={handleChange('panel3')}
       >
         <AccordionSummary
@@ -85,20 +102,24 @@ export default function FAQ() {
         </AccordionSummary>
         <AccordionDetails style={{ backgroundColor: "#ffffff" }}>
           <Typography>
-            <ul style={{ textAlign: 'left' }}>
+            <ul style={{ textAlign: 'justify' }}>
               Το ποσό του voucher ανέρχεται στα:
               <li> πεντακόσια (500) ευρώ μηνιαίως, εφόσον η Νταντά εργάζεται
-                με καθεστώς πλήρους απασχόλησης </li>
+                με καθεστώς πλήρους απασχόλησης. </li>
               <li>τριακόσια (300) ευρώ μηνιαίως, εφόσον η Νταντά εργάζεται με
-                καθεστώς μερικής απασχόλησης </li> 
+                καθεστώς μερικής απασχόλησης. </li>
             </ul>
           </Typography>
         </AccordionDetails>
       </Accordion>
 
-      <Accordion 
-        style={{ backgroundColor: "#1976d2", width: "50%" }} 
-        expanded={expanded === 'panel4'} 
+      <Accordion
+        style={{
+          backgroundColor: "#1976d2",
+          width: "50%",
+          boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.3)"
+        }}
+        expanded={expanded === 'panel4'}
         onChange={handleChange('panel4')}
       >
         <AccordionSummary
@@ -110,8 +131,8 @@ export default function FAQ() {
         </AccordionSummary>
         <AccordionDetails style={{ backgroundColor: "#1976d2" }}>
           <Typography style={{ color: 'white' }}>
-            <ul style={{ textAlign: 'left' }}>
-              ‘Οχι, σε περίπτωση που μια νταντά εργάζεται ήδη σε κάποιο σπίτι, δεν επιτρέπεται να εργαστεί με άλλον κηδεμόνα πριν το πέρας της προγραμματισμένης περιόδου. 
+            <ul style={{ textAlign: 'justify' }}>
+              Όχι, σε περίπτωση που μια νταντά εργάζεται ήδη σε κάποιο σπίτι, δεν επιτρέπεται να εργαστεί με άλλον κηδεμόνα πριν το πέρας της προγραμματισμένης περιόδου.
             </ul>
           </Typography>
         </AccordionDetails>

@@ -25,6 +25,7 @@ import { useNavigate } from "react-router-dom";
 
 
 
+
 export default function EditProfile() {
   const [email, setEmail] = useState("");
   const [userId, setUserId] = useState("");
@@ -147,7 +148,7 @@ export default function EditProfile() {
         <Card>
           <CardContent>
             <Typography variant="h4" gutterBottom>
-              Edit Profile
+              Επεξεργασία Προφίλ
             </Typography>
             {email && (
               <Typography variant="body1" sx={{ mb: 2 }}>
@@ -169,21 +170,21 @@ export default function EditProfile() {
                 fullWidth
               />
               <TextField
-                label="First Name"
+                label="Όνομα"
                 value={firstname}
                 onChange={(e) => setFirstName(e.target.value)}
                 required
                 fullWidth
               />
               <TextField
-                label="Last Name"
+                label="Επώνυμο"
                 value={lastname}
                 onChange={(e) => setLastName(e.target.value)}
                 required
                 fullWidth
               />
               <TextField
-                label="Age"
+                label="Ηλικία"
                 value={age}
                 onChange={(e) => setAge(e.target.value)}
                 type="number"
@@ -260,7 +261,7 @@ export default function EditProfile() {
               )}
 
               <Button variant="contained" color="primary" type="submit">
-                Υποβολή
+                ΥΠΟΒΟΛΗ
               </Button>
 
             </Box>
