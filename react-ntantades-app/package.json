@@ -22,7 +22,7 @@
     "nth-check": "^2.1.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-router-dom": "^7.0.2",
+    "react-router-dom": "^7.1.3",
     "react-scripts": "^5.0.1",
     "styled-components": "^6.1.13",
     "web-vitals": "^4.2.4"

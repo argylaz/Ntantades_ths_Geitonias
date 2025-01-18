@@ -2,11 +2,11 @@
 .header {
     display: flex;
     align-items:      center;
-    background-color: #3bc4ff;
-    position:         fixed;
+    background-color: #2dbdfb;
+    position:         absolute;
     top:              0%;
     z-index: 1000; /* Keeps it above other elements */
-    height:           15%;
+    height:           100%;
     width:            100%;
     /* opacity: 100%; */
 }
@@ -16,6 +16,7 @@
     display:          flex;
     width:            25%; 
     margin-left:      3%;
+    align-items: center;
 }
 
 .app-logo-container a {
@@ -23,14 +24,18 @@
     position: absolute;
     left: 1%;
     width: 15%;
-    height: 10%;
+    height: 80%;
     text-decoration: none;
     margin-left: 3%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-right: 5%;
 }
 
 .app-logo-container img {
     width:  60%;
     height: 80%;
+    margin-left: 3%;
     margin-top: 5%;
     margin-bottom: 5%;
     margin-right: 5%;

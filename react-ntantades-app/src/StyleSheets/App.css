@@ -12,8 +12,6 @@
 }
 
 .App-header {
-  /* background-color: #282c34; */
-  background-color: bisque;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,19 +27,19 @@
 }
 
 .App-content {
-  background-color: bisque;
+  /* background-color: bisque; */
   flex: 1;
-  margin-top: 100px; /* Adjust to match Header height */
-  margin-bottom: 100px; /* Adjust to match Footer height */
+  margin-top: 0px; /* Adjust to match Header height */
+  margin-bottom: 0px; /*Adjust to match Footer height */
   overflow-y: auto; /* Enable scrolling only for this area */
-  padding: 20px; /* Optional padding */
+  /* padding: 20px; Optional padding */
   z-index: 1; /* Lower than header/footer */
   position: relative; /* Ensure proper stacking context */
   /* background-color: #f9f9f9; Background for content */
 }
 
 .App-footer {
-  background-color: bisque;
+  /* background-color: bisque; */
   position: fixed;
   height: 12%;
   width: 100%;

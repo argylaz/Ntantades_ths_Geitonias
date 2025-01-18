@@ -10,7 +10,7 @@ import '../StyleSheets/HomePageNanny.css';
 
 function HomePageNanny () {
     return (
-        <div className = "home-page">
+        <div className = "home-page" style = {{backgroundColor: 'rgba(0, 0, 0, 0)',}}>
             <div className = "main-text">
                 <header>
                     <h2 style={{ fontStyle: 'normal' }}>Ξεκινήστε την διαδικασία εγγραφής στο Μητρώο Νταντάδων</h2>
