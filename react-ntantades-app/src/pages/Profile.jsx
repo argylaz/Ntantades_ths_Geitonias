@@ -95,7 +95,7 @@ export default function Profile() {
                 </Typography>
 
                 <Typography variant="body1" sx={{ mb: 2 }}>
-                    <strong>Ονομα:</strong> {userData.firstname || "Δεν βρεθηκε Ονομα"}
+                    <strong>Όνομα:</strong> {userData.firstname || "Δεν βρεθηκε Ονομα"}
                 </Typography>
 
                 <Typography variant="body1" sx={{ mb: 2 }}>
@@ -144,7 +144,7 @@ export default function Profile() {
                     <Typography variant="h5" gutterBottom>Παιδί</Typography>
 
                     <Typography variant="body1" sx={{ mb: 2 }}>
-                    <strong>Ονομα παιδιού:</strong> {userData.childData.name || "Δεν βρέθηκε όνομα παιδιού"}
+                    <strong>Όνομα παιδιού:</strong> {userData.childData.name || "Δεν βρέθηκε όνομα παιδιού"}
                     </Typography>
 
                     <Typography variant="body1" sx={{ mb: 2 }}>
@@ -152,7 +152,7 @@ export default function Profile() {
                     </Typography>
 
                     <Typography variant="body1" sx={{ mb: 2 }}>
-                    <strong>Φύλλο παιδιού:</strong> {userData.childData.gender || "Δεν βρέθηκε φυλλο παιδιού"}
+                    <strong>Φύλο παιδιού:</strong> {userData.childData.gender || "Δεν βρέθηκε φυλλο παιδιού"}
                     </Typography>
 
                     </Box>

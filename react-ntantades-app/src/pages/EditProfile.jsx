@@ -143,7 +143,7 @@ export default function EditProfile() {
 
   return (
     <div className="inner-page">   
-      <Box sx={{ maxWidth: 600, margin: "0 auto", mt: 4}}>
+      <Box sx={{ maxWidth: 600, margin: "0 auto", mt: '10%', mb : '10%'}}>
         <Card>
           <CardContent>
             <Typography variant="h4" gutterBottom>
@@ -151,7 +151,7 @@ export default function EditProfile() {
             </Typography>
             {email && (
               <Typography variant="body1" sx={{ mb: 2 }}>
-                Logged in as: {email}
+                Έχετε συνδεθεί ως: {email}
               </Typography>
             )}
             <Box
@@ -234,23 +234,23 @@ export default function EditProfile() {
           
               {role === "parent" && (
                 <Box sx={{ mt: 4 }}>
-                    <Typography variant="h5" gutterBottom>Παιδι</Typography>
+                    <Typography variant="h5" gutterBottom>Παιδί</Typography>
                     <TextField
-                        label="Ονομα Παιδιού"
+                        label="Όνομα παιδιού"
                         fullWidth
                         value={childData.name}
                         onChange={(e) => handleChildDataChange("name", e.target.value)}
                         sx={{ mb: 2 }}
                     />
                     <TextField
-                        label="Φυλλο παιδιού"
+                        label="Φύλο παιδιού"
                         fullWidth
                         value={childData.gender}
                         onChange={(e) => handleChildDataChange("gender", e.target.value)}
                         sx={{ mb: 2 }}
                     />
                     <TextField
-                        label="Ηλικία παιδιου"
+                        label="Ηλικία παιδιού"
                         fullWidth
                         value={childData.age}
                         onChange={(e) => handleChildDataChange("age", e.target.value)}

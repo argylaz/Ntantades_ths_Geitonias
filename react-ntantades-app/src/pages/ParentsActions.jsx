@@ -28,7 +28,7 @@ const images = [
     },
     {
       url: payment_image,
-      title: 'Πληρώμη Νταντάς',
+      title: 'Πληρωμή Νταντάς',
       width: '100%',
       route: 'ParentPayment'
     },
