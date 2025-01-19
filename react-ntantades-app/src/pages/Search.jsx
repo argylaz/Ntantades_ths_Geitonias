@@ -100,7 +100,7 @@ function SearchNannies() {
         <div className='inner-page'>
         <div className='search-box'  >
 
-            <header style={{color:"#948472",}}> <b>Συμπληρώστε τα φίλτρα Αναζήτησης</b></header>
+            <header style={{color:"black",}}> <b>Συμπληρώστε τα φίλτρα Αναζήτησης</b></header>
 
 
             <Box sx={{ flexGrow: 1, }}>

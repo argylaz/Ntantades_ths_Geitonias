@@ -117,49 +117,51 @@ function NannyScheduledMeetings() {
 
       <main>
       <Box sx={{color:"black",display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 4,}}> 
-
-      <TableContainer component={Paper} sx={{ marginTop: 4, width:"70%", display:"flex", justifyContent:"center", alignItems:"center",}}>
-          {meetings.length > 0 ? (
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell align="left"><strong>Όνομα</strong></TableCell>
-                  <TableCell align="left"><strong>Επώνυμο</strong></TableCell>
-                  <TableCell align="left"><strong>Περιοχή</strong></TableCell>
-                  <TableCell align="center"><strong>Ημ. Έναρξης</strong></TableCell>
-                  <TableCell align="center"><strong> </strong></TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {meetings.map((ad) => (
-                  <TableRow key={ad.id}>
-                    <TableCell align="left">{ad.ToUserDetails?.firstname || "N/A"}</TableCell>
-                    <TableCell align="left">{ad.ToUserDetails?.lastname || "N/A"}</TableCell>
-                    <TableCell align="left">{ad.place}</TableCell>
-                    <TableCell align="center">
-                      <Typography>
-                        {ad.start_date ? ad.start_date.toDate().toLocaleDateString() : "No date available"}
-                      </Typography></TableCell>
+      
+            <TableContainer component={Paper} sx={{ marginTop: 4, width:"70%", display:"flex", justifyContent:"center", alignItems:"center",}}>
+                {meetings.length > 0 ? (
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell align="center"><strong>Όνομα</strong></TableCell>
+                        <TableCell align="center"><strong>Επώνυμο</strong></TableCell>
+                        <TableCell align="center"><strong>Περιοχή</strong></TableCell>
+                        <TableCell align="center"><strong>Ημ. Έναρξης</strong></TableCell>
                     
-                    (<TableCell align="center"> <Button variant="contained"> ΠΡΟΒΟΛΗ ΛΕΠΤΟΜΕΡΕΙΩΝ </Button> </TableCell>)
-                    
-                    </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          ) : (
-            <Typography
-              variant="body1"
-              color="text.secondary"
-              align="center"
-              sx={{ padding: 4 }}
-            >
-              Δεν βρέθηκαν αποτελέσματα
-            </Typography>
-          )}
-      </TableContainer>
-
-      </Box>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {meetings
+                        .filter((meeting) => meeting.status === "accepted") // Filter only accepted meetings
+                        .map((meeting) => (
+                          <TableRow key={meeting.id}>
+                            <TableCell align="center">{meeting.FromUserDetails?.firstname || "N/A"}</TableCell>
+                            <TableCell align="center">{meeting.FromUserDetails?.lastname || "N/A"}</TableCell>
+                            <TableCell align="center">{meeting.place}</TableCell>
+                            <TableCell align="center">
+                              <Typography>
+                                {meeting.meetingDate
+                                  ? meeting.meetingDate.toDate().toLocaleDateString()
+                                  : "No date available"}
+                              </Typography>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                    </TableBody>
+                  </Table>
+                ) : (
+                  <Typography
+                    variant="body1"
+                    color="text.secondary"
+                    align="center"
+                    sx={{ padding: 4 }}
+                  >
+                    Δεν βρέθηκαν αποτελέσματα
+                  </Typography>
+                )}
+            </TableContainer>
+      
+            </Box>
 
 
       <Link to="/Nanny/Actions/NannyMeetings" style={{ textDecoration: 'none', marginRight: '48%',}}>

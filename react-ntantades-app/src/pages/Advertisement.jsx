@@ -161,6 +161,8 @@ function Advertisement() {
 
       </Box>
 
+      <div style={{marginBottom:"5%",}}>
+
 
       <Link to="/Nanny/Actions" style={{ textDecoration: 'none' }}>
         <Button
@@ -172,7 +174,7 @@ function Advertisement() {
             marginBottom: '2%',
             marginRight: '5%', // Add space to the right
           }}
-        >
+          >
           ΕΠΙΣΤΡΟΦΗ ΣΤΗ ΣΕΛΙΔΑ ΕΝΕΡΓΕΙΩΝ
         </Button>
       </Link>
@@ -184,14 +186,15 @@ function Advertisement() {
           sx={{
             whiteSpace: 'normal',
             textAlign: 'center',
-            marginBottom: '12%',
+            marginBottom: '2%',
             marginLeft: '5%', // Add space to the left
           }}
-        >
+          >
           ΔΗΜΙΟΥΡΓΙΑ ΝΕΑΣ ΑΓΓΕΛΙΑΣ
         </Button>
       </Link>
 
+      </div>
         
       </main>
 

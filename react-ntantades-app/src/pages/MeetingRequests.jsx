@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from "react";
 import { useLocation } from "react-router-dom";
-import { onAuthStateChanged, Timestamp } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
 
 import { format } from "date-fns";
 
 // import Box from '@mui/material/Box';
-import { doc, getDoc, collection, onSnapshot, query, where,} from "firebase/firestore";
+import { doc, getDoc, collection, onSnapshot, query, where, updateDoc, addDoc, Timestamp} from "firebase/firestore";
 import { FIREBASE_AUTH , FIREBASE_DB} from '../config/firebase'; // Import your Firebase config
 
 import { Link } from 'react-router-dom';
@@ -38,7 +38,7 @@ function NannyScheduledMeetings() {
   const location = useLocation();
   
   const [meetings, setMeetings] = useState([]);
-  
+  const [loading, setLoading] = useState(true);
   const [startDate, setStartDate] = useState(null);
 
   const [email, setEmail] = useState("");
@@ -108,6 +108,70 @@ function NannyScheduledMeetings() {
     }
 };
 
+const addActionAccepted = async (userId, parent_firstname, parent_lastname) => {
+    if (!userId) {
+      console.error("User ID is not available.");
+      return;
+    }
+  
+    try {
+      addDoc(collection(FIREBASE_DB, "Actions"), {
+        user: userId,
+        date: new Date(),
+        type: "Προγραμματισμός Συνάντησης με τον Κηδεμόνα " + parent_firstname + " " + parent_lastname ,
+        actionDate: Timestamp.now(),  // Timestamp of the payment
+      });
+    } catch (error) {
+      console.error("Error adding action record:", error);
+    }
+  }
+
+  const addActionRejected = async (userId, parent_firstname, parent_lastname) => {
+    if (!userId) {
+      console.error("User ID is not available.");
+      return;
+    }
+  
+    try {
+      addDoc(collection(FIREBASE_DB, "Actions"), {
+        user: userId,
+        date: new Date(),
+        type: "Απόρριψης Αιτήματος συνάντησης με τον Κηδεμόνα"  + parent_firstname + " " + parent_lastname,
+        actionDate: Timestamp.now(),  // Timestamp of the payment
+      });
+    } catch (error) {
+      console.error("Error adding action record:", error);
+    }
+  }
+
+
+// Method passed to RequestTable component to make changes in status (accepted/rejected requests)
+  const onUpdateStatus = async (requestId, newStatus) => {
+    try {
+      const requestRef = doc(FIREBASE_DB, "Meetings", requestId);
+      await updateDoc(requestRef, {
+        status: newStatus,
+      });
+      alert(`Επιτυχής ${newStatus === "accepted" ? "Αποδοχή" : " Απόρριψη"} Αίτησης`);
+    } catch (error) {
+      console.error("Error updating request status:", error);
+      alert("Failed to update request status");
+    }
+  };
+
+
+  const Accept = (request_id, parent_firstname, parent_lastname) =>{
+    onUpdateStatus(request_id, "accepted");
+    addActionAccepted(userId, parent_firstname, parent_lastname);
+  }  
+
+  const Reject = (request_id, parent_firstname, parent_lastname) =>{
+
+    onUpdateStatus(request_id, "rejected");
+    addActionRejected(userId, parent_firstname, parent_lastname);
+  } 
+
+
 
 
   return (
@@ -124,23 +188,56 @@ function NannyScheduledMeetings() {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell align="left"><strong>Όνομα</strong></TableCell>
-                  <TableCell align="left"><strong>Επώνυμο</strong></TableCell>
-                  <TableCell align="left"><strong>Περιοχή</strong></TableCell>
+                  <TableCell align="center"><strong>Όνομα</strong></TableCell>
+                  <TableCell align="center"><strong>Επώνυμο</strong></TableCell>
+                  <TableCell align="center"><strong>Περιοχή</strong></TableCell>
                   <TableCell align="center"><strong>Ημ. Έναρξης</strong></TableCell>
-                  <TableCell align="center"><strong> </strong></TableCell>
+                  <TableCell align="center"><strong>Κατάσταση</strong></TableCell>
+                  <TableCell align="center"><strong> Ενέργειες </strong></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {meetings.map((ad) => (
-                  <TableRow key={ad.id}>
-                    <TableCell align="left">{ad.FromUserDetails?.firstname || "N/A"}</TableCell>
-                    <TableCell align="left">{ad.FromUserDetails?.lastname || "N/A"}</TableCell>
-                    <TableCell align="left">{ad.place}</TableCell>
+                {meetings.map((meeting) => (
+                  <TableRow key={meeting.id}>
+                    <TableCell align="center">{meeting.FromUserDetails?.firstname || "N/A"}</TableCell>
+                    <TableCell align="center">{meeting.FromUserDetails?.lastname || "N/A"}</TableCell>
+                    <TableCell align="center">{meeting.place}</TableCell>
                     <TableCell align="center">
                       <Typography>
-                        {ad.start_date ? ad.start_date.toDate().toLocaleDateString() : "No date available"}
+                        {meeting.meetingDate ? meeting.meetingDate.toDate().toLocaleDateString() : "No date available"}
                       </Typography></TableCell>
+                    <TableCell align="center">
+                      {meeting.status === "pending" 
+                        ? "Εκκρεμής" 
+                        : meeting.status === "accepted" 
+                        ? "Ενεργή" 
+                        : meeting.status === "rejected" 
+                        ? "Απορρίφθηκε" 
+                        : "Unknown Status" }
+                    </TableCell>
+                    <TableCell align="center">
+                      {meeting.status === "pending" && (
+                        <>
+                          <Button
+                            variant="contained"
+                            color="success"
+                            // onClick={() => onUpdateStatus(request.id, "accepted")}
+                            onClick={ () => Accept(meeting.id, meeting.firstname, meeting.lastname)}
+                            style={{ marginRight: 8 }}
+                          >
+                            Αποδοχή
+                          </Button>
+                          <Button
+                            variant="contained"
+                            color="error"
+                            // onClick={() => onUpdateStatus(request.id, "rejected")}
+                            onClick={() => Reject(meeting.id, meeting.firstname, meeting.lastname)}
+                          >
+                            Απόρριψη
+                          </Button>
+                        </>
+                      )}
+                    </TableCell>
                     
                     {/* <TableCell align="center"> <Button variant="contained"> ΠΡΟΒΟΛΗ ΛΕΠΤΟΜΕΡΕΙΩΝ </Button> </TableCell> */}
                     
@@ -163,7 +260,7 @@ function NannyScheduledMeetings() {
       </Box>
 
 
-      <Link to="/Nanny/Actions/NannyMeetings" style={{ textDecoration: 'none', marginRight: '48%',}}>
+      <Link to="/Nanny/Actions/NannyMeetings" style={{ textDecoration: 'none', marginBottom:"4%",}}>
             <Button variant="contained" startIcon={<BackIcon />} 
                 sx={{ whiteSpace: 'normal',textAlign: 'center', marginBottom:'2%',}}>
                 ΕΠΙΣΤΡΟΦΗ ΣΤΑ ΡΑΝΤΕΒΟΥ ΜΟΥ

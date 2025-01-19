@@ -114,7 +114,7 @@ function NannyActionHistory() {
   return (
 
     
-    <div className='inner-page'>
+    <div className='inner-page' style={{marginTop:"6%",}}>
         <h1>Ιστορικό Ενεργειών</h1>
 
       <main>
@@ -156,13 +156,15 @@ function NannyActionHistory() {
 
       </Box>
 
+      <div style={{marginBottom:"5%",}}>
+        <Link to="/Nanny/Actions" style={{ textDecoration: 'none', marginRight: '48%',}}>
+              <Button variant="contained" startIcon={<BackIcon />} 
+                  sx={{ whiteSpace: 'normal',textAlign: 'center', marginBottom:'2%',}}>
+                  ΕΠΙΣΤΡΟΦΗ ΣΤΗ ΣΕΛΙΔΑ ΕΝΕΡΓΕΙΩΝ
+              </Button>
+        </Link>
 
-      <Link to="/Nanny/Actions" style={{ textDecoration: 'none', marginRight: '48%',}}>
-            <Button variant="contained" startIcon={<BackIcon />} 
-                sx={{ whiteSpace: 'normal',textAlign: 'center', marginBottom:'2%',}}>
-                ΕΠΙΣΤΡΟΦΗ ΣΤΗ ΣΕΛΙΔΑ ΕΝΕΡΓΕΙΩΝ
-            </Button>
-      </Link>
+      </div>
 
          
       </main>

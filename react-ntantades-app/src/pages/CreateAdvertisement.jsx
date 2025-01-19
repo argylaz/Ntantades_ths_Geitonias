@@ -190,7 +190,7 @@ function CreateAdvertisement() {
 
   return (
 
-    <div> 
+    <div style={{marginTop:"10%",}}> 
        
        <div>
 
@@ -276,7 +276,7 @@ function CreateAdvertisement() {
 
         </div>
         
-        <div>
+        <div style={{marginBottom:"10%",}}>
           <Link to="/Nanny/Actions/Advertisement" style={{ textDecoration: 'none', justifyContent:"left", alignContent:"left", position:"relative",}}>
               <Button variant="contained" startIcon={<BackIcon />} 
                   sx={{ whiteSpace: 'normal',textAlign: 'center', marginTop: '2%',}}>

@@ -69,7 +69,7 @@ function ResultsPage() {
   
 
   return (
-    <div className='inner-page'>
+    <div className='inner-page' style={{marginBottom:"5%", marginTop:"6%"}}>
         <h1>Αποτελέσματα Αναζήτησης</h1>
 
       <Box sx={{color:"black",display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 4,}}> 
