@@ -95,13 +95,13 @@ function ViewRequest() {
             fetchUserRole(); // Fetch user role only when userId is available
         }
     }, [userId]);
-    
+
     useEffect(() => {
         if (requestID) {
             fetchRequest(); // Fetch request data based on requestID
         }
     }, [requestID]);
-    
+
     useEffect(() => {
         if (request?.FromUser) {
             // Check if the role is 'parent' or 'nanny' and then pass the correct user ID

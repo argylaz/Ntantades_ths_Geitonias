@@ -12,25 +12,10 @@ function PageNotFound() {
   const { results } = location.state || { results: [] }; // Retrieve results from state
 
   return (
-    <div className='inner-page' style={{color:"black"}} >
-
-        <h1> ERROR 404 </h1>
-        <p>Η σελίδα δεν βρέθηκε </p>
-        {/* <Link to="/" style={{ textDecoration: 'none',}}> */}
-        {/* <img
-          style={{ width:"15%",}}
-          className = "Logo"
-          alt = "Rectangle stroke"
-          src = {logo}
-        /> */}
-        {/* </Link>         */}
-
-    
-
-
-    
+    <div className='inner-page' >
+      <h1> ERROR 404 </h1>
+      <p>Η σελίδα δεν βρέθηκε </p>
     </div>
-
   );
 }
 

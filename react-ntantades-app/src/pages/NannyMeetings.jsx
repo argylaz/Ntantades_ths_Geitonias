@@ -9,41 +9,43 @@ import WatchLater from '@mui/icons-material/WatchLater';
 import '../StyleSheets/HomePage.css';
 
 
-function Home () {
+function Home() {
     return (
-        <div className = "inner-page">
+        <div className="inner-page">
 
-            <div style={{justifyContent: 'center',}}> 
-                
+            <div style={{ justifyContent: 'center', }}>
+
                 <header>
                     <h2>Τα Ραντεβού μου</h2>
-                            
-                    <Link to="/Nanny/Actions/NannyMeetings/MeetingRequests" style={{ textDecoration: 'none', marginRight: '5%',}}>
-                        <Button variant="contained" startIcon={<PermContactCalendarIcon />}
-                            sx={{ width: '200px', height: "50px", whiteSpace: 'normal',textAlign: 'center',}}>
-                            Αιτήματα Ραντεβού
-                        </Button>
-                    </Link>
 
-                    <Link to="/Nanny/Actions/NannyMeetings/NannyScheduledMeetings" style={{ textDecoration: 'none', marginLeft: '5%',}}>
-                        <Button variant="contained" endIcon={<WatchLater />} 
-                            sx={{ width: '200px', height: "50px", whiteSpace: 'normal',textAlign: 'center',}}>
-                            Προγραμματισμένα Ραντεβού
-                        </Button>
-                    </Link>
+                    <div style={{ marginTop: "5%" }}>
+                        <Link to="/Nanny/Actions/NannyMeetings/MeetingRequests" style={{ textDecoration: 'none', marginRight: '4%', }}>
+                            <Button variant="contained" startIcon={<PermContactCalendarIcon />}
+                                sx={{ width: '200px', height: "80px", whiteSpace: 'normal', textAlign: 'center', }}>
+                                ΑΙΤΗΜΑΤΑ ΡΑΝΤΕΒΟΥ
+                            </Button>
+                        </Link>
+
+                        <Link to="/Nanny/Actions/NannyMeetings/NannyScheduledMeetings" style={{ textDecoration: 'none', marginLeft: '4%', }}>
+                            <Button variant="contained" endIcon={<WatchLater />}
+                                sx={{ width: '200px', height: "80px", whiteSpace: 'normal', textAlign: 'center', }}>
+                                ΠΡΟΓΡΑΜΜΑΤΙΣΜΕΝΑ ΡΑΝΤΕΒΟΥ
+                            </Button>
+                        </Link>
+                    </div>
 
                     <Link to="/Nanny/Actions" style={{ textDecoration: 'none' }}>
                         <Button
                             variant="contained"
                             startIcon={<BackIcon />}
-                            sx={{ whiteSpace: 'normal', textAlign: 'center', marginRight: "60%", marginTop:"5%",  }}
+                            sx={{ whiteSpace: 'normal', textAlign: 'center', marginTop: "6%", }}
                         >
                             ΕΠΙΣΤΡΟΦΗ ΣΕΛΙΔΑ ΕΝΕΡΓΕΙΩΝ
                         </Button>
                     </Link>
-                         
+
                 </header>
-                    
+
             </div>
         </div>
     );

@@ -10,7 +10,7 @@ import CheckImage from '../images/Check.png'; // Relative path to the image
 import "../StyleSheets/HomePage.css";
 
 function ReviewCompleted() {
-    
+
     const [error, setError] = useState(null); // To handle error states (if any)
     const [loading, setLoading] = useState(false); // To manage loading state
     const location = useLocation();
@@ -26,15 +26,15 @@ function ReviewCompleted() {
 
     return (
         <div className="inner-page">
-            <div style={{ justifyContent: "center", backgroundColor: "rgba(0, 0, 0, 0)",}}>
-                <h1 style={{ fontStyle: "normal"}}>Αξιολόγηση Συνεργασίας</h1>
+            <div style={{ justifyContent: "center", backgroundColor: "rgba(0, 0, 0, 0)", }}>
+                <h1 style={{ fontStyle: "normal" }}>Αξιολόγηση Συνεργασίας</h1>
                 <p style={{ fontStyle: "normal" }}>
                     {loading
                         ? "Φόρτωση λεπτομερειών της Νταντάς..."
                         : error
-                        ? error
-                        : "Η αξιολόγηση της Νταντάς " + NannyData.firstname + " " + NannyData.lastname + " "}
-                        υποβλήθηκε με επιτυχία.
+                            ? error
+                            : "Η αξιολόγηση της Νταντάς " + NannyData.firstname + " " + NannyData.lastname + " "}
+                    υποβλήθηκε με επιτυχία.
                 </p>
 
                 <Box
@@ -42,7 +42,7 @@ function ReviewCompleted() {
                     sx={{
                         width: '10%', // Adjust as needed
                         height: 'auto',
-                        
+
                     }}
                     alt="Descriptive text"
                     src={CheckImage} // Use the imported image here

@@ -48,9 +48,9 @@
     justify-content: center;
     height: 60%;
     width: 10%;
-    /* background-color: gray; */
-    margin-left: 10%;
-    margin-right: 10%;
+    
+    margin-left: 8%;
+    margin-right: 8%;
 }
 
 .user-mode-container {
@@ -60,7 +60,17 @@
     height: 60%;
     width: 10%;
     /* background-color: gray; */
+    margin-left: 12%;
+}
+
+.language-switch-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 5%;
+    height: 100%;
     margin-left: 10%;
+    /* margin: 0 10px; */
 }
 
 .user-button-container {
@@ -70,8 +80,9 @@
     height: 60%;
     width: 10%;
     /* background-color: gray; */
-    margin-left: 10%;
+    margin-left: 3%;
 }
+
 
 /* STYLING FOR LINKS */
 

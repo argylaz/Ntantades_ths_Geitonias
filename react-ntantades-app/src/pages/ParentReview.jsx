@@ -9,7 +9,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";  // Correct the TextField import here
 import { onAuthStateChanged } from "firebase/auth";
 import { FIREBASE_AUTH, FIREBASE_DB } from "../config/firebase";
-import { collection, addDoc } from "firebase/firestore";
+import { doc, getDoc, Timestamp, collection, addDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
 import "../StyleSheets/HomePage.css";
@@ -21,6 +21,8 @@ function ParentReview() {
     const [name, setName] = useState('');
     const [message, setMessage] = useState('');
     const [value, setValue] = useState(4.5); // default rating is 4.5
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
     const location = useLocation();
 
     const navigate = useNavigate(); // Initialize navigate function
@@ -31,12 +33,45 @@ function ParentReview() {
 
     const { contract_status, NannyData } = location.state || {}; // Default to empty object if no state
 
+    const addNotification = async (nannyId) => {
+        if (!nannyId) {
+            console.error("User ID is not available.");
+            return;
+        }
+
+        try {
+            await addDoc(collection(FIREBASE_DB, "Notifications"), {
+                UserId: nannyId,
+                Notification: "Έχετε μια νέα αξιολόγηση!",
+                Date: Timestamp.now(),  // Timestamp of the payment
+            });
+        } catch (error) {
+            console.error("Error adding notification record:", error);
+        }
+    };
+
+    // Fetch the logged-in parent's details
+    const fetchParentDetails = async (uid) => {
+        try {
+            const docRef = doc(FIREBASE_DB, "users", uid);
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                const parentData = docSnap.data();
+                setFirstName(parentData.firstname || "Unknown");
+                setLastName(parentData.lastname || "Unknown");
+            } else {
+                console.error("Nanny document not found.");
+            }
+        } catch (error) {
+            console.error("Error fetching nanny details:", error);
+        }
+    };
 
     // Handle form submission
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         // setFormMessage("");
-        console.log("Form submitted with:", { message , value});
+        console.log("Form submitted with:", { message, value });
 
 
         const payload = {
@@ -45,12 +80,14 @@ function ParentReview() {
             rating: value,
             comment: message,
         };
-        
+
         addDoc(collection(FIREBASE_DB, "Review"), payload);
 
-        
+        await fetchParentDetails(currentUser.uid);
+        addNotification(NannyData.id);
+
         navigate("ReviewCompleted", { state: { NannyData, contract_status } });
-        
+
     };
 
     // Handle rating change
@@ -74,16 +111,16 @@ function ParentReview() {
 
     return (
         <div className="inner-page">
-            <div style={{ justifyContent: "center", backgroundColor: "rgba(0, 0, 0, 0)",}}>
-                <h1 style={{ fontStyle: "normal"}}>Αξιολόγηση Συνεργασίας</h1>
+            <div style={{ justifyContent: "center", backgroundColor: "rgba(0, 0, 0, 0)", }}>
+                <h1 style={{ fontStyle: "normal" }}>Αξιολόγηση Συνεργασίας</h1>
                 <p style={{ fontStyle: "normal" }}>
                     {loading
                         ? "Φόρτωση λεπτομερειών της Νταντάς..."
                         : error
-                        ? error
-                        : "Η συνεργασία σας με την Νταντά " + NannyData.firstname + " " + NannyData.lastname}
-                    {contract_status === 'terminated' 
-                        ? " έληξε " 
+                            ? error
+                            : "Η συνεργασία σας με την Νταντά " + NannyData.firstname + " " + NannyData.lastname}
+                    {contract_status === 'terminated'
+                        ? " έληξε "
                         : " ανανεώθηκε "}
                     επιτυχώς!
                 </p>
@@ -119,17 +156,17 @@ function ParentReview() {
                             value={message}
                             onChange={(e) => setMessage(e.target.value)}
                             sx={{ marginBottom: '16px', }} // Add spacing for better layout
-                            
+
                         />
-                       
-                            <Button
-                                variant="contained"
-                                type="submit"
-                                color="primary"
-                                sx={{ height: '40px' }}
-                            >
-                                Submit
-                            </Button>
+
+                        <Button
+                            variant="contained"
+                            type="submit"
+                            color="primary"
+                            sx={{ height: '40px' }}
+                        >
+                            Submit
+                        </Button>
 
                     </form>
                 </Box>

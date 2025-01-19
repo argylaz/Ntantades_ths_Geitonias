@@ -11,10 +11,9 @@ import {
 import { Link } from "react-router-dom";
 import BackIcon from '@mui/icons-material/ArrowBack';
 import { onAuthStateChanged } from "firebase/auth";
-import { doc, addDoc, getDoc, collection, Timestamp} from "firebase/firestore";
+import { doc, addDoc, getDoc, collection, Timestamp } from "firebase/firestore";
 import { FIREBASE_AUTH, FIREBASE_DB } from "../config/firebase";
 import ButtonMenu from "../components/buttonMenu";
-
 
 
 
@@ -44,10 +43,10 @@ function CreateAdvertisement() {
     }
 
     let x;
-    if( status == "permanent"){
+    if (status == "permanent") {
       x = " οριστικής "
     }
-    else{
+    else {
       x = " προσωρινής "
     }
 
@@ -62,7 +61,7 @@ function CreateAdvertisement() {
       console.error("Error adding action record:", error);
     }
   }
-  
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, (user) => {
@@ -116,7 +115,7 @@ function CreateAdvertisement() {
   }
 
   const handleSubmit = async (e) => {
-    
+
     e.preventDefault();
     setStatus("permanent");
 
@@ -128,28 +127,28 @@ function CreateAdvertisement() {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     setFormMessage("");
-  
-    try {  
+
+    try {
 
       // Adding advertisement to firebase
       async function createAdvertisement(data) {
         try {
-            const docRef = await addDoc(collection(FIREBASE_DB, "Advertisement"), data);
-            console.log("Document added with ID:", docRef.id);
-            // console.log(data);
+          const docRef = await addDoc(collection(FIREBASE_DB, "Advertisement"), data);
+          console.log("Document added with ID:", docRef.id);
+          // console.log(data);
         } catch (e) {
-            console.error("Error adding document:", e);
+          console.error("Error adding document:", e);
         }
       }
 
       fetchUserData();
-      
+
 
       // // Ensure selectedDate is a valid Date
       // if (!startDate || isNaN(startDate.getTime())  || !endDate || isNaN(endDate.getTime())) {
       //   throw new Error("Invalid date selected");
       // }
-      
+
       console.log("Selected Date Before Conversion:", startDate);
       // Convert the selected date to Firebase Timestamp
 
@@ -173,11 +172,9 @@ function CreateAdvertisement() {
       // console.log("Document written with ID: ", docRef.id);
       setFormMessage("Advertisement added successfully!");
 
-      
       addAction(fromUser, place, status);
       // fetchUserData(); // Refresh user data after update
-  
-      
+
     } catch (error) {
       console.error("Error adding Advertisement document:", error);
       setFormMessage("Error adding Advertisement document:. Please try again.");
@@ -190,100 +187,96 @@ function CreateAdvertisement() {
 
   return (
 
-    <div style={{marginTop:"10%",}}> 
-       
-       <div>
+    <div className="inner-page">
 
-            
-        <Box sx={{ maxWidth: 500, maxHeight:500, margin: "0 auto", mt: 4 }}>
-        <Card>
-            <CardContent>
+      <div style={{ marginTop: "10%", }}>
+
+        <Card sx={{ maxWidth: 500, maxHeight: 500, margin: "0 auto", }}>
+          <CardContent>
             <Typography variant="h4" gutterBottom>
-                Συμπληρώστε τα στοιχεία της Αγγελίας
+              Συμπληρώστε τα στοιχεία της αγγελίας
             </Typography>
             {email && (
-                <Typography variant="body1" sx={{ mb: 2 }}>
+              <Typography variant="body1" sx={{ mb: 2 }}>
                 Το email σας είναι: {email}
-                </Typography>
+              </Typography>
             )}
+
             <Box
-                component="form"
-                // onSubmit={handleFormSubmit}
-                noValidate
-                sx={{ display: "flex", flexDirection: "column", gap: 2 }}
-                >
-                <TextField
+              component="form"
+              // onSubmit={handleFormSubmit}
+              noValidate
+              sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+            >
+              <TextField
                 label="Τοποθεσία Εργασίας"
                 value={place}
                 onChange={(e) => setPlace(e.target.value)}
                 type="string"
                 required
                 fullWidth
-                />
-                <TextField
+              />
+              <TextField
                 label="Καθεστώς Απασχόλησης"
                 value={employmentStatus}
                 onChange={(e) => setEmploymentStatus(e.target.value)}
                 required
                 fullWidth
-                />
-
-               
+              />
             </Box>
+
             {formMessage && (
-                <Alert severity="info" sx={{ mt: 2 }}>
+              <Alert severity="info" sx={{ mt: 2 }}>
                 {formMessage}
-                </Alert>
+              </Alert>
             )}
-            </CardContent>
 
-            <Box sx={{ display: 'flex', flexDirection: "row", width: '100%', justifyContent:"center", marginTop:"4%", marginBottom:"4%"}}>
+          </CardContent>
 
-          
-              <TextField
-                label="Ημ. Έναρξης"
-                type="date"
-                InputLabelProps={{ shrink: true }}
-                value={startDate}
-                onChange={(e) => setStartDate(e.target.value)}
-                required
-                // sx={{color:"black",display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 4,}}
-                />    
+          <Box sx={{ display: 'flex', flexDirection: "row", width: '100%', justifyContent: "center", marginTop: "4%", marginBottom: "4%" }}>
 
-              <TextField
-                label="Ημ. Λήξης"
-                type="date"
-                InputLabelProps={{ shrink: true }}
-                value={endDate}
-                onChange={(e) => setEndDate(e.target.value)}
-                required
-                // sx={{color:"black",display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 4,}}
-                />  
+            <TextField
+              label="Ημ. Έναρξης"
+              type="date"
+              InputLabelProps={{ shrink: true }}
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+              required
+            // sx={{color:"black",display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 4,}}
+            />
 
-            </Box>
+            <TextField
+              label="Ημ. Λήξης"
+              type="date"
+              InputLabelProps={{ shrink: true }}
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
+              required
+            // sx={{color:"black",display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 4,}}
+            />
 
-            <Button onClick={handleTempSave} variant="contained" color="primary" type="submit" sx={{marginBottom:'3%', marginRight:'3%',}} >
-                Προσωρινή Αποθήκευση
-            </Button>
+          </Box>
 
-            <Button onClick={handleSubmit} variant="contained" color="primary" type="submit" sx={{marginBottom:'3%', marginLeft:'3%',}} >
-                Οριστική Υποβολή
-            </Button>
+          <Button onClick={handleTempSave} variant="contained" color="primary" type="submit" sx={{ marginBottom: '3%', marginRight: '3%', }} >
+            ΠΡΟΣΩΡΙΝΗ ΑΠΟΘΗΚΕΥΣΗ
+          </Button>
+
+          <Button onClick={handleSubmit} variant="contained" type="submit" sx={{ marginBottom: '3%', marginLeft: '3%', backgroundColor: "#3ab840" }} >
+            ΟΡΙΣΤΙΚΗ ΥΠΟΒΟΛΗ
+          </Button>
 
         </Card>
-  
-      </Box>
 
-        </div>
-        
-        <div style={{marginBottom:"10%",}}>
-          <Link to="/Nanny/Actions/Advertisement" style={{ textDecoration: 'none', justifyContent:"left", alignContent:"left", position:"relative",}}>
-              <Button variant="contained" startIcon={<BackIcon />} 
-                  sx={{ whiteSpace: 'normal',textAlign: 'center', marginTop: '2%',}}>
-                  ΕΠΙΣΤΡΟΦΗ ΣΤΙΣ ΑΓΓΕΛΙΕΣ ΜΟΥ
-              </Button>
-          </Link>
-        </div>
+      </div>
+
+      <div style={{ marginTop: '2%' }}>
+        <Link to="/Nanny/Actions/Advertisement" style={{ textDecoration: 'none', justifyContent: "left", alignContent: "left", position: "relative", }}>
+          <Button variant="contained" startIcon={<BackIcon />}
+            sx={{ whiteSpace: 'normal', textAlign: 'center', marginBottom: "10%" }}>
+            ΕΠΙΣΤΡΟΦΗ ΣΤΙΣ ΑΓΓΕΛΙΕΣ ΜΟΥ
+          </Button>
+        </Link>
+      </div>
 
     </div>
   );

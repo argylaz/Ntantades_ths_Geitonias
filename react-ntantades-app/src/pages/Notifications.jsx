@@ -13,6 +13,7 @@ import BackIcon from '@mui/icons-material/ArrowBack';
 import RightIcon from '@mui/icons-material/ArrowForward';
 import { useNavigate } from "react-router-dom";
 
+
 import {
   Button,
   Box,
@@ -34,12 +35,11 @@ import "../StyleSheets/HomePage.css"
 
 
 
-function NannyActionHistory() {
-  const location = useLocation();
+function Notifications() {
 
-  const [actions, setActions] = useState([]);
+  const [notifications, setNotifications] = useState([]);
 
-  const [startDate, setStartDate] = useState(null);
+
 
   const [email, setEmail] = useState("");
   const [userId, setUserId] = useState(""); // Store the user ID
@@ -55,6 +55,7 @@ function NannyActionHistory() {
       } else {
         setEmail(null);
         setUserId(null);
+        alert("Δεν είστε συνδεδεμένος με κάποιο προφίλ.\nΓια να έχετε πρόσβαση στις ειδοποιήσεις πρέπει να συνδεθείτε στην σελίδα ως Νταντά ή ως Κηδεμόνας.");
       }
 
     });
@@ -65,21 +66,21 @@ function NannyActionHistory() {
 
   useEffect(() => {
     if (userId) {
-      SearchActions(); // Fetch user data only after the user_id is available
+      SearchNotifications(); // Fetch user data only after the user_id is available
     }
   }, [userId]);
 
 
 
-  const SearchActions = async () => {
+  const SearchNotifications = async () => {
     try {
       // Get collection
       ////////////////////////////////////////// Actions
-      const colRef = collection(FIREBASE_DB, "Actions");
+      const colRef = collection(FIREBASE_DB, "Notifications");
 
       // Query based on the ToUser field
       console.log(userId); // Assuming userId is the ID of the current user
-      const q = query(colRef, where("user", "==", userId));
+      const q = query(colRef, where("UserId", "==", userId));
       const comb_results = [];
 
       onSnapshot(q, async (snapshot) => {
@@ -102,10 +103,10 @@ function NannyActionHistory() {
         }
 
         comb_results.push(...temp);
-        setActions(comb_results);
+        setNotifications(comb_results);
       });
     } catch (error) {
-      console.error("Error fetching meetings:", error.message);
+      console.error("Error fetching notifications:", error.message);
     }
   };
 
@@ -113,27 +114,29 @@ function NannyActionHistory() {
 
   return (
 
-
     <div className='inner-page'>
-      <h1 style={{ marginTop: "10%", }}>Ιστορικό Ενεργειών</h1>
+
+
+      <h1 style={{ marginTop: "8%", }}>Ειδοποιήσεις</h1>
+      <p>Έχετε {notifications.length} ειδοποιήσεις.</p>
 
       <main>
         <Box sx={{ color: "black", display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 3, }}>
 
           <TableContainer component={Paper} sx={{ width: "70%", display: "flex", justifyContent: "center", alignItems: "center", }}>
-            {actions.length > 0 ? (
+            {notifications.length > 0 ? (
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell align="center"><strong>Τυπος Ενέργειας</strong></TableCell>
+                    <TableCell align="center"><strong>Ειδοποίηση</strong></TableCell>
                     <TableCell align="center"><strong>Ημερομηνία</strong></TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {actions.map((ac) => (
-                    <TableRow key={ac.id}>
-                      <TableCell align="center">{ac.type || "N/A"}</TableCell>
-                      <TableCell align="center">{ac.date.toDate().toLocaleDateString() || "N/A"}</TableCell>
+                  {notifications.map((notification) => (
+                    <TableRow key={notification.id}>
+                      <TableCell align="center">{notification.Notification || "N/A"}</TableCell>
+                      <TableCell align="center">{notification.Date.toDate().toLocaleDateString() || "N/A"}</TableCell>
 
                     </TableRow>
                   ))}
@@ -154,10 +157,10 @@ function NannyActionHistory() {
         </Box>
 
         <div style={{ marginBottom: "5%", }}>
-          <Link to="/Nanny/Actions" style={{ textDecoration: 'none', marginRight: '48%', }}>
+          <Link to="/Nanny/Actions" style={{ textDecoration: 'none', marginRight: '49%', }}>
             <Button variant="contained" startIcon={<BackIcon />}
               sx={{ whiteSpace: 'normal', textAlign: 'center', marginBottom: '2%', }}>
-              ΕΠΙΣΤΡΟΦΗ ΣΤΗ ΣΕΛΙΔΑ ΕΝΕΡΓΕΙΩΝ
+              ΕΠΙΣΤΡΟΦΗ ΣΤΗΝ ΑΡΧΙΚΗ ΣΕΛΙΔΑ
             </Button>
           </Link>
 
@@ -172,4 +175,4 @@ function NannyActionHistory() {
   );
 }
 
-export default NannyActionHistory;
+export default Notifications;

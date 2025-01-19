@@ -58,7 +58,7 @@ export default function IfLoggedInButton({ link, text, targetRole }) {
       <Link to={link} style={{ textDecoration: "none",}}>
 
         <Button variant="contained" style={{ boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.5)" }}
-          sx={{ width: '250px', height: "70px", whiteSpace: 'normal', textAlign: 'center', }}>
+          sx={{ width: '250px', height: "80px", whiteSpace: 'normal', textAlign: 'center', }}>
           {text}
         </Button>
 
@@ -68,7 +68,7 @@ export default function IfLoggedInButton({ link, text, targetRole }) {
     <div className="Login" style={{ backgroundColor: "transparent" }}>
       <Button onClick={handleLoginRedirect} variant="contained" startIcon={<LoginIcon />}
         style={{ boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.5)" }}
-        sx={{ width: '250px', height: "70px", whiteSpace: 'normal', textAlign: 'center', }}>
+        sx={{ width: '250px', height: "80px", whiteSpace: 'normal', textAlign: 'center', }}>
         {text}
       </Button>
     </div>

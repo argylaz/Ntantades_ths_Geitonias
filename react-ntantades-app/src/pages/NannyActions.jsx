@@ -27,7 +27,7 @@ const images = [
     url: greeting_image,
     title: 'Αιτήσεις Ενδιαφέροντος Συνεργασίας',
     width: '100%',
-    route: 'requests'
+    route: 'InterestRequests'
   },
   {
     url: job_image,
@@ -134,7 +134,7 @@ function NannyActions() {
 
 
     <div className="inner-page">
-      <h1 style={{fontFamily: "Arial, Helvetica, sans-serif", fontStyle: 'normal' }}> Επιλέξτε την ενέργεια που επιθυμείτε </h1>
+      <h1 style={{ fontFamily: "Arial, Helvetica, sans-serif", fontStyle: 'normal' }}> Επιλέξτε την ενέργεια που επιθυμείτε </h1>
 
       <Box sx={{ display: 'flex', flexDirection: "row", gap: 4, minWidth: 1200, width: '100%', minHeight: 100, }}>
         {images.map((image) => (

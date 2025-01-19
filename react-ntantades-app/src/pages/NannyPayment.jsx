@@ -7,12 +7,12 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { FIREBASE_AUTH , FIREBASE_DB} from '../config/firebase';
+import { FIREBASE_AUTH, FIREBASE_DB } from '../config/firebase';
 import { useLocation } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
-import { getFirestore, collection, query, where, getDocs, addDoc, Timestamp } from "firebase/firestore";
+import { getFirestore, doc, getDoc, collection, query, where, getDocs, addDoc, Timestamp } from "firebase/firestore";
 
-import qr_code from "../images/qr_code.png"
+import qr_code from "../images/qr_code.png";
 
 import '../StyleSheets/HomePage.css';
 
@@ -23,10 +23,33 @@ function NannyPayment() {
   const location = useLocation();
   const [payment, setPayment] = useState([]);
   const [startDate, setStartDate] = useState(null);
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
 
+  const [email, setEmail] = useState("");
+  const [userId, setUserId] = useState(""); // Store the user ID
+  // const [parentId, setParentId] = useState("");
 
+  const [NannyFirstName, setNannyFirstName] = useState("");
+  const [NannyLastName, setNannyLastName] = useState("");
 
-  
+  // Fetch the logged-in nanny's details
+  const fetchNannyDetails = async (uid) => {
+    try {
+      const docRef = doc(FIREBASE_DB, "users", uid);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        const nannyData = docSnap.data();
+        setNannyFirstName(nannyData.firstname || "Unknown");
+        setNannyLastName(nannyData.lastname || "Unknown");
+      } else {
+        console.error("Nanny document not found.");
+      }
+    } catch (error) {
+      console.error("Error fetching nanny details:", error);
+    }
+  };
+
   const addAction = async (userId) => {
     if (!userId) {
       console.error("User ID is not available.");
@@ -34,7 +57,7 @@ function NannyPayment() {
     }
 
     try {
-      addDoc(collection(FIREBASE_DB, "Actions"), {
+      await addDoc(collection(FIREBASE_DB, "Actions"), {
         user: userId,
         date: new Date(),
         type: "Λήψη Πληρωμης",
@@ -44,8 +67,23 @@ function NannyPayment() {
       console.error("Error adding action record:", error);
     }
   }
-  
 
+  const addNotification = async (parentId) => {
+    if (!parentId) {
+      console.error("User ID is not available.");
+      return;
+    }
+
+    try {
+      await addDoc(collection(FIREBASE_DB, "Notifications"), {
+        UserId: parentId,
+        Notification: "Η Νταντα " + NannyFirstName + " " + NannyLastName + " έλαβε την πληρωμή σας",
+        Date: Timestamp.now(),  // Timestamp of the payment
+      });
+    } catch (error) {
+      console.error("Error adding notification record:", error);
+    }
+  };
 
   const handleClick = async () => {
     if (!userId) {
@@ -53,19 +91,23 @@ function NannyPayment() {
       return;
     }
 
-    
-
     try {
+      // Use getDocs for the query, not getDoc
       const q = query(
         collection(FIREBASE_DB, "Payments"),
         where("ToUser", "==", userId) // Query to check for matching record
       );
-      
-      const querySnapshot = await getDocs(q);
+
+      const querySnapshot = await getDocs(q); // Use getDocs here
+
       if (!querySnapshot.empty) {
         setHasPaymentRecord(true); // Record exists
         setDialogOpen(true); // Open the dialog
         addAction(userId);
+        await fetchNannyDetails(userId);
+        querySnapshot.forEach((doc) => {
+          addNotification(doc.data().FromUser); // Add notification for the parent
+        });
       } else {
         setHasPaymentRecord(false); // No record found
         alert("Δεν βρέθηκε καμία πληρωμή για τον χρήστη αυτό.");
@@ -78,33 +120,26 @@ function NannyPayment() {
   const handleClose = () => {
     setDialogOpen(false);
   };
-  
-
-  const [email, setEmail] = useState("");
-  const [userId, setUserId] = useState(""); // Store the user ID
-  // const [firstname, setFirstName] = useState
 
   useEffect(() => {
-      const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, (user) => {
-          if (user) {
-              setEmail(user.email);
-              setUserId(user.uid); // Store the user's UID
-          } else {
-              setEmail(null);
-              setUserId(null);
-          }
+    const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, (user) => {
+      if (user) {
+        setEmail(user.email);
+        setUserId(user.uid); // Store the user's UID
+        fetchNannyDetails(user.id);
+      } else {
+        setEmail(null);
+        setUserId(null);
+      }
+    });
 
-      });
-
-      return () => unsubscribe();
+    return () => unsubscribe();
   }, []);
 
-
-    useEffect(() => {
-      if (userId) {
-          console.log(userId);
-          // SearchMeetings(); // Fetch user data only after the user_id is available
-      }
+  useEffect(() => {
+    if (userId) {
+      console.log(userId);
+    }
   }, [userId]);
 
   return (
@@ -140,7 +175,7 @@ function NannyPayment() {
         <DialogTitle>QR Code Voucher</DialogTitle>
         <DialogContent>
           <img
-            src= {qr_code} // Replace with the actual path to your QR code image
+            src={qr_code}
             alt="QR Code"
             style={{ width: '100%', height: 'auto' }}
           />

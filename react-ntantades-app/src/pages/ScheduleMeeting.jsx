@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { onAuthStateChanged } from "firebase/auth";
-import { doc, addDoc, collection, Timestamp } from "firebase/firestore";
+import { getDoc, doc, addDoc, collection, Timestamp } from "firebase/firestore";
 import { FIREBASE_AUTH, FIREBASE_DB } from "../config/firebase";
 import { useLocation } from "react-router-dom";
 import "../StyleSheets/HomePage.css";
@@ -22,22 +22,82 @@ function ScheduleMeeting() {
 
     const [selectedCheckbox, setSelectedCheckbox] = useState(""); // Track the selected checkbox
     const [selectedDateTime, setSelectedDateTime] = useState(null);
+    const [parentName, setParentName] = useState("");
     const [fromUser, setFromUser] = useState("");
     const [userId, setUserId] = useState("");
     const [formMessage, setFormMessage] = useState("");
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, (user) => {
+        const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, async (user) => {
             if (user) {
                 setFromUser(user.uid);
                 setUserId(user.uid);
+
+                // Fetch the parent's name from Firestore
+                try {
+                    const docRef = doc(FIREBASE_DB, "users", user.uid);
+                    const docSnap = await getDoc(docRef);
+
+                    if (docSnap.exists()) {
+                        const parentData = docSnap.data();
+                        setParentName(parentData.firstname);
+                    } else {
+                        console.error("Parent document does not exist.");
+                        setParentName("Unknown User");
+                    }
+                } catch (error) {
+                    console.error("Error fetching parent data:", error);
+                    setParentName("Error fetching name");
+                }
             } else {
                 setFromUser(null);
                 setUserId(null);
+                setParentName("");
             }
         });
+
         return () => unsubscribe();
     }, []);
+
+
+
+
+    const addAction = async (userId, NannyFirstname, NannyLastname) => {
+        if (!userId) {
+            console.error("User ID is not available.");
+            return;
+        }
+
+        try {
+            addDoc(collection(FIREBASE_DB, "Actions"), {
+                user: userId,
+                date: new Date(),
+                type: "Υποβολή αιτήματος ραντεβού στην νταντά " + NannyFirstname + " " + NannyLastname,
+                actionDate: Timestamp.now(),  // Timestamp of the payment
+            });
+        } catch (error) {
+            console.error("Error adding action record:", error);
+        }
+    }
+
+
+    const addNotification = async (NannyId, ParentName) => {
+        if (!NannyId) {
+            console.error("User ID is not available.");
+            return;
+        }
+
+        try {
+            addDoc(collection(FIREBASE_DB, "Notifications"), {
+                UserId: NannyId,
+                Notification: "Έχετε ένα αίτημα ραντεβού από τον Κηδεμόνα " + ParentName,
+                Date: Timestamp.now(),  // Timestamp of the payment
+            });
+            console.log()
+        } catch (error) {
+            console.error("Error adding notification record:", error);
+        }
+    }
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
@@ -69,10 +129,12 @@ function ScheduleMeeting() {
                 status: "pending",
             });
 
-            setFormMessage("Meeting request submitted successfully!");
+            setFormMessage("Η υποβολή αιτήματος ραντεβού ήταν επιτυχής!");
+            addAction(userId, nanny.firstname, nanny.lastname);
+            addNotification(nanny.FromUser, parentName);
         } catch (error) {
             console.error("Error submitting the meeting request:", error);
-            setFormMessage("Error submitting the meeting request. Please try again.");
+            setFormMessage("Σφάλμα κατα την υποβολή αιτήματος ραντεβού. Παρακαλώ προσπαθήστε ξανά.");
         }
     };
 
@@ -86,7 +148,7 @@ function ScheduleMeeting() {
     };
 
     return (
-        <div  className="inner-page" style={{marginTop:"2%"}}>
+        <div className="inner-page" style={{ marginTop: "2%" }}>
             <div className="text-border">
                 <header>
                     <h4><b>Επιλέξτε διαθέσιμες Ημερομηνίες και Ώρες για το Αίτημα του Ραντεβού σας</b></h4>
@@ -96,10 +158,10 @@ function ScheduleMeeting() {
             <Box sx={{ color: "black", display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 4 }}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DemoContainer components={['DateTimePicker']}>
-                        <DateTimePicker 
-                            label="Ημερομηνία και Ώρα" 
-                            value={selectedDateTime} 
-                            onChange={handleDateChange} 
+                        <DateTimePicker
+                            label="Ημερομηνία και Ώρα"
+                            value={selectedDateTime}
+                            onChange={handleDateChange}
                         />
                     </DemoContainer>
                 </LocalizationProvider>
@@ -122,7 +184,7 @@ function ScheduleMeeting() {
 
             <div className="feedback-message">
                 {formMessage && (
-                    <p style={{ 
+                    <p style={{
                         color: formMessage.includes("successfully") ? "green" : "red",
                         textAlign: "center",
                         fontWeight: "bold",
@@ -132,15 +194,15 @@ function ScheduleMeeting() {
                 )}
             </div>
 
-            <div style={{marginBottom:"2%"}}>
+            <div style={{ marginBottom: "2%" }}>
                 <Link to="/Parent/Actions/Search" style={{ textDecoration: 'none', }}>
-                    <Button variant="contained" startIcon={<BackIcon />} 
+                    <Button variant="contained" startIcon={<BackIcon />}
                         sx={{ whiteSpace: 'normal', textAlign: 'center', }}>
                         ΕΠΙΣΤΡΟΦΗ ΣΤΗ ΣΕΛΙΔΑ ΑΝΑΖΗΤΗΣΗΣ
                     </Button>
                 </Link>
 
-                <Button variant="contained" onClick={handleFormSubmit} sx={{ marginLeft: "5%"}}>
+                <Button variant="contained" onClick={handleFormSubmit} sx={{ marginLeft: "5%" }}>
                     ΥΠΟΒΟΛΗ ΑΙΤΗΜΑΤΟΣ ΡΑΝΤΕΒΟΥ
                 </Button>
             </div>

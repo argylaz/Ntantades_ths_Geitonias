@@ -4,6 +4,7 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
+import Breadcrumb from '../components/Breadcrumb';
 
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import "../StyleSheets/HomePage.css";
@@ -22,12 +23,8 @@ export default function FAQ() {
       alignItems: "center",
       justifyContent: "center",
     }}>
-      <Typography
-        variant="h3"
-        style={{ fontSize: 'x-large', fontStyle: 'bold', marginBottom: '2%' }}
-      >
-        Συχνές Ερωτήσεις
-      </Typography>
+
+      <h2 style={{ fontStyle: 'bold', marginBottom: '2%' }}>Συχνές Ερωτήσεις</h2>
 
       <Accordion
         style={{

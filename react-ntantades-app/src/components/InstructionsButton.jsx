@@ -68,7 +68,7 @@ export default function CustomizedMenus() {
         disableElevation
         onClick={handleClick}
         endIcon={<KeyboardArrowDownIcon />}
-        sx={{ width: 'auto', height: "60px", whiteSpace: 'normal',textAlign: 'center',backgroundColor:'white', color: 'black'}}
+        sx={{ width: 'auto', height: "60px", whiteSpace: 'normal', textAlign: 'center', backgroundColor: 'white', color: 'black' }}
 
       >
         ΟΔΗΓΙΕΣ
@@ -82,16 +82,16 @@ export default function CustomizedMenus() {
         open={open}
         onClose={handleClose}
       >
-        <Link to="/NannyInstruction" style={{ textDecoration: 'none',}}>
-            <MenuItem onClick={handleClose} disableRipple >
-              ΟΔΗΓΙΕΣ ΠΡΟΣ ΝΤΑΝΤΑΔΕΣ
-            </MenuItem>
+        <Link to="/NannyInstruction" style={{ textDecoration: 'none', }}>
+          <MenuItem onClick={handleClose} disableRipple >
+            ΟΔΗΓΙΕΣ ΠΡΟΣ ΝΤΑΝΤΑΔΕΣ
+          </MenuItem>
         </Link>
 
-        <Link to="/ParentInstruction" style={{ textDecoration: 'none',}}>
-            <MenuItem onClick={handleClose} disableRipple>
-              ΟΔΗΓΙΕΣ ΠΡΟΣ ΚΗΔΕΜΟΝΕΣ
-            </MenuItem>
+        <Link to="/ParentInstruction" style={{ textDecoration: 'none', }}>
+          <MenuItem onClick={handleClose} disableRipple>
+            ΟΔΗΓΙΕΣ ΠΡΟΣ ΚΗΔΕΜΟΝΕΣ
+          </MenuItem>
         </Link>
       </StyledMenu>
     </div>

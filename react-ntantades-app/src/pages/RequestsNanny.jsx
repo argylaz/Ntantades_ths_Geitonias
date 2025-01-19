@@ -1,11 +1,11 @@
 import React /*{ useEffect, useState }*/ from "react";
 import { Link } from 'react-router-dom';
 import BackIcon from '@mui/icons-material/ArrowBack';
-import { Button, containerClasses } from '@mui/material'; 
+import { Button, containerClasses } from '@mui/material';
 import RequestTable from "../components/InterestRequest"
 
-import { doc, updateDoc} from "firebase/firestore";
-import { FIREBASE_DB} from "../config/firebase"; // Import the Firebase DB
+import { doc, updateDoc } from "firebase/firestore";
+import { FIREBASE_DB } from "../config/firebase"; // Import the Firebase DB
 
 
 
@@ -27,24 +27,24 @@ function RequestsNanny() {
     }
   };
 
-   return (
-      <div className="inner-page">
-        <h1 style={{color:"black", }}> Οι Αιτήσεις Μου </h1>
-        <RequestTable onUpdateStatus={onUpdateStatus} />
+  return (
+    <div className="inner-page">
+      <h1 style={{ marginTop: "10%" }}> Οι Αιτήσεις Μου </h1>
+      <RequestTable onUpdateStatus={onUpdateStatus} />
 
-        <div style={{marginTop:'5%',}}>
-        
-          <Link to="/Nanny/Actions" style={{ textDecoration: 'none',}}>
-            <Button variant="contained" startIcon={<BackIcon />} 
-                sx={{ whiteSpace: 'normal',textAlign: 'center',marginRight:"5%", }}>
-                ΕΠΙΣΤΡΟΦΗ ΣΤΗ ΣΕΛΙΔΑ ΕΝΕΡΓΕΙΩΝ
-            </Button>
-          </Link>
-        
-        </div>
+      <div style={{ marginTop: "2%", }}>
+
+        <Link to="/Nanny/Actions" style={{ textDecoration: 'none', }}>
+          <Button variant="contained" startIcon={<BackIcon />}
+            sx={{ whiteSpace: 'normal', textAlign: 'center', marginBottom: "10%"}}>
+            ΕΠΙΣΤΡΟΦΗ ΣΤΗ ΣΕΛΙΔΑ ΕΝΕΡΓΕΙΩΝ
+          </Button>
+        </Link>
 
       </div>
-   );
+
+    </div>
+  );
 }
 
 export default RequestsNanny;

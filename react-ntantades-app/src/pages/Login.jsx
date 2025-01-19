@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate, useLocation } from 'react-router-dom'; // React Router for navigation
 import { FIREBASE_AUTH } from '../config/firebase';
+import Breadcrumb from '../components/Breadcrumb';
 
 
 import Button from '@mui/material/Button';
@@ -19,7 +20,7 @@ export default function Login() {
 
     const navigate = useNavigate();
     const location = useLocation();
-    const redirectTo = location.state?.redirectTo || '/Profile'; 
+    const redirectTo = location.state?.redirectTo || '/Profile';
 
     // Handles the login functionality of the user
     async function handleLogin(e) {
@@ -44,91 +45,94 @@ export default function Login() {
                 };
                 return errorMessages[errorCode] || "Παρουσιάστηκε σφάλμα. Δοκιμάστε ξανά.";
             };
-            
+
             setError(translateError(error.code));
         } finally {
             setLoading(false); // Reset the loading state
         }
     }
-  
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, (currentUser) => {
             if (currentUser) {
-                navigate(redirectTo); 
+                navigate(redirectTo);
             }
         });
 
         return () => unsubscribe(); // Cleanup subscription
     }, [navigate, /*FIREBASE_AUTH*/]);
 
-    
+
     return (
-        <div className="home-page" style={{ width: "100vw",
-                                            height: "100vh",
-                                            display: "flex",
-                                            justifyContent: "center",
-                                            alignItems: "center", }}>
+        <div className="home-page" style={{
+            width: "100vw",
+            height: "100vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+        }}>
+
 
             <div style={{
                 display: "flex",
                 flexDirection: "column", // Stack children vertically
                 backgroundColor: "transparent",
-                }}>
+            }}>
 
-                
-                                                    
+
+
                 <form onSubmit={handleLogin} className="login-container" style={{ boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.5)", padding: "20px", borderRadius: "8px" }}>
-                        <h2>Σύνδεση</h2>
+                    <h2>Σύνδεση</h2>
 
-                        {error && <p className="error-message" aria-live="polite" style={{ color: 'red' }}>{error}</p>} {/* Display error message */}
-                        
-                        <div className="login-row" >
-                            <label>Email:</label>
-                            &nbsp;&nbsp;&nbsp;
-                            <input
-                                type="email"
-                                placeholder="Εισάγετε το email σας"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                required
-                            />
-                        </div>
+                    {error && <p className="error-message" aria-live="polite" style={{ color: 'red' }}>{error}</p>} {/* Display error message */}
 
-                        <div className="login-row">
-                            <label>Password:</label>
-                            &nbsp;&nbsp;&nbsp;
-                            <input
-                                type="password"
-                                placeholder="Εισάγετε τον κωδικό σας"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                required
-                            />
-                        </div>
-                        
-                      
-                        {/* <Button type="submit" disabled={loading} style={{justifyContent:"center", marginTop:"5%",}} variant='contained' > 
+                    <div className="login-row" >
+                        <label>Email:</label>
+                        &nbsp;&nbsp;&nbsp;
+                        <input
+                            type="email"
+                            placeholder="Εισάγετε το email σας"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                    </div>
+
+                    <div className="login-row">
+                        <label>Password:</label>
+                        &nbsp;&nbsp;&nbsp;
+                        <input
+                            type="password"
+                            placeholder="Εισάγετε τον κωδικό σας"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    </div>
+
+
+                    {/* <Button type="submit" disabled={loading} style={{justifyContent:"center", marginTop:"5%",}} variant='contained' > 
                             {loading ? 'Logging in...' : 'Login'} 
                         </Button> */}
 
-                        <Button type="submit" disabled={loading} style={{ justifyContent: "center", marginTop: "5%", boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)"}} variant='contained'> 
-                            {loading ? <CircularProgress size={24} /> : 'ΣΥΝΔΕΣΗ'}
-                        </Button>
-                
+                    <Button type="submit" disabled={loading} style={{ justifyContent: "center", marginTop: "5%", boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)" }} variant='contained'>
+                        {loading ? <CircularProgress size={24} /> : 'ΣΥΝΔΕΣΗ'}
+                    </Button>
+
                 </form>
-                
-                <div style={{ marginTop: "1rem", marginBottom: "1rem", textAlign: "center", backgroundColor: "transparent",}}>
+
+                <div style={{ marginTop: "1rem", marginBottom: "1rem", textAlign: "center", backgroundColor: "transparent", }}>
                     <Link to="/register" style={{ textDecoration: 'none', backgroundColor: "transparent", }} >
-                        <Button  variant='contained' style={{boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.4)"}}> 
+                        <Button variant='contained' style={{ boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.4)" }}>
                             ΔΗΜΙΟΥΡΓΙΑ ΝΕΟΥ ΧΡΗΣΤΗ
                         </Button>
                     </Link>
                 </div>
-                
-        
+
+
             </div>
 
-        
+
         </div>
     );
 }

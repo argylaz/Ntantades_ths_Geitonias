@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 // import Box from '@mui/material/Box';
@@ -34,21 +34,22 @@ function ResultsPage() {
   const location = useLocation();
   const { results } = location.state || { results: [] }; // Retrieve results from state
   let nanny = [];
-  
+
   const [startDate, setStartDate] = useState(null);
-  
+
   const navigate = useNavigate();
   const scheduleMeeting = (nanny) => {
-  
+
     try {
-      navigate("ScheduleMeeting", { state: { nanny }  
-    });
+      navigate("ScheduleMeeting", {
+        state: { nanny }
+      });
 
     }
-    catch (error){
-        console.error(error.message)
+    catch (error) {
+      console.error(error.message)
     }
-        
+
   }
 
   // const [nanny, setNanny] = useState(null);
@@ -61,20 +62,20 @@ function ResultsPage() {
   //   };
   //   fetchData();
   // }, []);
-  
+
   if (!results) {
     return <div>Loading...</div>; // Or any loading state
   }
-  
-  
+
+
 
   return (
-    <div className='inner-page' style={{marginBottom:"5%", marginTop:"6%"}}>
-        <h1>Αποτελέσματα Αναζήτησης</h1>
+    <div className='inner-page' style={{ marginBottom: "5%", marginTop: "6%" }}>
+      <h1>Αποτελέσματα Αναζήτησης</h1>
 
-      <Box sx={{color:"black",display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 4,}}> 
+      <Box sx={{ color: "black", display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 4, }}>
 
-      <TableContainer component={Paper} sx={{ marginTop: 4, width:"70%", display:"flex", justifyContent:"center", alignItems:"center",}}>
+        <TableContainer component={Paper} sx={{ marginTop: 4, width: "70%", display: "flex", justifyContent: "center", alignItems: "center", }}>
           {results.length > 0 ? (
             <Table>
               <TableHead>
@@ -96,8 +97,8 @@ function ResultsPage() {
                     <TableCell align="center">{nanny.age}</TableCell>
                     <TableCell align="center">{nanny.place}</TableCell>
 
-                    <TableCell align="center"> <Typography>{nanny.start_date ?  new Date(nanny.start_date.seconds * 1000).toLocaleDateString() : "No date available"}</Typography> </TableCell>
-                    <TableCell align="center"> <Typography>{nanny.end_date  ? new Date(nanny.end_date.seconds * 1000).toLocaleDateString() : "No date available"}</Typography> </TableCell>
+                    <TableCell align="center"> <Typography>{nanny.start_date ? new Date(nanny.start_date.seconds * 1000).toLocaleDateString() : "No date available"}</Typography> </TableCell>
+                    <TableCell align="center"> <Typography>{nanny.end_date ? new Date(nanny.end_date.seconds * 1000).toLocaleDateString() : "No date available"}</Typography> </TableCell>
                     <TableCell align="center"> <Button onClick={() => scheduleMeeting(nanny)} variant="contained"> ΠΡΟΓΡΑΜΜΑΤΙΣΜΟΣ ΡΑΝΤΕΒΟΥ </Button> </TableCell>
                   </TableRow>
                 ))}
@@ -113,16 +114,16 @@ function ResultsPage() {
               Δεν βρέθηκαν αποτελέσματα
             </Typography>
           )}
-      </TableContainer>
+        </TableContainer>
 
       </Box>
-       
 
-      <Link to="/Parent/Actions/Search" style={{ textDecoration: 'none',}}>
-            <Button variant="contained" startIcon={<BackIcon />} 
-                sx={{ whiteSpace: 'normal',textAlign: 'center', marginBottom:'2%'}}>
-                ΕΠΙΣΤΡΟΦΗ ΣΤΗ ΣΕΛΙΔΑ ΑΝΑΖΗΤΗΣΗΣ
-            </Button>
+
+      <Link to="/Parent/Actions/Search" style={{ textDecoration: 'none', }}>
+        <Button variant="contained" startIcon={<BackIcon />}
+          sx={{ whiteSpace: 'normal', textAlign: 'center', marginBottom: '2%' }}>
+          ΕΠΙΣΤΡΟΦΗ ΣΤΗ ΣΕΛΙΔΑ ΑΝΑΖΗΤΗΣΗΣ
+        </Button>
       </Link>
 
     </div>

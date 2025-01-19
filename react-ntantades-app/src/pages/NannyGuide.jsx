@@ -12,10 +12,10 @@ function NannyGuide() {
                 <h2>Οδηγίες προς τις Νταντάδες </h2>
             </div>
 
-           
+
             <div style={{ width: '75%', margin: 'auto', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
- 
-                <ul style={{textAlign:'left', }}>
+
+                <ul style={{ textAlign: 'left', }}>
                     <b>Οδηγίες Δημιουργίας Προφίλ και Αγγελίας για εύρεση εργασίας ως Νταντά</b>
 
                     <li> Για να συμμετάσχετε στην Δράση “Νταντάδες της Γειτονιάς” ως Νταντά, αρχικά πρέπει να επιλέξετε “Είμαι Νταντά” στην Αρχική Σελίδα, και στη συνέχεια να πατήσετε το κουμπί “Είσοδος στην Υπηρεσία με κωδικούς taxisNet”. </li>
@@ -27,9 +27,9 @@ function NannyGuide() {
             </div>
 
             <Link to="/Nanny" style={{ textDecoration: 'none' }}>
-                <Button 
-                    variant="contained" 
-                    startIcon={<BackIcon />} 
+                <Button
+                    variant="contained"
+                    startIcon={<BackIcon />}
                     sx={{ whiteSpace: 'normal', textAlign: 'center', marginTop: '2%' }}
                 >
                     ΕΠΙΣΤΡΟΦΗ ΣΤΗ ΣΕΛΙΔΑ ΝΤΑΝΤΑΔΩΝ

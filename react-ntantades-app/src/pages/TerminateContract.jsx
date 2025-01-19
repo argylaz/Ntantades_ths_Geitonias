@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import CancelIcon from "@mui/icons-material/Cancel";
 import RenewIcon from "@mui/icons-material/Sync";
 import BackIcon from "@mui/icons-material/ArrowBack";
-import { collection, getDocs, query, where, getDoc, doc, updateDoc } from "firebase/firestore";
+import { collection, Timestamp, addDoc, getDocs, query, where, getDoc, doc, updateDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import { FIREBASE_AUTH, FIREBASE_DB } from "../config/firebase";
 
@@ -14,8 +14,11 @@ function TerminateContract() {
     const [error, setError] = useState(null); // To handle error states (if any)
     const [loading, setLoading] = useState(false); // To manage loading state
     const [NannyData, setNannyData] = useState({ firstname: "", lastname: "" }); // Default state for nanny data
+    const [nannyId, setNannyId] = useState("");
     const [currentUser, setCurrentUser] = useState(null); // State for logged-in user
     const [interestRequestId, setInterestRequestId] = useState(null); // Store the interest request ID
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
 
     const navigate = useNavigate(); // Initialize navigate function
 
@@ -35,6 +38,60 @@ function TerminateContract() {
             setError("Αποτυχία λήψης πληροφοριών για την Νταντά.");
         }
     };
+
+
+    const addAction = async (userId, NannyFirstname, NannyLastname, renew) => {
+        if (!userId) {
+            console.error("User ID is not available.");
+            return;
+        }
+
+        try {
+            if (renew === false) {
+                addDoc(collection(FIREBASE_DB, "Actions"), {
+                    user: userId,
+                    date: new Date(),
+                    type: "Ληξη συνεργασίας με την νταντά " + NannyFirstname + " " + NannyLastname,  // Type of action
+                    actionDate: Timestamp.now(),  // Timestamp of the payment
+                });
+            } else {
+                addDoc(collection(FIREBASE_DB, "Actions"), {
+                    user: userId,
+                    date: new Date(),
+                    type: "Ανανέωση συνεργασίας με την νταντά " + NannyFirstname + " " + NannyLastname,  // Type of action
+                    actionDate: Timestamp.now(),  // Timestamp of the payment
+                });
+            }
+        } catch (error) {
+            console.error("Error adding action record:", error);
+        }
+    }
+
+    const addNotification = async (NannyId, renew) => {
+        if (!NannyId) {
+            console.error("User ID is not available.");
+            return;
+        }
+
+        let x;
+        if (renew == false) {
+            x = " έληξε "
+        }
+        else {
+            x = " ανανεώθηκε "
+        }
+
+        try {
+            await addDoc(collection(FIREBASE_DB, "Notifications"), {
+                UserId: NannyId,
+                Notification: "Η συνεργασία σας με τον χρήστη " + firstName + " " + lastName + x,
+                Date: Timestamp.now(),  // Timestamp of the payment
+            });
+        } catch (error) {
+            console.error("Error adding notification record:", error);
+        }
+    };
+
 
     const findNanny = async (userId) => {
         setLoading(true);
@@ -56,6 +113,7 @@ function TerminateContract() {
                 setError("Δεν βρέθηκε κάποιο ενεργό Συμβόλαιο με Νταντά.");
             } else {
                 const acceptedRequest = querySnapshot.docs[0].data(); // Assume the first matching record
+                setNannyId(acceptedRequest.ToUser);
                 setInterestRequestId(querySnapshot.docs[0].id); // Store the request ID
                 fetchUserData(acceptedRequest.ToUser); // Fetch nanny's details using their user ID
             }
@@ -89,10 +147,13 @@ function TerminateContract() {
             setLoading(false);
         }
 
-        console.log()
-        navigate("ParentReview", { state: {contract_status: "terminated", NannyData: NannyData }}); 
+
+        addAction(currentUser.uid, NannyData.firstname, NannyData.lastname, false);
+        addNotification(nannyId, false);
+
+        navigate("ParentReview", { state: { contract_status: "terminated", NannyData: NannyData } });
     };
-    
+
 
     const renewContract = async () => {
         if (!interestRequestId) {
@@ -116,11 +177,28 @@ function TerminateContract() {
             setLoading(false);
         }
 
-        navigate("ParentReview", { state: {contract_status: "renewed", NannyData: NannyData }}); 
+        console.log(NannyData);
+        addAction(currentUser.uid, NannyData.firstname, NannyData.lastname, true);
+        addNotification(nannyId, true);
+
+        navigate("ParentReview", { state: { contract_status: "renewed", NannyData: NannyData } });
     };
 
 
-
+    const fetchParentData = async (parentId) => {
+        try {
+            const docRef = doc(FIREBASE_DB, "users", parentId);
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                setFirstName(docSnap.data().firstname);
+                setLastName(docSnap.data().lastname);
+            } else {
+                console.error("No document found with ID:", parentId);
+            }
+        } catch (error) {
+            console.error("Error fetching user data:", error);
+        }
+    };
 
 
 
@@ -129,6 +207,7 @@ function TerminateContract() {
             if (user) {
                 setCurrentUser(user);
                 findNanny(user.uid); // Fetch nanny data for the logged-in user
+                fetchParentData(user.uid);
             } else {
                 setCurrentUser(null);
                 setError("User is not logged in.");
@@ -148,8 +227,8 @@ function TerminateContract() {
                         {loading
                             ? "Φόρτωση λεπτομερειών της Νταντάς..."
                             : error
-                            ? error
-                            : `Επιλέξτε Λήξη ή Ανανέωση της Συνεργασίας με την Νταντά ${NannyData.firstname} ${NannyData.lastname}`}
+                                ? error
+                                : `Επιλέξτε Λήξη ή Ανανέωση της Συνεργασίας με την Νταντά ${NannyData.firstname} ${NannyData.lastname}`}
                     </p>
 
                     <div style={{ marginTop: "5%" }}>
@@ -173,7 +252,7 @@ function TerminateContract() {
                         >
                             ΑΝΑΝΕΩΣΗ ΣΥΝΕΡΓΑΣΙΑΣ
                         </Button>
-            
+
                     </div>
 
                     <div style={{ marginTop: "5%" }}>

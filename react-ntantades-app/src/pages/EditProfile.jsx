@@ -37,11 +37,11 @@ export default function EditProfile() {
   const [formMessage, setFormMessage] = useState("");
   const [userData, setUserData] = useState(null);
   const [role, setRole] = useState("");
-  
+
   const [childData, setChildData] = useState({ name: "", gender: "", age: "" }); // State for child data
   const [cvData, setCvData] = useState({ experience: "", specialization: "", studies: "", file: null }); // State for CV data
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, (user) => {
       if (user) {
@@ -74,8 +74,8 @@ export default function EditProfile() {
         setFirstName(docSnap.data().firstname);
         setLastName(docSnap.data().lastname);
         setRole(docSnap.data().role);
-        if (role === "parent") {setChildData(docSnap.data().childData);}
-        if (role === "nanny") {setCvData(docSnap.data().cvData);}
+        if (role === "parent") { setChildData(docSnap.data().childData); }
+        if (role === "nanny") { setCvData(docSnap.data().cvData); }
       } else {
         console.error("No document found with ID:", userId);
       }
@@ -87,12 +87,12 @@ export default function EditProfile() {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     setFormMessage("");
-  
+
     try {
       const docRef = doc(FIREBASE_DB, "users", userId); // Reference the current user's document
-  
+
       // Payload with the fields to update
-      if(role === "nanny") {
+      if (role === "nanny") {
         const payload = {
           AMKA,
           firstname,
@@ -113,9 +113,9 @@ export default function EditProfile() {
         };
         await updateDoc(docRef, payload);
       }
-  
+
       // Update the document
-  
+
       setFormMessage("Profile updated successfully!");
       fetchUserData(); // Refresh user data after update
       navigate("/profile");
@@ -126,16 +126,16 @@ export default function EditProfile() {
   };
 
   const handleFileUpload = (event) => {
-      const file = event.target.files[0];
-      setCvData({ ...cvData, file });
+    const file = event.target.files[0];
+    setCvData({ ...cvData, file });
   };
 
   const handleChildDataChange = (field, value) => {
-      setChildData({ ...childData, [field]: value });
+    setChildData({ ...childData, [field]: value });
   };
 
   const handleCvDataChange = (field, value) => {
-      setCvData({ ...cvData, [field]: value });
+    setCvData({ ...cvData, [field]: value });
   };
 
   if (loading) {
@@ -143,8 +143,8 @@ export default function EditProfile() {
   }
 
   return (
-    <div className="inner-page">   
-      <Box sx={{ maxWidth: 600, margin: "0 auto", mt: '10%', mb : '10%'}}>
+    <div className="inner-page">
+      <Box sx={{ maxWidth: 600, margin: "0 auto", mt: '10%', mb: '10%' }}>
         <Card>
           <CardContent>
             <Typography variant="h4" gutterBottom>
@@ -190,73 +190,73 @@ export default function EditProfile() {
                 type="number"
                 required
                 fullWidth
-                />
-          
-                {/* Conditional Sections */}
-                {role === "nanny" && (
+              />
+
+              {/* Conditional Sections */}
+              {role === "nanny" && (
                 <Box sx={{ mt: 4 }}>
-                    <Typography variant="h5" gutterBottom>Βιογραφικό</Typography>
-                    <TextField
-                        label="Εμπειρία"
-                        fullWidth
-                        value={cvData.experience}
-                        onChange={(e) => handleCvDataChange("experience", e.target.value)}
-                        sx={{ mb: 2 }}
+                  <Typography variant="h5" gutterBottom>Βιογραφικό</Typography>
+                  <TextField
+                    label="Εμπειρία"
+                    fullWidth
+                    value={cvData.experience}
+                    onChange={(e) => handleCvDataChange("experience", e.target.value)}
+                    sx={{ mb: 2 }}
+                  />
+                  <TextField
+                    label="Ειδικότητα"
+                    fullWidth
+                    value={cvData.specialization}
+                    onChange={(e) => handleCvDataChange("specialization", e.target.value)}
+                    sx={{ mb: 2 }}
+                  />
+                  <TextField
+                    label="Σπουδές"
+                    fullWidth
+                    value={cvData.studies}
+                    onChange={(e) => handleCvDataChange("studies", e.target.value)}
+                    sx={{ mb: 2 }}
+                  />
+                  <Button
+                    variant="contained"
+                    component="label"
+                    startIcon={<FileUploadIcon />}
+                  >
+                    Upload CV PDF
+                    <input
+                      type="file"
+                      accept=".pdf"
+                      hidden
+                      onChange={handleFileUpload}
                     />
-                    <TextField
-                        label="Ειδικότητα"
-                        fullWidth
-                        value={cvData.specialization}
-                        onChange={(e) => handleCvDataChange("specialization", e.target.value)}
-                        sx={{ mb: 2 }}
-                    />
-                    <TextField
-                        label="Σπουδές"
-                        fullWidth
-                        value={cvData.studies}
-                        onChange={(e) => handleCvDataChange("studies", e.target.value)}
-                        sx={{ mb: 2 }}
-                    />
-                    <Button
-                        variant="contained"
-                        component="label"
-                        startIcon={<FileUploadIcon />}
-                    >
-                        Upload CV PDF
-                        <input
-                            type="file"
-                            accept=".pdf"
-                            hidden
-                            onChange={handleFileUpload}
-                        />
-                    </Button>
+                  </Button>
                 </Box>
               )}
-          
+
               {role === "parent" && (
                 <Box sx={{ mt: 4 }}>
-                    <Typography variant="h5" gutterBottom>Παιδί</Typography>
-                    <TextField
-                        label="Όνομα παιδιού"
-                        fullWidth
-                        value={childData.name}
-                        onChange={(e) => handleChildDataChange("name", e.target.value)}
-                        sx={{ mb: 2 }}
-                    />
-                    <TextField
-                        label="Φύλο παιδιού"
-                        fullWidth
-                        value={childData.gender}
-                        onChange={(e) => handleChildDataChange("gender", e.target.value)}
-                        sx={{ mb: 2 }}
-                    />
-                    <TextField
-                        label="Ηλικία παιδιού"
-                        fullWidth
-                        value={childData.age}
-                        onChange={(e) => handleChildDataChange("age", e.target.value)}
-                        sx={{ mb: 2 }}
-                    />
+                  <Typography variant="h5" gutterBottom>Παιδί</Typography>
+                  <TextField
+                    label="Όνομα παιδιού"
+                    fullWidth
+                    value={childData.name}
+                    onChange={(e) => handleChildDataChange("name", e.target.value)}
+                    sx={{ mb: 2 }}
+                  />
+                  <TextField
+                    label="Φύλο παιδιού"
+                    fullWidth
+                    value={childData.gender}
+                    onChange={(e) => handleChildDataChange("gender", e.target.value)}
+                    sx={{ mb: 2 }}
+                  />
+                  <TextField
+                    label="Ηλικία παιδιού"
+                    fullWidth
+                    value={childData.age}
+                    onChange={(e) => handleChildDataChange("age", e.target.value)}
+                    sx={{ mb: 2 }}
+                  />
                 </Box>
               )}
 
@@ -265,7 +265,7 @@ export default function EditProfile() {
               </Button>
 
             </Box>
-            
+
             {formMessage && (
               <Alert severity="info" sx={{ mt: 2 }}>
                 {formMessage}
@@ -273,7 +273,7 @@ export default function EditProfile() {
             )}
           </CardContent>
         </Card>
-    </Box>
-    </div>   
+      </Box>
+    </div>
   );
 }
