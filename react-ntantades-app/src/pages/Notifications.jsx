@@ -33,19 +33,22 @@ import "../StyleSheets/HomePage.css"
 
 
 
-
-
-function Notifications() {
-
-  const [notifications, setNotifications] = useState([]);
-
-
-
+const Notifications = () => {
+  
   const [email, setEmail] = useState("");
   const [userId, setUserId] = useState(""); // Store the user ID
-  // const [firstname, setFirstName] = useState
-
+  
   const [userData, setUserData] = useState(""); // State for fetched user data
+  const [notifications, setNotifications] = useState([]);
+  
+  // For paging
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentItems = notifications.slice(startIndex, endIndex);
+  const totalPages = Math.ceil(notifications.length / itemsPerPage);
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, (user) => {
@@ -57,19 +60,17 @@ function Notifications() {
         setUserId(null);
         alert("Δεν είστε συνδεδεμένος με κάποιο προφίλ.\nΓια να έχετε πρόσβαση στις ειδοποιήσεις πρέπει να συνδεθείτε στην σελίδα ως Νταντά ή ως Κηδεμόνας.");
       }
-
     });
 
     return () => unsubscribe();
   }, []);
-
+  
 
   useEffect(() => {
     if (userId) {
       SearchNotifications(); // Fetch user data only after the user_id is available
     }
   }, [userId]);
-
 
 
   const SearchNotifications = async () => {
@@ -89,16 +90,6 @@ function Notifications() {
         for (const docSnap of snapshot.docs) {
           const actionData = { ...docSnap.data(), id: docSnap.id };
 
-          // // Fetch additional details if necessary
-          // if (actionData.FromUser) {
-          //     const userRef = doc(FIREBASE_DB, "users", actionData.user); // Adjust collection name if needed
-          //     const userSnap = await getDoc(userRef);
-
-          //     if (userSnap.exists()) {
-          //         actionData.UserDetails = userSnap.data(); // Add user details
-          //     }
-          // }
-
           temp.push(actionData);
         }
 
@@ -110,20 +101,27 @@ function Notifications() {
     }
   };
 
+  // For paging
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
 
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
 
   return (
-
     <div className='inner-page'>
-
-
-      <h1 style={{ marginTop: "8%", }}>Ειδοποιήσεις</h1>
+      <h1 style={{ marginTop: "8%" }}>Ειδοποιήσεις</h1>
       <p>Έχετε {notifications.length} ειδοποιήσεις.</p>
 
       <main>
-        <Box sx={{ color: "black", display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 3, }}>
-
-          <TableContainer component={Paper} sx={{ width: "70%", display: "flex", justifyContent: "center", alignItems: "center", }}>
+        <Box sx={{ color: "black", display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 3 }}>
+          <TableContainer component={Paper} sx={{ width: "70%", display: "flex", justifyContent: "center", alignItems: "center" }}>
             {notifications.length > 0 ? (
               <Table>
                 <TableHead>
@@ -133,46 +131,57 @@ function Notifications() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {notifications.map((notification) => (
+                  {currentItems.map((notification) => (
                     <TableRow key={notification.id}>
                       <TableCell align="center">{notification.Notification || "N/A"}</TableCell>
                       <TableCell align="center">{notification.Date.toDate().toLocaleDateString() || "N/A"}</TableCell>
-
                     </TableRow>
                   ))}
                 </TableBody>
               </Table>
             ) : (
-              <Typography
-                variant="body1"
-                color="text.secondary"
-                align="center"
-                sx={{ padding: 4 }}
-              >
+              <Typography variant="body1" color="text.secondary" align="center" sx={{ padding: 4 }}>
                 Δεν βρέθηκαν αποτελέσματα
               </Typography>
             )}
           </TableContainer>
-
         </Box>
 
-        <div style={{ marginBottom: "5%", }}>
-          <Link to="/Nanny/Actions" style={{ textDecoration: 'none', marginRight: '49%', }}>
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1rem' }}>
+          <Button
+            variant="contained"
+            onClick={handlePreviousPage}
+            disabled={currentPage === 1}
+            sx={{ marginRight: 1 }}
+          >
+            ΠΡΟΗΓΟΥΜΕΝΗ
+          </Button>
+          <Typography variant="body1" sx={{ marginTop: '0.5rem' }}>
+            Σελίδα {currentPage} από {totalPages}
+          </Typography>
+          <Button
+            variant="contained"
+            onClick={handleNextPage}
+            disabled={currentPage === totalPages}
+            sx={{ marginLeft: 1 }}
+          >
+            ΕΠΟΜΕΝΗ
+          </Button>
+        </div>
+
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '2%' }}>
+          <Link to="/" style={{ textDecoration: 'none', marginBottom: '10%' }}>
             <Button variant="contained" startIcon={<BackIcon />}
-              sx={{ whiteSpace: 'normal', textAlign: 'center', marginBottom: '2%', }}>
+              sx={{ whiteSpace: 'normal', textAlign: 'center', }}>
               ΕΠΙΣΤΡΟΦΗ ΣΤΗΝ ΑΡΧΙΚΗ ΣΕΛΙΔΑ
             </Button>
           </Link>
-
         </div>
 
 
       </main>
-
-
     </div>
-
   );
-}
+};
 
 export default Notifications;
