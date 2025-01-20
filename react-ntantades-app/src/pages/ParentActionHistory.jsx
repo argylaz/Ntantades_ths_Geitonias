@@ -1,51 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import { onAuthStateChanged, Timestamp } from 'firebase/auth';
-
-import { format } from "date-fns";
-
-// import Box from '@mui/material/Box';
-import { doc, getDoc, collection, onSnapshot, query, where, } from "firebase/firestore";
-import { FIREBASE_AUTH, FIREBASE_DB } from '../config/firebase'; // Import your Firebase config
-
+import { onAuthStateChanged } from 'firebase/auth';
+import { collection, query, where, onSnapshot } from "firebase/firestore";
+import { FIREBASE_AUTH, FIREBASE_DB } from '../config/firebase';
 import { Link } from 'react-router-dom';
 import BackIcon from '@mui/icons-material/ArrowBack';
-import RightIcon from '@mui/icons-material/ArrowForward';
-import { useNavigate } from "react-router-dom";
-
-import {
-  Button,
-  Box,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
-  Typography,
-} from '@mui/material';
-
-
-
-import "../StyleSheets/HomePage.css"
-
-
-
-
+import { Button, Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from '@mui/material';
+import "../StyleSheets/HomePage.css";
 
 function ParentActionHistory() {
-  const location = useLocation();
-
   const [actions, setActions] = useState([]);
-
-  const [startDate, setStartDate] = useState(null);
-
   const [email, setEmail] = useState("");
   const [userId, setUserId] = useState(""); // Store the user ID
-  // const [firstname, setFirstName] = useState
 
-  const [userData, setUserData] = useState(""); // State for fetched user data
+  // Pagination state
+  const [currentTablePage, setCurrentTablePage] = useState(1);
+  const itemsPerPage = 5;
+  const startIndex = (currentTablePage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentItems = actions.slice(startIndex, endIndex);
+  const totalPages = Math.ceil(actions.length / itemsPerPage);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, (user) => {
@@ -56,71 +29,57 @@ function ParentActionHistory() {
         setEmail(null);
         setUserId(null);
       }
-
     });
 
     return () => unsubscribe();
   }, []);
 
-
   useEffect(() => {
     if (userId) {
-      SearchActions(); // Fetch user data only after the user_id is available
+      SearchActions(); // Fetch actions only after the user_id is available
     }
   }, [userId]);
 
-
-
   const SearchActions = async () => {
     try {
-      // Get collection
-      ////////////////////////////////////////// Actions
       const colRef = collection(FIREBASE_DB, "Actions");
-
-      // Query based on the ToUser field
-      console.log(userId); // Assuming userId is the ID of the current user
       const q = query(colRef, where("user", "==", userId));
-      const comb_results = [];
+      onSnapshot(q, (snapshot) => {
+        const tempActions = snapshot.docs.map(docSnap => ({
+          id: docSnap.id,
+          ...docSnap.data()
+        }));
 
-      onSnapshot(q, async (snapshot) => {
-        let temp = [];
+        // Sort actions by date (descending order)
+        tempActions.sort((a, b) => b.date.toDate() - a.date.toDate());
 
-        for (const docSnap of snapshot.docs) {
-          const actionData = { ...docSnap.data(), id: docSnap.id };
-
-          // // Fetch additional details if necessary
-          // if (meetingData.FromUser) {
-          //     const userRef = doc(FIREBASE_DB, "users", meetingData.FromUser); // Adjust collection name if needed
-          //     const userSnap = await getDoc(userRef);
-
-          //     if (userSnap.exists()) {
-          //         meetingData.FromUserDetails = userSnap.data(); // Add user details
-          //     }
-          // }
-
-          temp.push(actionData);
-        }
-
-        comb_results.push(...temp);
-        setActions(comb_results);
+        setActions(tempActions);
       });
     } catch (error) {
-      console.error("Error fetching meetings:", error.message);
+      console.error("Error fetching actions:", error.message);
     }
   };
 
+  // Pagination handlers
+  const handleNextPage = () => {
+    if (currentTablePage < totalPages) {
+      setCurrentTablePage(currentTablePage + 1);
+    }
+  };
 
+  const handlePreviousPage = () => {
+    if (currentTablePage > 1) {
+      setCurrentTablePage(currentTablePage - 1);
+    }
+  };
 
   return (
-
-
-    <div className='inner-page' >
+    <div className='inner-page'>
       <h1 style={{ marginTop: "10%" }}>Ιστορικό Ενεργειών</h1>
 
       <main>
-        <Box sx={{ color: "black", display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 4, }}>
-
-          <TableContainer component={Paper} sx={{ width: "70%", display: "flex", justifyContent: "center", alignItems: "center", }}>
+        <Box sx={{ color: "black", display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 4 }}>
+          <TableContainer component={Paper} sx={{ width: "70%", display: "flex", justifyContent: "center", alignItems: "center" }}>
             {actions.length > 0 ? (
               <Table>
                 <TableHead>
@@ -130,7 +89,7 @@ function ParentActionHistory() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {actions.map((ac) => (
+                  {currentItems.map((ac) => (
                     <TableRow key={ac.id}>
                       <TableCell align="center">{ac.type || "N/A"}</TableCell>
                       <TableCell align="center">{ac.date.toDate().toLocaleDateString() || "N/A"}</TableCell>
@@ -139,33 +98,46 @@ function ParentActionHistory() {
                 </TableBody>
               </Table>
             ) : (
-              <Typography
-                variant="body1"
-                color="text.secondary"
-                align="center"
-                sx={{ padding: 4 }}
-              >
+              <Typography variant="body1" color="text.secondary" align="center" sx={{ padding: 4 }}>
                 Δεν βρέθηκαν αποτελέσματα
               </Typography>
             )}
           </TableContainer>
-
         </Box>
 
-
-        <Link to="/Parent/Actions" style={{ textDecoration: 'none', marginRight: '48%', }}>
-          <Button variant="contained" startIcon={<BackIcon />}
-            sx={{ whiteSpace: 'normal', textAlign: 'center', marginBottom: '8%', }}>
-            ΕΠΙΣΤΡΟΦΗ ΣΤΗ ΣΕΛΙΔΑ ΕΝΕΡΓΕΙΩΝ
+        {/* Pagination controls */}
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '0.8rem' }}>
+          <Button
+            variant="contained"
+            onClick={handlePreviousPage}
+            disabled={currentTablePage === 1}
+            sx={{ marginRight: 1 }}
+          >
+            ΠΡΟΗΓΟΥΜΕΝΗ
           </Button>
-        </Link>
+          <Typography variant="body1" sx={{ marginTop: '0.5rem' }}>
+            Σελίδα {currentTablePage} από {totalPages}
+          </Typography>
+          <Button
+            variant="contained"
+            onClick={handleNextPage}
+            disabled={currentTablePage === totalPages}
+            sx={{ marginLeft: 1 }}
+          >
+            ΕΠΟΜΕΝΗ
+          </Button>
+        </div>
 
-
+        {/* Back to actions page */}
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '2%' }}>
+          <Link to="/Parent/Actions" style={{ textDecoration: 'none', marginBottom: '10%' }}>
+            <Button variant="contained" startIcon={<BackIcon />} sx={{ whiteSpace: 'normal', textAlign: 'center' }}>
+              ΕΠΙΣΤΡΟΦΗ ΣΤΗ ΣΕΛΙΔΑ ΕΝΕΡΓΕΙΩΝ
+            </Button>
+          </Link>
+        </div>
       </main>
-
-
     </div>
-
   );
 }
 

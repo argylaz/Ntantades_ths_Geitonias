@@ -207,19 +207,6 @@ function CreateAdvertisement() {
             console.log("Selected Date Before Conversion:", startDate);
             // Convert the selected date to Firebase Timestamp
 
-
-            // // Find the user with the given email
-            // await findUserByEmail(nanny_email).then((user) => {
-            //   if (user) {
-            //       setToUser(user.id)
-            //       console.log("User found and set:", user.id);
-            //       // console.log("Hello User");
-            //   } else {
-            //     console.log("User not found.");
-            //     alert("User not found.");
-            //   }
-            // });
-
             await createAdvertisement({
                 FromUser: fromUser,
                 ToUser: user.id,
@@ -257,9 +244,9 @@ function CreateAdvertisement() {
 
         <div className="inner-page">
 
-            <div style={{marginTop: "10%"}}>
+            <div style={{marginTop: "10%", display: "flex"}}>
 
-                <Box sx={{ maxWidth: 500, maxHeight: 500, margin: "0 auto", mt: 4 }}>
+                <Box sx={{ maxWidth: 500, maxHeight: 500, margin: "0 auto", mt: 4, marginBottom: "2%"}}>
                     <Card>
                         <CardContent>
                             <Typography variant="h4" gutterBottom>
@@ -349,10 +336,10 @@ function CreateAdvertisement() {
 
             </div>
 
-            <div>
+            <div style={{ marginTop: '5%', }}>
                 <Link to="/Parent/Actions/ParentsRequest" style={{ textDecoration: 'none', justifyContent: "center", alignContent: "center", display: "flex", }}>
                     <Button variant="contained" startIcon={<BackIcon />}
-                        sx={{ whiteSpace: 'normal', textAlign: 'center', marginTop: '3%', marginBottom: '10%' }}>
+                        sx={{ whiteSpace: 'normal', textAlign: 'center', marginBottom: '10%' }}>
                         ΕΠΙΣΤΡΟΦΗ ΣΤΙΣ ΑΙΤΗΣΕΙΣ ΜΟΥ
                     </Button>
                 </Link>

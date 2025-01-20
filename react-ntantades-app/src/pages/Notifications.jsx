@@ -143,7 +143,7 @@ const Notifications = () => {
                     </TableContainer>
                 </Box>
 
-                <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'center', marginTop: '0.8rem' }}>
                     <Button
                         variant="contained"
                         onClick={handlePreviousPage}

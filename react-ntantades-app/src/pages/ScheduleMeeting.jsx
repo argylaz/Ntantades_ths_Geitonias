@@ -148,8 +148,8 @@ function ScheduleMeeting() {
     };
 
     return (
-        <div className="inner-page" style={{ marginTop: "2%" }}>
-            <div className="text-border">
+        <div className="inner-page" >
+            <div className="text-border" style={{ marginTop: "10%" }}>
                 <header>
                     <h4><b>Επιλέξτε διαθέσιμες Ημερομηνίες και Ώρες για το Αίτημα του Ραντεβού σας</b></h4>
                 </header>
@@ -194,7 +194,7 @@ function ScheduleMeeting() {
                 )}
             </div>
 
-            <div style={{ marginBottom: "2%" }}>
+            <div style={{ marginBottom: "8%" }}>
                 <Link to="/Parent/Actions/Search" style={{ textDecoration: 'none', }}>
                     <Button variant="contained" startIcon={<BackIcon />}
                         sx={{ whiteSpace: 'normal', textAlign: 'center', }}>
