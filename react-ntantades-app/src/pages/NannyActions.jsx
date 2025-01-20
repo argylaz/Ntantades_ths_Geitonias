@@ -42,12 +42,6 @@ const images = [
     route: 'NannyPayment'
   },
   {
-    url: history_activity_image,
-    title: 'Ιστορικό Ενεργειών',
-    width: '100%',
-    route: 'NannyActionHistory'
-  },
-  {
     url: handshake_image,
     title: 'Τα Ραντεβού μου',
     width: '100%',
@@ -58,6 +52,12 @@ const images = [
     title: 'Προβολή Αξιολογήσεων',
     width: '100%',
     route: 'NannyReviews',
+  },
+  {
+    url: history_activity_image,
+    title: 'Ιστορικό Ενεργειών',
+    width: '100%',
+    route: 'NannyActionHistory'
   },
 
 ];
@@ -131,7 +131,6 @@ function NannyActions() {
   const navigate = useNavigate();
 
   return (
-
 
     <div className="inner-page">
       <h1 style={{ fontFamily: "Arial, Helvetica, sans-serif", fontStyle: 'normal' }}> Επιλέξτε την ενέργεια που επιθυμείτε </h1>

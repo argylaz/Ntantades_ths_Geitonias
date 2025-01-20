@@ -51,7 +51,6 @@ function SearchNannies() {
     const navigate = useNavigate();
 
 
-
     const handleSearch = (event) => {
 
         event.preventDefault();
@@ -102,7 +101,6 @@ function SearchNannies() {
 
                 <header style={{ color: "black", }}> <b>Συμπληρώστε τα φίλτρα Αναζήτησης</b></header>
 
-
                 <Box sx={{ flexGrow: 1, }}>
 
 
@@ -147,7 +145,7 @@ function SearchNannies() {
                         {/* Age */}
                         <FormControl variant="standard" style={{ marginRight: "15px" }}>
                             <InputLabel htmlFor="input-with-icon-adornment">
-                                Ηιλικία Νταντάς
+                                Ηλικία Νταντάς
                             </InputLabel>
                             <Input
                                 id="input-with-icon-adornment"
@@ -262,20 +260,11 @@ function SearchNannies() {
                         }}
                     >
                         <Button onClick={handleSearch} variant='contained'>
-                            Αναζήτηση
+                            ΑΝΑΖΗΤΗΣΗ
                         </Button>
                     </Box>
 
                 </Box>
-
-                {/* <form>
-                <label color='black'>Firstname</label>    
-                <input type="text" name="firstname" required onChange={(e) => setSearchName(e.target.value)}/>
-
-                <button onClick={handleSearch}> Search </button>
-            </form>  
-
-            <ul> {results.map((name) => ( <li key={name.id}>{name.firstname} {name.lastname}</li> ))} </ul>  */}
 
                 <div className='back-button'>
                     <Link to="/Parent/Actions/" style={{ textDecoration: 'none', }}>

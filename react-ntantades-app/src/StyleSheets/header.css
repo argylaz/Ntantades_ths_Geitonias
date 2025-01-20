@@ -60,16 +60,16 @@
     height: 60%;
     width: 10%;
     /* background-color: gray; */
-    margin-left: 12%;
+    margin-left: 10%;
 }
 
 .language-switch-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 5%;
+    width: 10%;
     height: 100%;
-    margin-left: 10%;
+    margin-left: 8%;
     /* margin: 0 10px; */
 }
 
@@ -80,7 +80,7 @@
     height: 60%;
     width: 10%;
     /* background-color: gray; */
-    margin-left: 3%;
+    margin-left: 5%;
 }
 
 

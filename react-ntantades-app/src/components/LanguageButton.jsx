@@ -19,13 +19,14 @@ const LanguageButton = () => {
                 exclusive
                 onChange={handleLanguageChange}
                 aria-label="language switch"
-                style={{ height: "30%" }}
+                sx={{ height: "30%", width: "50%", justifyContent: "center", alignContent: "center"}}
+                
             >
                 <ToggleButton
                     value="el"
                     aria-label="Greek"
                     sx={{
-                        width: "10%",
+                        // width: "15%",
                         backgroundColor: language === "el" ? "primary.main" : "white",
                         color: language === "el" ? "white" : "black",
                         "&.Mui-selected": {
@@ -40,7 +41,7 @@ const LanguageButton = () => {
                     value="en"
                     aria-label="English"
                     sx={{
-                        width: "10%",
+                        // width: "15%",
                         backgroundColor: language === "en" ? "primary.main" : "white",
                         color: language === "en" ? "white" : "black",
                         "&.Mui-selected": {

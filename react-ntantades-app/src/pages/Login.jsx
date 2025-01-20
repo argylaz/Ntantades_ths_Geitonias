@@ -20,7 +20,7 @@ export default function Login() {
 
     const navigate = useNavigate();
     const location = useLocation();
-    const redirectTo = location.state?.redirectTo || '/Profile';
+    const redirectTo = location.state?.redirectTo || '/';
 
     // Handles the login functionality of the user
     async function handleLogin(e) {
@@ -110,10 +110,6 @@ export default function Login() {
                         />
                     </div>
 
-
-                    {/* <Button type="submit" disabled={loading} style={{justifyContent:"center", marginTop:"5%",}} variant='contained' > 
-                            {loading ? 'Logging in...' : 'Login'} 
-                        </Button> */}
 
                     <Button type="submit" disabled={loading} style={{ justifyContent: "center", marginTop: "5%", boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)" }} variant='contained'>
                         {loading ? <CircularProgress size={24} /> : 'ΣΥΝΔΕΣΗ'}

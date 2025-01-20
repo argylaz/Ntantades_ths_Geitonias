@@ -33,16 +33,16 @@ const images = [
     route: 'ParentPayment'
   },
   {
-    url: history_activity_image,
-    title: 'Ιστορικό Ενεργειών',
-    width: '100%',
-    route: 'ParentActionHistory'
-  },
-  {
     url: handshake_image,
     title: 'Λήξη/Ανανέωση Συνεργασίας',
     width: '100%',
     route: 'TerminateContract'
+  },
+  {
+    url: history_activity_image,
+    title: 'Ιστορικό Ενεργειών',
+    width: '100%',
+    route: 'ParentActionHistory'
   },
 ];
 

@@ -32,7 +32,7 @@ function RequestsNanny() {
       <h1 style={{ marginTop: "10%" }}> Οι Αιτήσεις Μου </h1>
       <RequestTable onUpdateStatus={onUpdateStatus} />
 
-      <div style={{ marginTop: "2%", }}>
+      <div style={{ marginTop: "3%", }}>
 
         <Link to="/Nanny/Actions" style={{ textDecoration: 'none', }}>
           <Button variant="contained" startIcon={<BackIcon />}
